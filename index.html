@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO & Brand Metadata -->
+  <title>Daily Brew | Specialty Coffee Roaster - "Coffee First, Everything Later."</title>
+  <meta name="description" content="Daily Brew คัดสรรเมล็ดกาแฟ Specialty Single Origin คั่วสดใหม่ เสิร์ฟความสุขทุกแก้วด้วยสโลแกน Coffee First, Everything Later. สั่งออนไลน์พร้อมส่งตรงถึงคุณ">
+  <meta name="keywords" content="Daily Brew, ร้านกาแฟ, Specialty Coffee, Cold Brew, Dirty Coffee, ขนมอบสด, Digital Marketing Mini Project">
+  <meta name="author" content="Daily Brew Coffee Team">
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- FontAwesome Icons for clean UI -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar (Marketing Promo Hook) -->
+  <div class="top-bar">
+    <div class="container">
+      <div>
+        <span class="top-bar-badge">🔥 Flash Deal</span>
+        <span>สั่งครั้งแรก รับส่วนลดทันที 20% เพียงกรอกโค้ด <strong>DAILYVIP20</strong></span>
+      </div>
+      <div class="top-bar-right">
+        <a href="#promotions"><i class="fa-solid fa-gift"></i> ดูโปรโมชั่นทั้งหมด</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" id="nav-brand-logo">
+        <img src="assets/logo.jpg" alt="Daily Brew Logo">
+        <div class="brand-text">
+          <h1>Daily Brew</h1>
+          <span>Coffee First, Everything Later.</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#hero" class="active">หน้าแรก</a></li>
+          <li><a href="#promotions">โปรโมชั่น</a></li>
+          <li><a href="#quiz">ค้นหากาแฟที่ใช่</a></li>
+          <li><a href="#menu">เมนูแนะนำ</a></li>
+          <li><a href="#story">เรื่องราวของเรา</a></li>
+          <li><a href="#reviews">รีวิวลูกค้า</a></li>
+          <li><a href="#contact">ติดต่อ & สาขา</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions & Special Marketing Presentation Button -->
+      <div class="nav-actions">
+        <!-- Digital Marketing Deck Button for Professor Presentation -->
+        <button class="btn-mktg-deck" id="btn-open-mktg" title="คลิกเพื่อดูแผนการตลาด Digital Marketing สำหรับนำเสนออาจารย์">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Marketing Deck</span>
+        </button>
+
+        <!-- Cart Button -->
+        <button class="cart-toggle-btn" id="btn-open-cart" aria-label="เปิดตะกร้าสินค้า">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-count-badge" id="cart-count-badge">0</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="menu-toggle" id="btn-mobile-menu" aria-label="เมนูหลัก">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fa-solid fa-mug-hot"></i>
+            <span>Artisanal Specialty Coffee & Roastery</span>
+          </div>
+          <h1>
+            Start Your Day With The Perfect Roast
+            <span class="hero-slogan-highlight">"Coffee First, Everything Later."</span>
+          </h1>
+          <p class="hero-description">
+            เริ่มต้นเช้าวันใหม่ด้วยกลิ่นหอมกรุ่นของกาแฟคัดพิเศษ Single Origin จากแหล่งปลูกคุณภาพสูง ดอยช้างและเชียงราย ผ่านการคั่วสดใหม่และการสกัดที่ประณีตในทุกแก้ว ให้คุณพร้อมลุยทุกความท้าทาย
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#menu" class="btn btn-primary" id="hero-btn-order">
+              <i class="fa-solid fa-utensils"></i> สั่งเครื่องดื่ม & ขนม
+            </a>
+            <a href="#quiz" class="btn btn-secondary" id="hero-btn-quiz">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> ค้นหากาแฟตาม Mood วันนี้
+            </a>
+          </div>
+
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <span class="metric-number">4.9/5.0</span>
+              <span class="metric-label">⭐ จาก 2,500+ รีวิว</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-number">100%</span>
+              <span class="metric-label">🌱 Specialty Grade Beans</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-number">15 Mins</span>
+              <span class="metric-label">⚡ เสิร์ฟเร็ว พร้อมเดลิเวอรี</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-image-wrapper">
+          <img src="assets/hero.jpg" alt="บรรยากาศร้านกาแฟ Daily Brew" class="hero-main-img">
+          
+          <!-- Floating Feature Badges -->
+          <div class="floating-card card-top">
+            <div class="floating-icon">
+              <i class="fa-solid fa-seedling"></i>
+            </div>
+            <div class="floating-text">
+              <h4>Direct Trade</h4>
+              <p>สนับสนุนเกษตรกรไทย 100%</p>
+            </div>
+          </div>
+
+          <div class="floating-card card-bottom">
+            <div class="floating-icon">
+              <i class="fa-solid fa-fire-burner"></i>
+            </div>
+            <div class="floating-text">
+              <h4>Daily Fresh Roast</h4>
+              <p>คั่วสดใหม่ทุกสัปดาห์</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. DIGITAL MARKETING CAMPAIGNS & PROMOTIONS (Lead Acquisition) -->
+    <section class="promotions-section" id="promotions">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag"><i class="fa-solid fa-tags"></i> Special Offers</span>
+          <h2>แคมเปญโปรโมชั่น & ดีลสุดพิเศษ</h2>
+          <p>เพิ่มพลังความสดชื่นด้วยโปรโมชั่นสุดคุ้มที่คัดสรรมาเพื่อตอบโจทย์ทุกไลฟ์สไตล์ของชาวคอกาแฟ</p>
+        </div>
+
+        <div class="campaign-grid">
+          <!-- Campaign 1: Morning Rush Hour -->
+          <div class="campaign-card">
+            <div>
+              <span class="campaign-tag">⏰ 07:00 - 10:00 AM</span>
+              <h3>Morning Rush Booster</h3>
+              <p>ปลุกความตื่นตัวรับเช้าวันทำงาน รับส่วนลดทันที 20% สำหรับเมนู Espresso Bar & Cold Brew ทุกแก้ว</p>
+            </div>
+            <div>
+              <div class="promo-code-box">
+                <span>Code: <code>MORNING20</code></span>
+                <button class="btn-copy-code" onclick="copyCode('MORNING20')">คัดลอกโค้ด</button>
+              </div>
+              <button class="btn btn-secondary" style="width:100%" onclick="applyPromoAndScroll('MORNING20')">ใช้โค้ดนี้สั่งเลย</button>
+            </div>
+          </div>
+
+          <!-- Campaign 2: Daily Pass Subscription (Highlight) -->
+          <div class="campaign-card highlight">
+            <div>
+              <span class="campaign-tag">⭐ Best Value Club</span>
+              <h3>Daily Brew Pass 30 Days</h3>
+              <p>บัตรสมาชิกสุดคุ้มสำหรับคนขาดกาแฟไม่ได้ ซื้อแพ็กเกจ 10 แก้ว ฟรีทันที 3 แก้ว พร้อมอัปเกรดนมพืชฟรีทุกเมนู!</p>
+            </div>
+            <div>
+              <div class="promo-code-box">
+                <span>Code: <code>BREWPASS</code></span>
+                <button class="btn-copy-code" onclick="copyCode('BREWPASS')">คัดลอกโค้ด</button>
+              </div>
+              <button class="btn btn-primary" style="width:100%" onclick="applyPromoAndScroll('BREWPASS')">รับสิทธิ์สมาชิก</button>
+            </div>
+          </div>
+
+          <!-- Campaign 3: Afternoon Work & Chill Combo -->
+          <div class="campaign-card">
+            <div>
+              <span class="campaign-tag">🥐 Afternoon Fuel</span>
+              <h3>Work & Chill Combo</h3>
+              <p>จับคู่เครื่องดื่ม Signature คู่กับครัวซองต์อัลมอนด์หรือบาสก์ชีสเค้ก เพียง 179 บาท (ปกติ 240 บาท)</p>
+            </div>
+            <div>
+              <div class="promo-code-box">
+                <span>Code: <code>COMBO179</code></span>
+                <button class="btn-copy-code" onclick="copyCode('COMBO179')">คัดลอกโค้ด</button>
+              </div>
+              <button class="btn btn-secondary" style="width:100%" onclick="applyPromoAndScroll('COMBO179')">สั่งเซ็ตสุดคุ้ม</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lead Capture Newsletter Banner -->
+        <div class="lead-capture-box">
+          <div class="lead-capture-info">
+            <span class="badge-tag"><i class="fa-solid fa-envelope-open-text"></i> VIP Club</span>
+            <h3>รับคูปองส่วนลด 20% ทันที</h3>
+            <p>กรอกเบอร์โทรหรืออีเมลเพื่อสมัครสมาชิก Daily Brew VIP รับส่วนลดต้อนรับและสิทธิพิเศษในวันเกิดก่อนใคร</p>
+          </div>
+          <form class="lead-form" id="lead-capture-form" onsubmit="handleLeadCapture(event)">
+            <input type="email" id="lead-email" placeholder="ระบุอีเมลหรือเบอร์โทรของคุณ..." required>
+            <button type="submit" class="btn btn-primary" id="btn-submit-lead">
+              <span>รับสิทธิ์</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. INTERACTIVE COFFEE FINDER QUIZ (Customer Engagement Funnel) -->
+    <section class="quiz-section" id="quiz">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag"><i class="fa-solid fa-sparkles"></i> AI Flavor Matcher</span>
+          <h2>ค้นหากาแฟที่เข้ากับอารมณ์คุณวันนี้</h2>
+          <p>ตอบคำถามง่ายๆ 3 ข้อ ให้บาริสต้า Daily Brew แนะนำแก้วที่ใช่ที่สุดสำหรับคุณในตอนนี้!</p>
+        </div>
+
+        <div class="quiz-container">
+          <div class="quiz-header">
+            <h3 id="quiz-step-title"><i class="fa-solid fa-compass"></i> Step 1 of 3</h3>
+            <div class="quiz-progress-bar">
+              <div class="progress-dot active" id="dot-1"></div>
+              <div class="progress-dot" id="dot-2"></div>
+              <div class="progress-dot" id="dot-3"></div>
+            </div>
+          </div>
+
+          <div class="quiz-body">
+            <!-- Step 1 -->
+            <div class="quiz-step active" id="quiz-step-1">
+              <h4 class="quiz-question-title">วันนี้คุณต้องการพลังงานและ Mood แบบไหน?</h4>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectQuizOption(1, 'strong')">
+                  <div class="quiz-option-icon">⚡</div>
+                  <div class="quiz-option-text">
+                    <h4>ตื่นเต็มตาขั้นสุด</h4>
+                    <p>ต้องการพลังงานเข้มข้น ลุยงานทั้งวัน</p>
+                  </div>
+                </div>
+                <div class="quiz-option-card" onclick="selectQuizOption(1, 'smooth')">
+                  <div class="quiz-option-icon">☁️</div>
+                  <div class="quiz-option-text">
+                    <h4>นุ่มละมุน สบายอารมณ์</h4>
+                    <p>จิบเพลินๆ ทำงานชิลล์ๆ ช่วงบ่าย</p>
+                  </div>
+                </div>
+                <div class="quiz-option-card" onclick="selectQuizOption(1, 'refresh')">
+                  <div class="quiz-option-icon">🍊</div>
+                  <div class="quiz-option-text">
+                    <h4>สดชื่น ดับกระหาย</h4>
+                    <p>ต้องการความเปรี้ยวซ่า ปลุกความเฟรช</p>
+                  </div>
+                </div>
+                <div class="quiz-option-card" onclick="selectQuizOption(1, 'sweet')">
+                  <div class="quiz-option-icon">🍯</div>
+                  <div class="quiz-option-text">
+                    <h4>หวานมัน เติมรางวัลให้ตัวเอง</h4>
+                    <p>ของหวานบำบัดหัวใจ คลายเครียด</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="quiz-step" id="quiz-step-2">
+              <h4 class="quiz-question-title">รสสัมผัสและโทนกาแฟที่คุณชอบที่สุด?</h4>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectQuizOption(2, 'espresso')">
+                  <div class="quiz-option-icon">☕</div>
+                  <div class="quiz-option-text">
+                    <h4>Dark Chocolate & Nutty</h4>
+                    <p>โทนช็อกโกแลตเข้มข้น กลิ่นถั่วหอมกรุ่น</p>
+                  </div>
+                </div>
+                <div class="quiz-option-card" onclick="selectQuizOption(2, 'fruity')">
+                  <div class="quiz-option-icon">🍋</div>
+                  <div class="quiz-option-text">
+                    <h4>Citrus & Floral Fruity</h4>
+                    <p>หอมกลิ่นดอกไม้และผลไม้เมืองหนาวสดชื่น</p>
+                  </div>
+                </div>
+                <div class="quiz-option-card" onclick="selectQuizOption(2, 'caramel')">
+                  <div class="quiz-option-icon">🍮</div>
+                  <div class="quiz-option-text">
+                    <h4>Creamy Salted Caramel</h4>
+                    <p>หอมหวานคาราเมลและฟองนมนุ่มลิ้น</p>
+                  </div>
+                </div>
+                <div class="quiz-option-card" onclick="selectQuizOption(2, 'matcha')">
+                  <div class="quiz-option-icon">🍵</div>
+                  <div class="quiz-option-text">
+                    <h4>Authentic Uji Matcha</h4>
+                    <p>ชาเขียวมัทฉะแท้เกรดพิธีชง หอมอูมามิ</p>
+                  </div>
+                </div>
+              </div>
+              <div class="quiz-actions">
+                <button class="btn btn-secondary" onclick="prevQuizStep(1)"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="quiz-step" id="quiz-step-3">
+              <h4 class="quiz-question-title">คุณดื่มกาแฟกับนมประเภทไหน?</h4>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectQuizOption(3, 'fresh_milk')">
+                  <div class="quiz-option-icon">🥛</div>
+                  <div class="quiz-option-text">
+                    <h4>นมสดพรีเมียม (Whole Milk)</h4>
+                    <p>หอมมัน กลมกล่อมแบบคลาสสิก</p>
+                  </div>
+                </div>
+                <div class="quiz-option-card" onclick="selectQuizOption(3, 'oat_milk')">
+                  <div class="quiz-option-icon">🌾</div>
+                  <div class="quiz-option-text">
+                    <h4>นมโอ๊ต / แอลมอนด์ (Plant-Based)</h4>
+                    <p>สุขภาพดี หอมกลิ่นธัญพืช ย่อยง่าย</p>
+                  </div>
+                </div>
+                <div class="quiz-option-card" onclick="selectQuizOption(3, 'black')">
+                  <div class="quiz-option-icon">🖤</div>
+                  <div class="quiz-option-text">
+                    <h4>ไม่ใส่นม (Black Coffee / Tonic)</h4>
+                    <p>สัมผัสรสชาติเนื้อแท้ของเมล็ดกาแฟ</p>
+                  </div>
+                </div>
+                <div class="quiz-option-card" onclick="selectQuizOption(3, 'creamy')">
+                  <div class="quiz-option-icon">🍦</div>
+                  <div class="quiz-option-text">
+                    <h4>ครีมนมเข้มข้นเย็นจัด (Dirty Layer)</h4>
+                    <p>แยกชั้นช็อตกาแฟร้อนกับนมเย็นจัด</p>
+                  </div>
+                </div>
+              </div>
+              <div class="quiz-actions">
+                <button class="btn btn-secondary" onclick="prevQuizStep(2)"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
+              </div>
+            </div>
+
+            <!-- Quiz Result -->
+            <div class="quiz-step" id="quiz-step-result">
+              <div class="quiz-result-wrapper">
+                <span class="quiz-result-badge">🎉 เมนูคู่แท้ประจำวันของคุณ</span>
+                <div class="quiz-result-card" id="quiz-result-card-content">
+                  <!-- Dynamically populated by JS -->
+                </div>
+                <button class="btn btn-secondary" onclick="restartQuiz()"><i class="fa-solid fa-rotate-right"></i> เล่นใหม่อีกครั้ง</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SIGNATURE MENU & INTERACTIVE ORDERING (Conversion) -->
+    <section class="menu-section" id="menu">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag"><i class="fa-solid fa-mug-saucer"></i> Crafted With Passion</span>
+          <h2>เมนูแนะนำ & เครื่องดื่มคราฟต์</h2>
+          <p>เลือกสรรความอร่อยได้ตามใจชอบ พร้อมปรับระดับความหวานและประเภทนมได้ตามสไตล์คุณ</p>
+        </div>
+
+        <!-- Menu Filter Tabs -->
+        <div class="menu-filter-bar" id="menu-filter-bar">
+          <button class="menu-tab-btn active" data-category="all">ทั้งหมด (All)</button>
+          <button class="menu-tab-btn" data-category="espresso">☕ Espresso Bar</button>
+          <button class="menu-tab-btn" data-category="coldbrew">❄️ Cold Brew & Specialty</button>
+          <button class="menu-tab-btn" data-category="noncoffee">🌿 Non-Coffee & Tea</button>
+          <button class="menu-tab-btn" data-category="bakery">🥐 Artisanal Bakery</button>
+        </div>
+
+        <!-- Menu Items Grid -->
+        <div class="menu-grid" id="menu-grid">
+          <!-- Dynamically populated by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. BRAND STORY & QUALITY PILLARS (Consideration & Brand Loyalty) -->
+    <section class="story-section" id="story">
+      <div class="container story-grid">
+        <div class="story-visual">
+          <img src="assets/promo_morning.jpg" alt="Daily Brew Coffee Story" class="story-img-main">
+          <div class="story-slogan-card">
+            <h4>"Coffee First, Everything Later."</h4>
+            <p>เพราะเราเชื่อว่าทุกความสำเร็จเริ่มต้นจากการได้ดื่มกาแฟดีๆ หนึ่งแก้ว</p>
+          </div>
+        </div>
+
+        <div class="story-content">
+          <span class="badge-tag"><i class="fa-solid fa-heart"></i> The Daily Brew Philosophy</span>
+          <h2>เบื้องหลังความพิถีพิถัน ในทุกหยดของ Daily Brew</h2>
+          <p>
+            เราเริ่มต้นจากความหลงใหลในศาสตร์ของ Specialty Coffee คัดสรรเมล็ดกาแฟที่ปลูกด้วยความใส่ใจจากเกษตรกรไทยบนยอดดอยสูงกว่า 1,400 เมตรจากระดับน้ำทะเล นำมาคั่วและสกัดด้วยสูตรเฉพาะ เพื่อมอบรสชาติที่สมบูรณ์แบบที่สุดให้กับคุณ
+          </p>
+
+          <div class="pillar-list">
+            <div class="pillar-item">
+              <div class="pillar-icon"><i class="fa-solid fa-leaf"></i></div>
+              <div>
+                <h4>Direct Trade & Ethical Sourcing</h4>
+                <p>รับซื้อเมล็ดโดยตรงจากเกษตรกรดอยช้างในราคาที่เป็นธรรม พร้อมสนับสนุนการปลูกแบบอนุรักษ์ป่าต้นน้ำ</p>
+              </div>
+            </div>
+
+            <div class="pillar-item">
+              <div class="pillar-icon"><i class="fa-solid fa-gears"></i></div>
+              <div>
+                <h4>Small Batch Precision Roasting</h4>
+                <p>คั่วสดในปริมาณน้อยควบคุมด้วยระบบคอมพิวเตอร์ ดึงเอกลักษณ์และกลิ่นหอมตามธรรมชาติของเมล็ดได้อย่างเต็มที่</p>
+              </div>
+            </div>
+
+            <div class="pillar-item">
+              <div class="pillar-icon"><i class="fa-solid fa-recycle"></i></div>
+              <div>
+                <h4>100% Eco-Friendly Cup</h4>
+                <p>บรรจุภัณฑ์ย่อยสลายได้ตามธรรมชาติ พร้อมมอบส่วนลด 10 บาททันทีเมื่อลูกค้านำแก้วส่วนตัวมารับบริการ</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. SOCIAL PROOF & UGC INSTAGRAM GRID (Trust & Retention) -->
+    <section class="social-section" id="reviews">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag"><i class="fa-brands fa-instagram"></i> #DailyBrewMoments</span>
+          <h2>แบ่งปันช่วงเวลาดีๆ ไปกับเรา</h2>
+          <p>ภาพความประทับใจจากลูกค้าที่มาร่วมสัมผัสประสบการณ์กาแฟกับ Daily Brew</p>
+        </div>
+
+        <!-- UGC Photo Grid -->
+        <div class="instagram-grid">
+          <div class="insta-card">
+            <img src="assets/dirty_coffee.jpg" alt="Instagram Post 1">
+            <div class="insta-overlay">
+              <i class="fa-brands fa-instagram" style="font-size: 1.8rem; margin-bottom: 8px;"></i>
+              <div class="insta-user">@coffee_lover_bkk</div>
+              <div class="insta-tag">"Dirty Coffee ที่ดีที่สุดในสยาม ละมุนมากก ✨"</div>
+            </div>
+          </div>
+
+          <div class="insta-card">
+            <img src="assets/cold_brew.jpg" alt="Instagram Post 2">
+            <div class="insta-overlay">
+              <i class="fa-brands fa-instagram" style="font-size: 1.8rem; margin-bottom: 8px;"></i>
+              <div class="insta-user">@patty_vibes</div>
+              <div class="insta-tag">"Nitro Cold Brew สดชื่นตาสว่างมาก 🍊"</div>
+            </div>
+          </div>
+
+          <div class="insta-card">
+            <img src="assets/croissant.jpg" alt="Instagram Post 3">
+            <div class="insta-overlay">
+              <i class="fa-brands fa-instagram" style="font-size: 1.8rem; margin-bottom: 8px;"></i>
+              <div class="insta-user">@cafehopping.bkk</div>
+              <div class="insta-tag">"ครัวซองต์อัลมอนด์กรอบนอกนุ่มใน ฟินสุดๆ 🥐"</div>
+            </div>
+          </div>
+
+          <div class="insta-card">
+            <img src="assets/matcha.jpg" alt="Instagram Post 4">
+            <div class="insta-overlay">
+              <i class="fa-brands fa-instagram" style="font-size: 1.8rem; margin-bottom: 8px;"></i>
+              <div class="insta-user">@ken_workfromcafe</div>
+              <div class="insta-tag">"Uji Matcha เข้มข้น นั่งทำงานชิลล์ทั้งวัน 💻"</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Reviews -->
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">"กาแฟหอมมาก บรรยากาศร้านดี เหมาะกับการนั่งทำงาน สั่งผ่านเว็บมารับที่ร้านสะดวกมาก ไม่ต้องรอคิวเลย"</p>
+            <div class="review-author">
+              <div class="author-avatar">P</div>
+              <div class="author-info">
+                <h5>คุณพิมพ์มาดา</h5>
+                <span>Verified Google Review</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">"ชอบฟีเจอร์ AI Quiz แนะนำเครื่องดื่มมาก แนะนำ Dirty Coffee ตรงใจสุดๆ เมล็ดกาแฟมีความฟรุตตี้ปลายๆ ถูกใจสาย Specialty"</p>
+            <div class="review-author">
+              <div class="author-avatar">N</div>
+              <div class="author-info">
+                <h5>คุณณภัทร (Beem)</h5>
+                <span>Regular Customer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">"โปรโมชั่น Morning Rush คุ้มค่ามาก กาแฟแก้วละไม่ถึงร้อยแต่คุณภาพระดับรางวัล บาสก์ชีสเค้กก็เนื้อเนียนละลายในปาก"</p>
+            <div class="review-author">
+              <div class="author-avatar">T</div>
+              <div class="author-info">
+                <h5>คุณธนกฤต</h5>
+                <span>Food Blogger</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 7. FOOTER & LOCATIONS -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo" style="margin-bottom: 15px;">
+            <img src="assets/logo.jpg" alt="Daily Brew Logo" style="width: 44px; height: 44px;">
+            <div class="brand-text">
+              <h3 style="color: white; margin: 0; font-size: 1.2rem;">Daily Brew</h3>
+              <span style="color: var(--accent-gold); font-size: 0.7rem;">Coffee First, Everything Later.</span>
+            </div>
+          </div>
+          <p>
+            แบรนด์กาแฟสเปเชียลตี้ที่เชื่อว่ากาแฟดีๆ สามารถเปลี่ยนเช้าวันธรรมดาให้กลายเป็นวันที่ยอดเยี่ยมได้ทุกวัน
+          </p>
+          <div class="footer-socials">
+            <a href="#" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-icon" aria-label="LINE OA"><i class="fa-brands fa-line"></i></a>
+            <a href="#" class="social-icon" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>สาขาที่เปิดให้บริการ</h4>
+          <div style="background: rgba(255,255,255,0.06); padding: 16px; border-radius: 12px; border: 1px dashed rgba(230,179,96,0.35);">
+            <p style="color: var(--accent-gold); font-weight: 600; font-size: 0.92rem; margin-bottom: 6px;">
+              <i class="fa-solid fa-store-slash"></i> ขณะนี้ยังไม่มีหน้าร้าน
+            </p>
+            <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-dim); margin-bottom: 8px;">
+              ให้บริการความอร่อยผ่านช่องทาง <strong>Online & Delivery</strong> จัดส่งด่วนถึงบ้านและออฟฟิศของคุณ
+            </p>
+            <span style="display:inline-block; font-size: 0.78rem; background: rgba(200,137,55,0.25); color: var(--accent-gold); padding: 3px 10px; border-radius: 9999px;">
+              ✨ เตรียมพบกับหน้าร้านเร็วๆ นี้
+            </span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>ลิงก์ด่วน</h4>
+          <ul>
+            <li><a href="#hero">หน้าแรก</a></li>
+            <li><a href="#promotions">โปรโมชั่นและส่วนลด</a></li>
+            <li><a href="#quiz">แบบทดสอบหากาแฟที่ชอบ</a></li>
+            <li><a href="#menu">เมนูกาแฟ & เบเกอรี</a></li>
+            <li><a href="#story">เรื่องราวแบรนด์ Daily Brew</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>สั่งเดลิเวอรีได้แล้วที่</h4>
+          <p style="font-size: 0.85rem;">ค้นหา "Daily Brew Specialty Coffee" บนแอปพลิเคชันชั้นนำ</p>
+          <div class="delivery-partners">
+            <span class="delivery-badge"><i class="fa-solid fa-motorcycle"></i> GrabFood</span>
+            <span class="delivery-badge"><i class="fa-solid fa-motorcycle"></i> LINE MAN</span>
+            <span class="delivery-badge"><i class="fa-solid fa-motorcycle"></i> Robinhood</span>
+            <span class="delivery-badge"><i class="fa-solid fa-motorcycle"></i> ShopeeFood</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Daily Brew Coffee Co. All rights reserved. Slogan: "Coffee First, Everything Later."
+        </div>
+        <div>
+          <span class="student-tag">🎓 Digital Marketing Mini Project Showcase</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODALS & INTERACTIVE OVERLAYS
+       ========================================================================== -->
+
+  <!-- 1. CART & CHECKOUT MODAL -->
+  <div class="modal-overlay" id="cart-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-bag-shopping" style="color: var(--accent-caramel);"></i> ตะกร้าสินค้าของคุณ</h3>
+        <button class="btn-close-modal" onclick="closeCartModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="cart-items-container" class="cart-items-list">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Promo Code Input -->
+        <div class="cart-voucher-input-group">
+          <input type="text" id="cart-promo-input" placeholder="ใส่โค้ดส่วนลด (เช่น DAILYVIP20, MORNING20)">
+          <button class="btn btn-secondary" onclick="applyCartPromo()">ใช้โค้ด</button>
+        </div>
+        <div id="promo-applied-message" style="font-size: 0.82rem; color: var(--accent-green); margin-top:-10px; margin-bottom:12px;"></div>
+
+        <!-- Summary -->
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>ยอดรวมสินค้า (Subtotal):</span>
+            <span id="cart-subtotal">0 ฿</span>
+          </div>
+          <div class="summary-row">
+            <span>ส่วนลด (Discount):</span>
+            <span id="cart-discount" style="color: #d62828;">-0 ฿</span>
+          </div>
+          <div class="summary-row">
+            <span>ค่าจัดส่ง (Delivery Fee):</span>
+            <span style="color: var(--accent-green); font-weight: 600;">ฟรี (Free)</span>
+          </div>
+          <div class="summary-row total">
+            <span>ยอดสุทธิ (Total Amount):</span>
+            <span id="cart-total" style="color: var(--accent-caramel);">0 ฿</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" style="width: 100%;" id="btn-checkout" onclick="proceedToCheckout()">
+          <i class="fa-solid fa-lock"></i> ดำเนินการชำระเงิน (Checkout)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. ITEM CUSTOMIZER MODAL -->
+  <div class="modal-overlay" id="customizer-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="customizer-item-title">ปรับแต่งเครื่องดื่ม</h3>
+        <button class="btn-close-modal" onclick="closeCustomizerModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="display: flex; gap: 16px; margin-bottom: 20px; align-items: center;">
+          <img id="customizer-item-img" src="" alt="" style="width: 70px; height: 70px; border-radius: 12px; object-fit: cover;">
+          <div>
+            <h4 id="customizer-modal-name" style="font-size: 1.15rem; color: var(--primary-espresso);"></h4>
+            <span id="customizer-modal-price" style="font-weight: 700; color: var(--accent-caramel); font-size: 1.1rem;"></span>
+          </div>
+        </div>
+
+        <!-- Sweetness -->
+        <div class="customizer-options">
+          <div class="option-group-title"><i class="fa-solid fa-cubes-stacked"></i> ระดับความหวาน (Sweetness)</div>
+          <div class="option-chips" id="sweetness-options">
+            <span class="option-chip" data-val="0%">ไม่หวาน 0%</span>
+            <span class="option-chip" data-val="25%">หวานน้อย 25%</span>
+            <span class="option-chip active" data-val="50%">หวานมาตรฐาน 50%</span>
+            <span class="option-chip" data-val="100%">หวานปกติ 100%</span>
+          </div>
+        </div>
+
+        <!-- Milk Choice -->
+        <div class="customizer-options">
+          <div class="option-group-title"><i class="fa-solid fa-cow"></i> ชนิดของนม (Milk Choice)</div>
+          <div class="option-chips" id="milk-options">
+            <span class="option-chip active" data-val="Fresh Milk" data-price="0">นมสดแท้ (Standard)</span>
+            <span class="option-chip" data-val="Oat Milk" data-price="20">Oat Milk (+20฿)</span>
+            <span class="option-chip" data-val="Almond Milk" data-price="20">Almond Milk (+20฿)</span>
+          </div>
+        </div>
+
+        <!-- Extra Shot -->
+        <div class="customizer-options">
+          <div class="option-group-title"><i class="fa-solid fa-plus"></i> เพิ่มเติม (Add-ons)</div>
+          <div class="option-chips" id="extra-options">
+            <span class="option-chip" data-val="Extra Shot" data-price="25">+ เพิ่ม 1 ช็อตเอสเปรสโซ (+25฿)</span>
+            <span class="option-chip" data-val="Caramel Drizzle" data-price="15">+ ซอสคาราเมล (+15฿)</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="confirmAddToCart()">
+          <i class="fa-solid fa-cart-plus"></i> เพิ่มลงตะกร้าสินค้า
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. SIMULATED CHECKOUT & RECEIPT MODAL -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-circle-check" style="color: var(--accent-green);"></i> ชำระเงินสำเร็จ (Order Placed!)</h3>
+        <button class="btn-close-modal" onclick="closeCheckoutModal()">&times;</button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <div style="font-size: 3.5rem; color: var(--accent-green); margin-bottom: 12px;">
+          <i class="fa-solid fa-mug-hot"></i>
+        </div>
+        <h4 style="font-size: 1.3rem; color: var(--primary-espresso); margin-bottom: 6px;">ขอบคุณที่เลือก Daily Brew!</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+          ออเดอร์หมายเลข <strong>#DB-2026-889</strong> กำลังถูกจัดเตรียมโดยบาริสต้า
+        </p>
+
+        <div style="background: var(--bg-cream-soft); padding: 18px; border-radius: 12px; text-align: left; margin-bottom: 20px; font-size: 0.88rem;">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 6px;">
+            <span>สถานะ:</span>
+            <span style="color: var(--accent-caramel); font-weight: 700;">กำลังชง (Brewing with Love)</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom: 6px;">
+            <span>เวลาโดยประมาณ:</span>
+            <span>10 - 15 นาที</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span>ชำระผ่าน:</span>
+            <span>PromptPay QR / Online Cashless</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" style="width: 100%;" onclick="closeCheckoutModal()">
+          กลับสู่หน้าหลัก
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 🎓 DIGITAL MARKETING STRATEGY DECK MODAL (For Professor Presentation) -->
+  <div class="modal-overlay" id="mktg-modal">
+    <div class="modal-content modal-mktg-deck">
+      <div class="modal-header">
+        <div>
+          <h3 style="font-size: 1.25rem;"><i class="fa-solid fa-chalkboard-user" style="color: var(--accent-green);"></i> Digital Marketing Project Strategy</h3>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Brand: Daily Brew | Slogan: "Coffee First, Everything Later."</span>
+        </div>
+        <button class="btn-close-modal" onclick="closeMktgModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Marketing Tabs -->
+        <div class="mktg-tabs">
+          <button class="mktg-tab-btn active" onclick="switchMktgTab(event, 'tab-persona')">🎯 Customer Persona</button>
+          <button class="mktg-tab-btn" onclick="switchMktgTab(event, 'tab-funnel')">🔄 AIDA Marketing Funnel</button>
+          <button class="mktg-tab-btn" onclick="switchMktgTab(event, 'tab-channel')">📱 Omnichannel Strategy</button>
+          <button class="mktg-tab-btn" onclick="switchMktgTab(event, 'tab-kpi')">📊 Project KPIs & Metrics</button>
+        </div>
+
+        <!-- Tab 1: Customer Persona -->
+        <div class="mktg-tab-pane active" id="tab-persona">
+          <div class="mktg-card-grid">
+            <div class="mktg-card">
+              <h4><i class="fa-solid fa-graduation-cap"></i> Persona A: "The Busy Student / Gen-Z"</h4>
+              <p><strong>อายุ:</strong> 18 - 24 ปี (นักศึกษามหาวิทยาลัย / First Jobber)</p>
+              <p><strong>Pain Point:</strong> ต้องการกาแฟปลุกความตื่นตัวช่วงสอบ/ส่งงาน งบประมาณจำกัด ชอบความคุ้มค่าและดีไซน์ถ่ายรูปสวย</p>
+              <p><strong>กลยุทธ์การเข้าถึง:</strong> โปรโมชั่น Morning Rush 20%, คูปองส่วนลดผ่าน TikTok / Instagram, Flash Combo</p>
+            </div>
+
+            <div class="mktg-card">
+              <h4><i class="fa-solid fa-laptop-code"></i> Persona B: "The Remote Professional"</h4>
+              <p><strong>อายุ:</strong> 25 - 38 ปี (Freelancer, Tech & Creative Workers)</p>
+              <p><strong>Pain Point:</strong> มองหาร้านบรรยากาศดี มี Wi-Fi นั่งทำงานได้ และชื่นชอบ Specialty Grade กาแฟรสชาติพรีเมียม</p>
+              <p><strong>กลยุทธ์การเข้าถึง:</strong> Daily Pass Subscription 30 วัน, Work & Chill Set, โปรแกรมสมาชิกสะสมแต้ม</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: AIDA Funnel -->
+        <div class="mktg-tab-pane" id="tab-funnel">
+          <div class="funnel-diagram">
+            <div class="funnel-step">
+              <div>
+                <h5>1. Awareness (การรับรู้แบรนด์)</h5>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">โลโก้ที่โดดเด่น สโลแกนจำง่าย "Coffee First, Everything Later." และคอนเทนต์ TikTok/IG</p>
+              </div>
+              <span>SEO & Social Ads</span>
+            </div>
+
+            <div class="funnel-step">
+              <div>
+                <h5>2. Interest & Consideration (ความสนใจ)</h5>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">มินิเกม AI Coffee Quiz แนะนำเครื่องดื่มตาม Personal Taste และเรื่องราว Direct Trade</p>
+              </div>
+              <span>Interactive Quiz</span>
+            </div>
+
+            <div class="funnel-step">
+              <div>
+                <h5>3. Desire & Lead Capture (ความต้องการ)</h5>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">แจกคูปอง DAILYVIP20 ลด 20% แลกกับการเก็บ Email/Line ID สร้างฐานข้อมูลลูกค้า</p>
+              </div>
+              <span>Lead Voucher 20%</span>
+            </div>
+
+            <div class="funnel-step">
+              <div>
+                <h5>4. Action & Retention (การซื้อซ้ำ)</h5>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">ระบบ Seamless Order Simulator + Daily Pass Subscription กระตุ้นให้กลับมาซื้อซ้ำ</p>
+              </div>
+              <span>Sub & Order Cart</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Omnichannel Strategy -->
+        <div class="mktg-tab-pane" id="tab-channel">
+          <div class="mktg-card-grid">
+            <div class="mktg-card">
+              <h4><i class="fa-brands fa-instagram"></i> Social Media & UGC</h4>
+              <ul>
+                <li>สร้างแคมเปญ #DailyBrewMoments ให้ลูกค้าถ่ายรูปลง IG Story แลกรับท็อปปิ้งฟรี</li>
+                <li>Short-form Video บน TikTok สาธิตการสกัดกาแฟ Dirty และเบื้องหลังการคั่ว</li>
+              </ul>
+            </div>
+
+            <div class="mktg-card">
+              <h4><i class="fa-brands fa-line"></i> LINE Official Account & CRM</h4>
+              <ul>
+                <li>บรอดแคสต์โปรโมชั่น Morning Rush ทุกเช้า 07:30 น.</li>
+                <li>ระบบ Digital Stamp Card สะสมครบ 10 แก้ว ฟรี 1 แก้ว</li>
+              </ul>
+            </div>
+
+            <div class="mktg-card">
+              <h4><i class="fa-solid fa-truck-fast"></i> Delivery Aggregators</h4>
+              <ul>
+                <li>จับคู่โปรโมชั่น Flash Sale บน GrabFood, LINE MAN, ShopeeFood</li>
+                <li>ตั้งรัศมีการจัดส่งรอบมหาวิทยาลัยและย่านออฟฟิศ เพื่อส่งไวใน 15 นาที</li>
+              </ul>
+            </div>
+
+            <div class="mktg-card">
+              <h4><i class="fa-solid fa-store"></i> On-Ground Store Experience</h4>
+              <ul>
+                <li>ตกแต่งร้านโทน Warm Crema & Wood สร้างบรรยากาศ Instagrammable</li>
+                <li>ส่วนลด 10 บาทเมื่อลูกค้านำแก้วมาเอง ส่งเสริมนโยบาย Eco-Friendly</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: KPIs & Metrics -->
+        <div class="mktg-tab-pane" id="tab-kpi">
+          <div class="mktg-card-grid">
+            <div class="mktg-card">
+              <h4><i class="fa-solid fa-bullseye"></i> Acquisition KPIs</h4>
+              <ul>
+                <li><strong>Website Conversion Rate:</strong> เป้าหมาย > 8.5% จากผู้เข้าชมเปลี่ยนเป็นผู้สั่งซื้อ</li>
+                <li><strong>Lead Form Opt-in Rate:</strong> > 15% ของผู้เข้าชมกรอกรับคูปอง DAILYVIP20</li>
+                <li><strong>CAC (Customer Acquisition Cost):</strong> ต่ำกว่า 45 บาท/คน ผ่าน Organic UGC</li>
+              </ul>
+            </div>
+
+            <div class="mktg-card">
+              <h4><i class="fa-solid fa-rotate"></i> Retention & Lifetime Value</h4>
+              <ul>
+                <li><strong>Repeat Purchase Rate (30 วัน):</strong> ตั้งเป้า 40% จากระบบ Daily Pass</li>
+                <li><strong>Average Order Value (AOV):</strong> 165 บาท/ออเดอร์ (จากการทำ Up-selling คู่ขนม)</li>
+                <li><strong>Customer Satisfaction (CSAT):</strong> 4.9/5.0 จากรีวิวจริงบนหน้าเว็บไซต์</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- JavaScript Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
