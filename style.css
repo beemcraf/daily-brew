@@ -164,42 +164,45 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 84px;
-  gap: 20px;
+  height: 76px;
+  gap: 12px;
+  max-width: 1480px;
+  width: 100%;
+  padding: 0 16px;
 }
 
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   flex-shrink: 0;
 }
 
 .brand-logo img {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  border: 2px solid var(--accent-caramel);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  border: 1.5px solid var(--accent-caramel);
 }
 
 .brand-text h1 {
-  font-size: 1.4rem;
+  font-size: 1.22rem;
   color: var(--primary-espresso);
-  letter-spacing: -0.5px;
+  letter-spacing: -0.3px;
   margin: 0;
   line-height: 1.1;
 }
 
 .brand-text span {
-  font-size: 0.7rem;
+  font-size: 0.64rem;
   color: var(--accent-caramel);
   font-weight: 700;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
   display: block;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 /* Nav Links Pill Container */
@@ -207,15 +210,16 @@ nav {
   display: flex;
   justify-content: center;
   flex: 1;
+  min-width: 0;
 }
 
 .nav-links {
   display: inline-flex;
   list-style: none;
-  gap: 6px;
+  gap: 2px;
   align-items: center;
-  background: rgba(244, 236, 223, 0.7);
-  padding: 6px 8px;
+  background: rgba(244, 236, 223, 0.85);
+  padding: 4px 6px;
   border-radius: var(--radius-full);
   border: 1px solid rgba(80, 49, 35, 0.08);
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
@@ -227,10 +231,10 @@ nav {
 
 .nav-links a {
   display: inline-block;
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   font-weight: 500;
   color: var(--text-muted);
-  padding: 8px 16px;
+  padding: 6px 11px;
   border-radius: var(--radius-full);
   white-space: nowrap;
   transition: var(--transition-fast);
@@ -246,33 +250,33 @@ nav {
   background: var(--primary-espresso);
   color: #ffffff !important;
   font-weight: 600;
-  box-shadow: 0 3px 10px rgba(36, 20, 14, 0.2);
+  box-shadow: 0 3px 8px rgba(36, 20, 14, 0.2);
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
 .btn-mktg-deck {
   background: linear-gradient(135deg, #1e3a29, #2d5a3f);
   color: #ffffff;
-  font-size: 0.88rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  padding: 10px 18px;
+  padding: 7px 13px;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 14px rgba(45, 90, 63, 0.3);
+  gap: 6px;
+  box-shadow: 0 3px 10px rgba(45, 90, 63, 0.25);
   border: 1px solid rgba(255,255,255,0.2);
   white-space: nowrap;
 }
 .btn-mktg-deck:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(45, 90, 63, 0.4);
+  box-shadow: 0 5px 14px rgba(45, 90, 63, 0.35);
   background: linear-gradient(135deg, #254a34, #366b4b);
 }
 
@@ -280,14 +284,14 @@ nav {
   position: relative;
   background: #ffffff;
   color: var(--primary-espresso);
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid var(--border-light);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   box-shadow: var(--shadow-sm);
 }
 .cart-toggle-btn:hover {
@@ -1736,10 +1740,22 @@ nav {
 /* ==========================================================================
    RESPONSIVE DESIGN (Tablets & Mobile)
    ========================================================================== */
-@media (max-width: 1180px) {
+@media (max-width: 1380px) {
   .nav-links a {
-    padding: 6px 12px;
-    font-size: 0.86rem;
+    padding: 5px 8px;
+    font-size: 0.77rem;
+  }
+  .brand-text span {
+    display: none;
+  }
+}
+
+@media (max-width: 1160px) {
+  .nav-links {
+    display: none;
+  }
+  .menu-toggle {
+    display: flex;
   }
 }
 
@@ -2379,15 +2395,15 @@ nav {
   background: rgba(200, 137, 55, 0.12);
   color: var(--accent-caramel);
   border: 1px solid rgba(200, 137, 55, 0.3);
-  padding: 8px 16px;
+  padding: 7px 12px;
   border-radius: 9999px;
   font-family: 'Prompt', sans-serif;
-  font-size: 0.84rem;
+  font-size: 0.78rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
