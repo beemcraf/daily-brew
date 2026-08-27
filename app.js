@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupEventListeners();
   loadSavedVoucher();
   loadSavedVipMember();
+  initSmartRecommendation();
 });
 
 function setupEventListeners() {
@@ -522,13 +523,109 @@ function proceedToCheckout() {
     showToast('กรุณาเลือกเครื่องดื่มลงในตะกร้าก่อนสั่งซื้อนะคะ ☕');
     return;
   }
+
+  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  let discountAmount = 0;
+  if (appliedDiscountPercent > 0) {
+    discountAmount = Math.round(subtotal * (appliedDiscountPercent / 100));
+  } else if (appliedDiscountAmount > 0) {
+    discountAmount = Math.min(appliedDiscountAmount, subtotal);
+  }
+  const finalTotal = Math.max(0, subtotal - discountAmount);
+  const pointsEarned = Math.floor(finalTotal / 10);
+  const orderId = `DB-ORD-${Math.floor(1000 + Math.random() * 9000)}`;
+  const nowStr = new Date().toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' });
+
+  // Record into Order History
+  const orderRecord = {
+    id: orderId,
+    date: nowStr,
+    items: JSON.parse(JSON.stringify(cart)),
+    subtotal: subtotal,
+    discount: discountAmount,
+    coupon: appliedCouponCode || 'None',
+    total: finalTotal,
+    pointsEarned: pointsEarned,
+    status: 'จัดส่งสำเร็จ'
+  };
+
+  try {
+    const existingOrders = JSON.parse(localStorage.getItem('dailybrew_order_history') || '[]');
+    existingOrders.unshift(orderRecord);
+    localStorage.setItem('dailybrew_order_history', JSON.stringify(existingOrders));
+
+    // Update VIP Member points & lifetime spend
+    const savedMember = localStorage.getItem('dailybrew_vip_member');
+    if (savedMember) {
+      const member = JSON.parse(savedMember);
+      member.points = (member.points || 100) + pointsEarned;
+      member.totalSpent = (member.totalSpent || 0) + finalTotal;
+      localStorage.setItem('dailybrew_vip_member', JSON.stringify(member));
+      loadSavedVipMember();
+    }
+  } catch (err) {
+    console.error('Error recording order history', err);
+  }
+
   closeCartModal();
+
+  // Update Checkout Modal Content with Real Order Data
+  const checkoutBody = document.querySelector('#checkout-modal .modal-body');
+  if (checkoutBody) {
+    let itemsHtml = orderRecord.items.map(it => `
+      <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:0.85rem;">
+        <span>${it.name} x${it.qty}</span>
+        <span>${it.price * it.qty} ฿</span>
+      </div>
+    `).join('');
+
+    checkoutBody.innerHTML = `
+      <div style="font-size: 3.5rem; color: var(--accent-green); margin-bottom: 10px;">
+        <i class="fa-solid fa-mug-hot"></i>
+      </div>
+      <h4 style="font-size: 1.3rem; color: var(--primary-espresso); margin-bottom: 4px;">สั่งซื้อสำเร็จแล้วค่ะ! (Order Placed)</h4>
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 16px;">
+        ออเดอร์หมายเลข <strong style="color:var(--accent-caramel);">${orderId}</strong> บันทึกลงระบบ CDP แล้ว
+      </p>
+
+      <div style="background: var(--bg-cream-soft); padding: 16px 18px; border-radius: 14px; text-align: left; margin-bottom: 18px; font-size: 0.88rem; border: 1px solid rgba(80,49,35,0.08);">
+        <div style="padding-bottom:10px; margin-bottom:10px; border-bottom:1px dashed rgba(80,49,35,0.15);">
+          ${itemsHtml}
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom: 4px;">
+          <span>ยอดรวมสุทธิ:</span>
+          <strong style="color:var(--accent-caramel); font-size:1.05rem;">${finalTotal} ฿</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom: 4px;">
+          <span>แต้มที่ได้รับ (10฿ = 1pt):</span>
+          <span style="color:var(--accent-green); font-weight:700;">+${pointsEarned} Points ⭐</span>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <span>สถานะจัดส่ง:</span>
+          <span style="color: #00b894; font-weight:700;">🛵 กำลังเตรียมจัดส่งด่วน</span>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px;">
+        <button class="btn btn-secondary" style="flex:1;" onclick="closeCheckoutModal(); openMemberPortalModal();">
+          <i class="fa-solid fa-clock-rotate-left"></i> ดูประวัติสั่งซื้อ
+        </button>
+        <button class="btn btn-primary" style="flex:1;" onclick="closeCheckoutModal()">
+          สั่งเมนูอื่นเพิ่ม
+        </button>
+      </div>
+    `;
+  }
+
   document.getElementById('checkout-modal').classList.add('active');
-  // Reset Cart after mock purchase
+
+  // Reset Cart after purchase
   cart = [];
   appliedDiscountPercent = 0;
   appliedDiscountAmount = 0;
+  appliedCouponCode = '';
   updateCartUI();
+  showToast(`ชำระเงินสำเร็จ! รับแต้มสะสม +${pointsEarned} Points 🌟`);
 }
 
 function closeCheckoutModal() {
@@ -847,3 +944,224 @@ function resetVipForm() {
   localStorage.removeItem('dailybrew_vip_member');
   location.reload();
 }
+
+// ==========================================
+// 12. SUBSCRIPTION PACKAGES & FOOD PAIRING
+// ==========================================
+function buyPackage(pkgId, pkgName, pkgPrice) {
+  cart.push({
+    id: pkgId,
+    name: `⭐ ${pkgName}`,
+    price: pkgPrice,
+    image: 'assets/promo_morning.jpg',
+    options: 'Monthly Subscription Pass',
+    qty: 1
+  });
+  updateCartUI();
+  openCartModal();
+  showToast(`เพิ่มแพ็กเกจ "${pkgName}" ลงในตะกร้าแล้วค่ะ 🎉`);
+}
+
+function addPairingItem(itemId, itemName, itemPrice, itemImage) {
+  const existingIdx = cart.findIndex(ci => ci.id === itemId && ci.options === 'Food Pairing Set');
+  if (existingIdx > -1) {
+    cart[existingIdx].qty += 1;
+  } else {
+    cart.push({
+      id: itemId,
+      name: itemName,
+      price: itemPrice,
+      image: itemImage,
+      options: 'Food Pairing Set',
+      qty: 1
+    });
+  }
+  updateCartUI();
+  showToast(`เพิ่มเมนูคู่กัน "${itemName}" ในราคาพิเศษ ${itemPrice}฿ แล้ว 🥐`);
+}
+
+// ==========================================
+// 13. SMART AI RECOMMENDATION ENGINE (Time & Mood)
+// ==========================================
+function initSmartRecommendation() {
+  const hour = new Date().getHours();
+  const titleEl = document.getElementById('smart-rec-title');
+  const descEl = document.getElementById('smart-rec-desc');
+  const tagEl = document.getElementById('smart-rec-tag');
+  const btnEl = document.getElementById('btn-smart-rec-order');
+
+  if (!titleEl || !descEl) return;
+
+  if (hour >= 6 && hour < 12) {
+    tagEl.textContent = '☀️ บาริสต้าแนะนำรับเช้าวันใหม่ (Morning Booster)';
+    titleEl.textContent = 'Signature Dirty Coffee & Almond Croissant';
+    descEl.textContent = 'เช้าวันนี้เริ่มต้นด้วยดับเบิลช็อตกาแฟสกัดร้อนตัดกับนมเย็นจัด ทานคู่กับครัวซองต์กรอบนอกนุ่มใน';
+    if (btnEl) btnEl.setAttribute('onclick', "directAddToCart('dirty-coffee')");
+  } else if (hour >= 12 && hour < 17) {
+    tagEl.textContent = '🍊 เมนูสดชื่นยามบ่าย (Afternoon Refresh)';
+    titleEl.textContent = 'Artisan Orange Cold Brew & Basque Cheesecake';
+    descEl.textContent = 'ช่วงบ่ายคลายร้อนด้วยโคลด์บรูว์ส้มวาเลนเซียสดชื่นตาสว่าง ผสานความหวานละมุนของบาสก์ชีสเค้ก';
+    if (btnEl) btnEl.setAttribute('onclick', "directAddToCart('orange-coldbrew')");
+  } else {
+    tagEl.textContent = '🌙 ผ่อนคลายยามเย็น (Evening Chill)';
+    titleEl.textContent = 'Kyoto Uji Matcha Cloud & Basque Cheesecake';
+    descEl.textContent = 'ยามเย็นชิลล์ๆ กับมัทฉะแท้เกรดพิธีชงจากเกียวโต นุ่มละมุน ดื่มสบายไม่รบกวนการนอนหลับ';
+    if (btnEl) btnEl.setAttribute('onclick', "directAddToCart('uji-matcha-cloud')");
+  }
+}
+
+// ==========================================
+// 14. MEMBER PORTAL & CDP DASHBOARD CONTROLS
+// ==========================================
+function openMemberPortalModal() {
+  renderCdpProfile();
+  renderOrderHistory();
+  document.getElementById('member-portal-modal').classList.add('active');
+}
+
+function closeMemberPortalModal() {
+  document.getElementById('member-portal-modal').classList.remove('active');
+}
+
+function switchPortalTab(e, tabId) {
+  document.querySelectorAll('#member-portal-modal .mktg-tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('#member-portal-modal .mktg-tab-pane').forEach(pane => pane.classList.remove('active'));
+
+  e.target.classList.add('active');
+  const targetPane = document.getElementById(tabId);
+  if (targetPane) targetPane.classList.add('active');
+}
+
+function renderCdpProfile() {
+  const saved = localStorage.getItem('dailybrew_vip_member');
+  const fieldsContainer = document.getElementById('cdp-fields-container');
+  
+  if (!saved) {
+    // Default Guest / Demo Profile
+    document.getElementById('portal-stat-tier').textContent = 'Guest Member';
+    document.getElementById('portal-stat-points').textContent = '0 Points';
+    document.getElementById('portal-stat-spent').textContent = '0 ฿';
+    
+    if (fieldsContainer) {
+      fieldsContainer.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align:center; padding:20px; color:var(--text-muted);">
+          <p style="margin-bottom:12px;">ยังไม่ได้ลงทะเบียนสมาชิก VIP</p>
+          <a href="#membership" class="btn btn-primary" onclick="closeMemberPortalModal()">
+            <i class="fa-solid fa-crown"></i> ไปหน้าสมัครสมาชิกรับส่วนลด 20%
+          </a>
+        </div>
+      `;
+    }
+    return;
+  }
+
+  const member = JSON.parse(saved);
+  const orders = JSON.parse(localStorage.getItem('dailybrew_order_history') || '[]');
+  const totalSpent = orders.reduce((sum, o) => sum + (o.total || 0), 0);
+
+  document.getElementById('portal-stat-tier').textContent = member.tier || 'VIP Gold Member';
+  document.getElementById('portal-stat-points').textContent = `${member.points || 100} Points`;
+  document.getElementById('portal-stat-spent').textContent = `${totalSpent} ฿`;
+
+  if (fieldsContainer) {
+    fieldsContainer.innerHTML = `
+      <div class="cdp-field-item">
+        <span class="cdp-field-label"><i class="fa-solid fa-id-badge"></i> รหัสสมาชิก (Member ID)</span>
+        <span class="cdp-field-val" style="color:var(--accent-caramel); font-weight:700;">${member.memberId || 'DB-2026-8899'}</span>
+      </div>
+      <div class="cdp-field-item">
+        <span class="cdp-field-label"><i class="fa-solid fa-user"></i> ชื่อ - นามสกุล</span>
+        <span class="cdp-field-val">${member.fullname}</span>
+      </div>
+      <div class="cdp-field-item">
+        <span class="cdp-field-label"><i class="fa-solid fa-envelope"></i> อีเมล (Gmail / Email)</span>
+        <span class="cdp-field-val">${member.email}</span>
+      </div>
+      <div class="cdp-field-item">
+        <span class="cdp-field-label"><i class="fa-solid fa-phone"></i> เบอร์โทรศัพท์</span>
+        <span class="cdp-field-val">${member.phone}</span>
+      </div>
+      <div class="cdp-field-item">
+        <span class="cdp-field-label"><i class="fa-solid fa-cake-candles"></i> วันเกิด (Birthday Freebie)</span>
+        <span class="cdp-field-val">${member.birthday ? new Date(member.birthday).toLocaleDateString('th-TH') : 'ไม่ระบุ'}</span>
+      </div>
+      <div class="cdp-field-item">
+        <span class="cdp-field-label"><i class="fa-solid fa-mug-hot"></i> สไตล์กาแฟที่ชอบ (Flavor Preference)</span>
+        <span class="cdp-field-val">${member.favoriteCoffee || 'Signature Dirty'}</span>
+      </div>
+      <div class="cdp-field-item">
+        <span class="cdp-field-label"><i class="fa-solid fa-cow"></i> นมที่เลือกดื่ม (Milk Preference)</span>
+        <span class="cdp-field-val">${member.milk || 'Fresh Milk'}</span>
+      </div>
+      <div class="cdp-field-item">
+        <span class="cdp-field-label"><i class="fa-solid fa-location-dot"></i> ที่อยู่จัดส่ง / ย่านที่สะดวก</span>
+        <span class="cdp-field-val">${member.address || 'ย่านสยาม-จุฬาฯ'}</span>
+      </div>
+    `;
+  }
+}
+
+function renderOrderHistory() {
+  const container = document.getElementById('order-history-container');
+  if (!container) return;
+
+  const orders = JSON.parse(localStorage.getItem('dailybrew_order_history') || '[]');
+
+  if (orders.length === 0) {
+    container.innerHTML = `
+      <div style="text-align:center; padding: 40px 10px; color: var(--text-muted);">
+        <i class="fa-solid fa-receipt" style="font-size: 2.5rem; margin-bottom: 12px; opacity: 0.4;"></i>
+        <p>ยังไม่มีประวัติการสั่งซื้อ</p>
+        <p style="font-size:0.82rem;">ทดลองสั่งเมนูโปรดของคุณเพื่อเริ่มบันทึกประวัติและสะสมแต้มได้เลยค่ะ</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = '';
+  orders.forEach((ord, idx) => {
+    const card = document.createElement('div');
+    card.className = 'order-card';
+
+    const itemsSummary = ord.items.map(it => `${it.name} (x${it.qty})`).join(', ');
+
+    card.innerHTML = `
+      <div class="order-card-top">
+        <div>
+          <span class="order-card-id">#${ord.id}</span>
+          <span class="order-card-date">${ord.date}</span>
+        </div>
+        <span class="order-status-badge">✅ ${ord.status || 'จัดส่งสำเร็จ'}</span>
+      </div>
+      <div class="order-card-items-text">
+        <strong>รายการ:</strong> ${itemsSummary}
+      </div>
+      <div class="order-card-bottom">
+        <div>
+          <span class="order-card-total">${ord.total} ฿</span>
+          <span class="order-card-points"> (+${ord.pointsEarned || Math.floor(ord.total / 10)} pts)</span>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="reorderPastOrder(${idx})">
+          <i class="fa-solid fa-rotate-right"></i> สั่งซ้ำ
+        </button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function reorderPastOrder(orderIndex) {
+  const orders = JSON.parse(localStorage.getItem('dailybrew_order_history') || '[]');
+  if (!orders[orderIndex]) return;
+
+  const targetOrder = orders[orderIndex];
+  targetOrder.items.forEach(it => {
+    cart.push(JSON.parse(JSON.stringify(it)));
+  });
+
+  updateCartUI();
+  closeMemberPortalModal();
+  openCartModal();
+  showToast(`เพิ่มรายการจากออเดอร์ #${targetOrder.id} ลงในตะกร้าแล้วค่ะ ☕`);
+}
+

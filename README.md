@@ -11,18 +11,21 @@
 
 ## 📖 เกี่ยวกับโปรเจกต์ (About The Project)
 
-**Daily Brew** เป็นมินิโปรเจกต์วิชา **Digital Marketing** ที่พัฒนาขึ้นเพื่อจำลองร้านกาแฟสเปเชียลตี้ระดับพรีเมียม โดยผสมผสานความสวยงามด้าน UI/UX (Aesthetics) เข้ากับกลยุทธ์การตลาดดิจิทัลที่ครบวงจรตาม **AIDA Marketing Funnel** เพื่อสร้างการรับรู้ ดึงดูดลูกค้า เก็บข้อมูล Lead และกระตุ้นการสั่งซื้อซ้ำ
+**Daily Brew** เป็นมินิโปรเจกต์วิชา **Digital Marketing & Customer Data Platform (CDP)** ที่พัฒนาขึ้นเพื่อจำลองร้านกาแฟสเปเชียลตี้ระดับพรีเมียม โดยผสมผสานความสวยงามด้าน UI/UX (Aesthetics) เข้ากับกลยุทธ์การตลาดดิจิทัลที่ครบวงจรตาม **AIDA Marketing Funnel** และ **CDP Loyalty Retention Model**
 
 ---
 
 ## 🌟 ฟีเจอร์เด่นของเว็บไซต์ (Key Features)
 
 1. **🎨 Brand Identity & Hero Section:** ดีไซน์โทนสีอบอุ่นสไตล์ Warm Specialty Cafe พร้อมสโลแกน *"Coffee First, Everything Later."*
-2. **🎁 Digital Promotions & Lead Capture:** แคมเปญ *Morning Rush 20%*, *Daily Pass*, และ *Work & Chill Combo* พร้อมระบบคัดลอกโค้ดส่วนลด
-3. **👑 VIP Coffee Club & CRM Registration:** ระบบฟอร์มสมัครสมาชิกพร้อมออก **บัตรสมาชิกดิจิทัล (Digital VIP Card)** และสิทธิประโยชน์วันเกิด/สะสมแต้ม
-4. **🧠 Interactive "Find Your Daily Brew" Quiz:** มินิเกมตอบคำถาม 3 ขั้นตอนเพื่อจับคู่กาแฟที่เข้ากับอารมณ์และรสชาติโปรด (Personalization & Engagement)
-5. **☕ Interactive Menu & Customizer:** เมนูกาแฟสกัดเย็นและเบเกอรี ปรับแต่งความหวาน/ประเภทนมโอ๊ต และจำลองการสั่งซื้อพร้อมใบเสร็จ
-6. **🎯 Marketing Strategy Deck (Modal):** หน้าต่างสรุปกลยุทธ์การตลาด 4 ด้าน (Customer Persona, AIDA Funnel, Omnichannel Strategy, KPIs) สำหรับใช้พรีเซนต์งานอาจารย์
+2. **🎁 Digital Promotions & Voucher Engine:** แคมเปญ *Morning Rush 20%*, *Daily Pass*, และ *Work & Chill Combo* พร้อมระบบคัดลอกโค้ดส่วนลด
+3. **👑 VIP Coffee Club & CDP Registration:** ระบบฟอร์มสมัครสมาชิกพร้อมออก **บัตรสมาชิกดิจิทัล (Digital VIP Card)** บันทึก Gmail/เบอร์โทร/วันเกิด และสิทธิประโยชน์สะสมแต้ม
+4. **📊 Member Portal & Order History (CDP 360°):** แดชบอร์ดดูโปรไฟล์ลูกค้า 360 องศา, ยอดใช้จ่ายสะสม, แต้มคงเหลือ, และ **ประวัติการสั่งซื้อย้อนหลัง (Order History)** พร้อมปุ่มสั่งซ้ำ (Re-order)
+5. **💎 Coffee Subscriptions & Packages:** แพ็กเกจกาแฟรายเดือนสุดคุ้ม (5 แก้ว, 12 แก้ว, 25 แก้ว) เพื่อสร้าง Recurring Revenue และเพิ่ม Customer Lifetime Value (LTV)
+6. **🤖 Smart AI Recommendation Engine:** ระบบแนะนำเมนูอัจฉริยะตามช่วงเวลาจริง (เช้า/บ่าย/เย็น) และระบบ Food Pairing แนะนำขนมทานคู่กันในตะกร้า
+7. **🧠 Interactive "Find Your Daily Brew" Quiz:** มินิเกมตอบคำถาม 3 ขั้นตอนเพื่อจับคู่กาแฟที่เข้ากับอารมณ์และรสชาติโปรด (Personalization & Engagement)
+8. **☕ Interactive Menu & Customizer:** เมนูกาแฟสกัดเย็นและเบเกอรี ปรับแต่งความหวาน/ประเภทนมโอ๊ต และจำลองการสั่งซื้อพร้อมใบเสร็จ
+9. **🎯 Marketing Strategy Deck (Modal):** หน้าต่างสรุปกลยุทธ์การตลาด 4 ด้าน (Customer Persona, AIDA Funnel, Omnichannel Strategy, KPIs) สำหรับใช้พรีเซนต์งานอาจารย์
 
 ---
 
@@ -41,10 +44,10 @@
 
 ```
 ร้านขายกาแฟ(Daily Brew)/
-├── index.html          # โครงสร้างหน้าเว็บหลักและ Semantic HTML
+├── index.html          # โครงสร้างหน้าเว็บหลัก, Sections, Modals
 ├── style.css           # ดีไซน์ระบบ Design Tokens, Glassmorphism, Responsive
-├── app.js              # ลอจิกการทำงาน (Quiz, Cart, Voucher, Marketing Modal)
-├── TECH_STACK.md       # เอกสารสรุปเทคโนโลยีที่ใช้พัฒนาอย่างละเอียด
+├── app.js              # ลอจิกการทำงาน (CDP, Order History, Packages, Smart Rec, Cart)
+├── TECH_STACK.md       # เอกสารสรุปเทคโนโลยีและระบบ CDP อย่างละเอียด
 ├── README.md           # เอกสารแนะนำโปรเจกต์สำหรับ GitHub
 └── assets/             # รูปภาพเมนู แบนเนอร์ และโลโก้ร้านกาแฟ
 ```

@@ -49,6 +49,7 @@
           <li><a href="#hero" class="active">หน้าแรก</a></li>
           <li><a href="#promotions">โปรโมชั่น</a></li>
           <li><a href="#membership">สมัครสมาชิก</a></li>
+          <li><a href="#packages">แพ็กเกจกาแฟ</a></li>
           <li><a href="#quiz">ค้นหากาแฟที่ใช่</a></li>
           <li><a href="#menu">เมนูแนะนำ</a></li>
           <li><a href="#story">เรื่องราวของเรา</a></li>
@@ -59,6 +60,12 @@
 
       <!-- Nav Actions & Special Marketing Presentation Button -->
       <div class="nav-actions">
+        <!-- Member Portal & Order History Button -->
+        <button class="btn-member-portal" id="btn-open-member-portal" onclick="openMemberPortalModal()" title="ดูข้อมูลลูกค้า CDP และประวัติการสั่งซื้อ">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>ประวัติสั่งซื้อ & CDP</span>
+        </button>
+
         <!-- Digital Marketing Deck Button for Professor Presentation -->
         <button class="btn-mktg-deck" id="btn-open-mktg" title="คลิกเพื่อดูแผนการตลาด Digital Marketing สำหรับนำเสนออาจารย์">
           <i class="fa-solid fa-chart-pie"></i>
@@ -389,7 +396,89 @@
       </div>
     </section>
 
-    <!-- 4. INTERACTIVE COFFEE FINDER QUIZ (Customer Engagement Funnel) -->
+    <!-- 4. COFFEE PACKAGES & SUBSCRIPTIONS (Recurring Revenue & LTV) -->
+    <section class="packages-section" id="packages">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag"><i class="fa-solid fa-gem"></i> Monthly Coffee Subscriptions</span>
+          <h2>แพ็กเกจกาแฟรายเดือนสุดคุ้ม (Daily Pass)</h2>
+          <p>ประหยัดสูงสุด 40% สำหรับคอกาแฟตัวจริง ซื้อครั้งเดียว ดื่มได้ตลอดเดือน พร้อมสิทธิ์อัปเกรดนมพืชฟรีทุกแก้ว!</p>
+        </div>
+
+        <div class="packages-grid">
+          <!-- Package 1: Starter -->
+          <div class="package-card">
+            <div class="package-header">
+              <span class="package-badge">☕ Starter Trial</span>
+              <h3>Starter Pass (5 แก้ว)</h3>
+              <p>สำหรับทดลองดื่ม กาแฟสเปเชียลตี้ 5 แก้ว</p>
+              <div class="package-price">
+                <span class="price-val">499</span><span class="price-currency">฿</span>
+                <span class="price-unit">/ เดือน (เฉลี่ย 99฿ / แก้ว)</span>
+              </div>
+            </div>
+            <ul class="package-features">
+              <li><i class="fa-solid fa-check"></i> ดื่มกาแฟหมวดใดก็ได้ 5 แก้ว (มูลค่าสูงสุด 675฿)</li>
+              <li><i class="fa-solid fa-check"></i> อายุการใช้งาน 30 วันนับจากวันที่ซื้อ</li>
+              <li><i class="fa-solid fa-check"></i> สั่งผ่านเว็บล่วงหน้า ไม่ต้องรอคิว</li>
+              <li><i class="fa-solid fa-check"></i> รับแต้มสะสมทันที 50 Points</li>
+            </ul>
+            <button class="btn btn-secondary" style="width:100%;" onclick="buyPackage('starter', 'Starter Pass (5 แก้ว)', 499)">
+              <i class="fa-solid fa-cart-plus"></i> เลือกแพ็กเกจนี้
+            </button>
+          </div>
+
+          <!-- Package 2: Daily Pass (Highlight) -->
+          <div class="package-card featured">
+            <div class="popular-ribbon">⭐ Most Popular</div>
+            <div class="package-header">
+              <span class="package-badge gold">🔥 Best Value Club</span>
+              <h3>Daily Brew Pass (10+2 แก้ว)</h3>
+              <p>ซื้อ 10 แก้ว ฟรีทันที 2 แก้ว รวมเป็น 12 แก้ว!</p>
+              <div class="package-price">
+                <span class="price-val">990</span><span class="price-currency">฿</span>
+                <span class="price-unit">/ เดือน (เฉลี่ย 82฿ / แก้ว)</span>
+              </div>
+            </div>
+            <ul class="package-features">
+              <li><i class="fa-solid fa-check"></i> ดื่มเครื่องดื่มและกาแฟ Signature 12 แก้ว (มูลค่า 1,620฿)</li>
+              <li><i class="fa-solid fa-check"></i> <strong>ฟรี!</strong> อัปเกรดนมโอ๊ต/นมอัลมอนด์ทุกแก้ว</li>
+              <li><i class="fa-solid fa-check"></i> รับฟรี ส่วนลดเบเกอรี 20% ทุกชิ้น</li>
+              <li><i class="fa-solid fa-check"></i> รับแต้มสะสมทันที 100 Points</li>
+              <li><i class="fa-solid fa-check"></i> อายุการใช้งาน 45 วัน</li>
+            </ul>
+            <button class="btn btn-primary" style="width:100%; font-size:1.02rem; padding:14px;" onclick="buyPackage('daily-pass', 'Daily Brew Pass (10+2 แก้ว)', 990)">
+              <i class="fa-solid fa-bolt"></i> สมัครแพ็กเกจนี้ (ยอดนิยม)
+            </button>
+          </div>
+
+          <!-- Package 3: Master Connoisseur -->
+          <div class="package-card">
+            <div class="package-header">
+              <span class="package-badge">👑 Master Roaster</span>
+              <h3>VIP Master Pass (25 แก้ว)</h3>
+              <p>20 แก้ว + แถมฟรี 5 แก้ว + แก้ว Tumbler พรีเมียม</p>
+              <div class="package-price">
+                <span class="price-val">1,890</span><span class="price-currency">฿</span>
+                <span class="price-unit">/ เดือน (เฉลี่ย 75฿ / แก้ว)</span>
+              </div>
+            </div>
+            <ul class="package-features">
+              <li><i class="fa-solid fa-check"></i> ดื่มเครื่องดื่มใดก็ได้ 25 แก้ว ไม่จำกัดเมนู</li>
+              <li><i class="fa-solid fa-check"></i> <strong>ฟรี!</strong> แก้ว Daily Brew Thermal Tumbler (มูลค่า 490฿)</li>
+              <li><i class="fa-solid fa-check"></i> สิทธิ์ Priority Fast Track สั่งด่วนได้ทุกวัน</li>
+              <li><i class="fa-solid fa-check"></i> รับแต้มสะสมทันที 200 Points</li>
+              <li><i class="fa-solid fa-check"></i> อายุการใช้งาน 60 วัน</li>
+            </ul>
+            <button class="btn btn-secondary" style="width:100%;" onclick="buyPackage('master', 'VIP Master Pass (25 แก้ว + แก้ว Tumbler)', 1890)">
+              <i class="fa-solid fa-cart-plus"></i> เลือกแพ็กเกจนี้
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. INTERACTIVE COFFEE FINDER QUIZ (Customer Engagement Funnel) -->
     <section class="quiz-section" id="quiz">
       <div class="container">
         <div class="section-header">
@@ -543,6 +632,19 @@
           <span class="badge-tag"><i class="fa-solid fa-mug-saucer"></i> Crafted With Passion</span>
           <h2>เมนูแนะนำ & เครื่องดื่มคราฟต์</h2>
           <p>เลือกสรรความอร่อยได้ตามใจชอบ พร้อมปรับระดับความหวานและประเภทนมได้ตามสไตล์คุณ</p>
+        </div>
+
+        <!-- Smart AI Recommendation Banner (Time & Preference based) -->
+        <div class="smart-rec-banner" id="smart-rec-banner">
+          <div class="smart-rec-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <div class="smart-rec-content">
+            <span class="smart-rec-tag" id="smart-rec-tag">☀️ บาริสต้าแนะนำประจำช่วงเวลา</span>
+            <h4 id="smart-rec-title">Signature Dirty Coffee & Almond Croissant</h4>
+            <p id="smart-rec-desc">ช่วงเวลานี้เหมาะกับกาแฟเข้มข้นผสมผสานนมเย็นจัด ทานคู่กับครัวซองต์อบใหม่ร้อนๆ</p>
+          </div>
+          <button class="btn btn-primary" id="btn-smart-rec-order" onclick="directAddToCart('dirty-coffee')">
+            <i class="fa-solid fa-bag-shopping"></i> สั่งเมนูแนะนำนี้
+          </button>
         </div>
 
         <!-- Menu Filter Tabs -->
@@ -795,6 +897,26 @@
         </div>
         <div id="promo-applied-message" style="font-size: 0.82rem; color: var(--accent-green); margin-top:-10px; margin-bottom:12px;"></div>
 
+        <!-- Smart Food Pairing Cross-sell -->
+        <div class="cart-pairing-box" id="cart-pairing-box">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+            <span style="font-size:0.82rem; font-weight:700; color:var(--primary-espresso);">💡 แนะนำทานคู่กัน (Food Pairing):</span>
+            <span style="font-size:0.75rem; background:rgba(200,137,55,0.15); color:var(--accent-caramel); padding:2px 8px; border-radius:9999px;">ลดพิเศษ 20฿</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:var(--bg-card); padding:10px 12px; border-radius:10px; border:1px solid rgba(80,49,35,0.1);">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <img src="assets/croissant.jpg" alt="Almond Croissant" style="width:38px; height:38px; border-radius:8px; object-fit:cover;">
+              <div>
+                <h5 style="margin:0; font-size:0.85rem;">Almond Croissant อบสด</h5>
+                <span style="font-size:0.8rem; color:var(--accent-caramel); font-weight:700;">69 ฿ <del style="color:#a89a90; font-size:0.75rem;">89 ฿</del></span>
+              </div>
+            </div>
+            <button class="btn btn-secondary" style="padding:6px 12px; font-size:0.78rem;" onclick="addPairingItem('almond-croissant', 'Almond Croissant อบสด', 69, 'assets/croissant.jpg')">
+              + เพิ่มคู่กัน
+            </button>
+          </div>
+        </div>
+
         <!-- Summary -->
         <div class="cart-summary">
           <div class="summary-row">
@@ -913,7 +1035,122 @@
     </div>
   </div>
 
-  <!-- 4. 🎓 DIGITAL MARKETING STRATEGY DECK MODAL (For Professor Presentation) -->
+  <!-- 4. MEMBER PORTAL & CDP DASHBOARD MODAL -->
+  <div class="modal-overlay" id="member-portal-modal">
+    <div class="modal-content modal-member-portal">
+      <div class="modal-header">
+        <div>
+          <h3 style="font-size: 1.3rem;"><i class="fa-solid fa-address-card" style="color: var(--accent-caramel);"></i> Member Portal & CDP Dashboard</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">ระบบจัดการข้อมูลลูกค้า 360 องศา & ประวัติการสั่งซื้อ</span>
+        </div>
+        <button class="btn-close-modal" onclick="closeMemberPortalModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Portal Navigation Tabs -->
+        <div class="mktg-tabs">
+          <button class="mktg-tab-btn active" onclick="switchPortalTab(event, 'portal-profile')">👤 ข้อมูลลูกค้า (CDP Profile)</button>
+          <button class="mktg-tab-btn" onclick="switchPortalTab(event, 'portal-orders')">📜 ประวัติการสั่งซื้อ (Order History)</button>
+          <button class="mktg-tab-btn" onclick="switchPortalTab(event, 'portal-perks')">🎁 คูปอง & สิทธิประโยชน์</button>
+        </div>
+
+        <!-- Tab 1: CDP Profile -->
+        <div class="mktg-tab-pane active" id="portal-profile">
+          <div class="cdp-profile-wrapper">
+            <div class="cdp-stats-grid">
+              <div class="cdp-stat-box">
+                <span class="cdp-stat-label">สถานะสมาชิก</span>
+                <h4 id="portal-stat-tier" style="color: var(--accent-caramel);">VIP Gold Member</h4>
+              </div>
+              <div class="cdp-stat-box">
+                <span class="cdp-stat-label">แต้มสะสมทั้งหมด</span>
+                <h4 id="portal-stat-points" style="color: var(--accent-gold);">100 Points</h4>
+              </div>
+              <div class="cdp-stat-box">
+                <span class="cdp-stat-label">ยอดสั่งซื้อสะสม</span>
+                <h4 id="portal-stat-spent">0 ฿</h4>
+              </div>
+              <div class="cdp-stat-box">
+                <span class="cdp-stat-label">สิทธิ์เดือนเกิด 🎂</span>
+                <h4 id="portal-stat-birthday" style="color: #00b894;">พร้อมใช้งาน</h4>
+              </div>
+            </div>
+
+            <div class="cdp-details-card">
+              <h4><i class="fa-solid fa-database" style="color:var(--accent-caramel);"></i> ข้อมูลลูกค้า 360° (Single Customer View)</h4>
+              <div class="cdp-fields-grid" id="cdp-fields-container">
+                <!-- Dynamically populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Order History -->
+        <div class="mktg-tab-pane" id="portal-orders">
+          <div class="order-history-header">
+            <h4><i class="fa-solid fa-receipt" style="color:var(--accent-caramel);"></i> รายการคำสั่งซื้อย้อนหลัง</h4>
+            <span style="font-size:0.82rem; color:var(--text-muted);">ระบบบันทึกคำสั่งซื้ออัตโนมัติแบบ Real-time</span>
+          </div>
+          <div class="order-history-list" id="order-history-container">
+            <!-- Dynamically populated by JS -->
+          </div>
+        </div>
+
+        <!-- Tab 3: Active Perks & Coupons -->
+        <div class="mktg-tab-pane" id="portal-perks">
+          <div class="portal-vouchers-grid">
+            <div class="portal-voucher-card">
+              <div class="voucher-card-left">
+                <span class="voucher-discount-val">20%</span>
+                <span class="voucher-discount-sub">OFF</span>
+              </div>
+              <div class="voucher-card-right">
+                <h5>ส่วนลดต้อนรับสมาชิก VIP</h5>
+                <p>ลด 20% ทุกเมนูเครื่องดื่มและอาหาร</p>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                  <code>DAILYVIP20</code>
+                  <button class="btn btn-secondary btn-sm" onclick="applyPromoAndScroll('DAILYVIP20'); closeMemberPortalModal();">ใช้คูปองนี้</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="portal-voucher-card">
+              <div class="voucher-card-left" style="background:linear-gradient(135deg, #e17055, #d63031);">
+                <span class="voucher-discount-val">25%</span>
+                <span class="voucher-discount-sub">PASS</span>
+              </div>
+              <div class="voucher-card-right">
+                <h5>Daily Pass Coffee Lover</h5>
+                <p>ส่วนลด 25% สำหรับสมาชิกแพ็กเกจ</p>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                  <code>BREWPASS</code>
+                  <button class="btn btn-secondary btn-sm" onclick="applyPromoAndScroll('BREWPASS'); closeMemberPortalModal();">ใช้คูปองนี้</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="portal-voucher-card">
+              <div class="voucher-card-left" style="background:linear-gradient(135deg, #0984e3, #6c5ce7);">
+                <span class="voucher-discount-val">40฿</span>
+                <span class="voucher-discount-sub">COMBO</span>
+              </div>
+              <div class="voucher-card-right">
+                <h5>Work & Chill Afternoon Set</h5>
+                <p>ลด 40 บาทเมื่อสั่งคู่กับเบเกอรี</p>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                  <code>COMBO179</code>
+                  <button class="btn btn-secondary btn-sm" onclick="applyPromoAndScroll('COMBO179'); closeMemberPortalModal();">ใช้คูปองนี้</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 🎓 DIGITAL MARKETING STRATEGY DECK MODAL (For Professor Presentation) -->
   <div class="modal-overlay" id="mktg-modal">
     <div class="modal-content modal-mktg-deck">
       <div class="modal-header">
