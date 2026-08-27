@@ -18,10 +18,11 @@
 ## 🌟 ฟีเจอร์เด่นของเว็บไซต์ (Key Features)
 
 1. **🎨 Brand Identity & Hero Section:** ดีไซน์โทนสีอบอุ่นสไตล์ Warm Specialty Cafe พร้อมสโลแกน *"Coffee First, Everything Later."*
-2. **🎁 Digital Promotions & Lead Capture:** แคมเปญ *Morning Rush 20%*, *Daily Pass*, และ *Work & Chill Combo* พร้อมระบบคัดลอกโค้ดและกล่องรับคูปอง VIP Club
-3. **🧠 Interactive "Find Your Daily Brew" Quiz:** มินิเกมตอบคำถาม 3 ขั้นตอนเพื่อจับคู่กาแฟที่เข้ากับอารมณ์และรสชาติโปรด (Personalization & Engagement)
-4. **☕ Interactive Menu & Customizer:** เมนูกาแฟสกัดเย็นและเบเกอรี ปรับแต่งความหวาน/ประเภทนมโอ๊ต และจำลองการสั่งซื้อพร้อมใบเสร็จ
-5. **🎯 Marketing Strategy Deck (Modal):** หน้าต่างสรุปกลยุทธ์การตลาด 4 ด้าน (Customer Persona, AIDA Funnel, Omnichannel Strategy, KPIs) สำหรับใช้พรีเซนต์งานอาจารย์
+2. **🎁 Digital Promotions & Lead Capture:** แคมเปญ *Morning Rush 20%*, *Daily Pass*, และ *Work & Chill Combo* พร้อมระบบคัดลอกโค้ดส่วนลด
+3. **👑 VIP Coffee Club & CRM Registration:** ระบบฟอร์มสมัครสมาชิกพร้อมออก **บัตรสมาชิกดิจิทัล (Digital VIP Card)** และสิทธิประโยชน์วันเกิด/สะสมแต้ม
+4. **🧠 Interactive "Find Your Daily Brew" Quiz:** มินิเกมตอบคำถาม 3 ขั้นตอนเพื่อจับคู่กาแฟที่เข้ากับอารมณ์และรสชาติโปรด (Personalization & Engagement)
+5. **☕ Interactive Menu & Customizer:** เมนูกาแฟสกัดเย็นและเบเกอรี ปรับแต่งความหวาน/ประเภทนมโอ๊ต และจำลองการสั่งซื้อพร้อมใบเสร็จ
+6. **🎯 Marketing Strategy Deck (Modal):** หน้าต่างสรุปกลยุทธ์การตลาด 4 ด้าน (Customer Persona, AIDA Funnel, Omnichannel Strategy, KPIs) สำหรับใช้พรีเซนต์งานอาจารย์
 
 ---
 
