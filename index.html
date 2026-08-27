@@ -48,6 +48,7 @@
         <ul class="nav-links" id="nav-links">
           <li><a href="#hero" class="active">หน้าแรก</a></li>
           <li><a href="#promotions">โปรโมชั่น</a></li>
+          <li><a href="#membership">สมัครสมาชิก</a></li>
           <li><a href="#quiz">ค้นหากาแฟที่ใช่</a></li>
           <li><a href="#menu">เมนูแนะนำ</a></li>
           <li><a href="#story">เรื่องราวของเรา</a></li>
@@ -208,24 +209,187 @@
           </div>
         </div>
 
-        <!-- Lead Capture Newsletter Banner -->
+        <!-- Lead Capture Quick Action Banner -->
         <div class="lead-capture-box">
           <div class="lead-capture-info">
-            <span class="badge-tag"><i class="fa-solid fa-envelope-open-text"></i> VIP Club</span>
-            <h3>รับคูปองส่วนลด 20% ทันที</h3>
-            <p>กรอกเบอร์โทรหรืออีเมลเพื่อสมัครสมาชิก Daily Brew VIP รับส่วนลดต้อนรับและสิทธิพิเศษในวันเกิดก่อนใคร</p>
+            <span class="badge-tag"><i class="fa-solid fa-crown"></i> VIP Member Club</span>
+            <h3>สิทธิพิเศษสำหรับสมาชิก Daily Brew VIP</h3>
+            <p>สมัครสมาชิกฟรีวันนี้ รับคูปองส่วนลด 20% ทันที พร้อมสิทธิ์รับเครื่องดื่มฟรีในเดือนเกิด และสะสมแต้มแลกของรางวัล</p>
           </div>
-          <form class="lead-form" id="lead-capture-form" onsubmit="handleLeadCapture(event)">
-            <input type="email" id="lead-email" placeholder="ระบุอีเมลหรือเบอร์โทรของคุณ..." required>
-            <button type="submit" class="btn btn-primary" id="btn-submit-lead">
-              <span>รับสิทธิ์</span>
-            </button>
-          </form>
+          <div style="display:flex; justify-content: flex-end;">
+            <a href="#membership" class="btn btn-primary" style="padding: 14px 28px; font-size: 1rem;">
+              <i class="fa-solid fa-user-plus"></i> สมัครสมาชิกเลย (Free VIP)
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 3. INTERACTIVE COFFEE FINDER QUIZ (Customer Engagement Funnel) -->
+    <!-- 3. VIP MEMBERSHIP REGISTRATION (CRM & Customer Loyalty) -->
+    <section class="membership-section" id="membership">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag"><i class="fa-solid fa-crown"></i> VIP Coffee Club</span>
+          <h2>สมัครสมาชิก Daily Brew Club</h2>
+          <p>เปิดประสบการณ์ความเอ็กซ์คลูซีฟ รับส่วนลด 20% ทันที พร้อมสะสมแต้มแลกเครื่องดื่มฟรี และรับของขวัญในเดือนเกิด 🎂</p>
+        </div>
+
+        <div class="membership-grid">
+          <!-- Left: Registration Form Card -->
+          <div class="membership-form-card" id="membership-form-card">
+            <div class="form-card-header">
+              <h3><i class="fa-solid fa-id-card" style="color: var(--accent-caramel);"></i> กรอกข้อมูลสมัครสมาชิก</h3>
+              <p>สมัครฟรี ไม่มีค่าใช้จ่าย พร้อมรับสิทธิพิเศษทันทีหลังลงทะเบียน</p>
+            </div>
+
+            <form id="vip-registration-form" onsubmit="handleVipRegistration(event)">
+              <div class="form-row-grid">
+                <div class="form-group">
+                  <label for="member-fullname"><i class="fa-solid fa-user"></i> ชื่อ - นามสกุล *</label>
+                  <input type="text" id="member-fullname" placeholder="เช่น คุณณภัทร มีสุข" required oninput="updateLiveCard()">
+                </div>
+                <div class="form-group">
+                  <label for="member-phone"><i class="fa-solid fa-phone"></i> เบอร์โทรศัพท์ *</label>
+                  <input type="tel" id="member-phone" placeholder="เช่น 089-123-4567" required oninput="updateLiveCard()">
+                </div>
+              </div>
+
+              <div class="form-row-grid">
+                <div class="form-group">
+                  <label for="member-email"><i class="fa-solid fa-envelope"></i> อีเมล (สำหรับรับคูปอง) *</label>
+                  <input type="email" id="member-email" placeholder="name@example.com" required oninput="updateLiveCard()">
+                </div>
+                <div class="form-group">
+                  <label for="member-birthday"><i class="fa-solid fa-cake-candles"></i> วัน/เดือน/ปีเกิด (รับของขวัญเดือนเกิด) *</label>
+                  <input type="date" id="member-birthday" required>
+                </div>
+              </div>
+
+              <div class="form-row-grid">
+                <div class="form-group">
+                  <label for="member-favorite-coffee"><i class="fa-solid fa-mug-hot"></i> สไตล์กาแฟที่ชอบที่สุด</label>
+                  <select id="member-favorite-coffee">
+                    <option value="Signature Dirty">Signature Dirty (เข้มข้น นมเย็นจัด)</option>
+                    <option value="Cold Brew / Tonic">Cold Brew / Orange Tonic (สดชื่น ดับกระหาย)</option>
+                    <option value="Espresso & Flat White">Espresso / Flat White (หอมเข้ม นุ่มลึก)</option>
+                    <option value="Kyoto Uji Matcha">Kyoto Uji Matcha (มัทฉะแท้เกรดพิธี)</option>
+                    <option value="Bakery & Pastry">ครัวซองต์ & ชีสเค้กอบสด</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="member-milk"><i class="fa-solid fa-cow"></i> นมที่คุณเลือกดื่ม</label>
+                  <select id="member-milk">
+                    <option value="Whole Milk">นมสดแท้พรีเมียม (Whole Milk)</option>
+                    <option value="Oat Milk">นมโอ๊ตสูตรบาริสต้า (Oat Milk)</option>
+                    <option value="Almond Milk">นมแอลมอนด์ (Almond Milk)</option>
+                    <option value="No Milk">ไม่ใส่นม (Black Coffee)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="member-address"><i class="fa-solid fa-location-dot"></i> ที่อยู่จัดส่ง / ย่านที่สะดวกรับสินค้า (สำหรับเดลิเวอรี)</label>
+                <input type="text" id="member-address" placeholder="เช่น หอพัก/คอนโด ย่านสยาม หรือ อารีย์">
+              </div>
+
+              <div class="form-group-checkbox">
+                <label>
+                  <input type="checkbox" id="member-consent" checked required>
+                  <span>ยินยอมรับสิทธิประโยชน์ ส่วนลดโปรโมชั่นประจำสัปดาห์ และข้อมูลข่าวสารจาก Daily Brew</span>
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.05rem; padding: 15px;">
+                <i class="fa-solid fa-sparkles"></i> สมัครสมาชิก & รับบัตร VIP ทันที
+              </button>
+            </form>
+          </div>
+
+          <!-- Right: Live VIP Member Card Mockup & Perks -->
+          <div class="membership-card-display">
+            <!-- Digital Member Card -->
+            <div class="vip-digital-card" id="vip-digital-card">
+              <div class="vip-card-glow"></div>
+              <div class="vip-card-top">
+                <div class="vip-card-brand">
+                  <img src="assets/logo.jpg" alt="Daily Brew" class="vip-card-logo">
+                  <div>
+                    <h4>Daily Brew</h4>
+                    <span>Coffee First, Everything Later.</span>
+                  </div>
+                </div>
+                <div class="vip-card-tier-badge">
+                  <i class="fa-solid fa-crown"></i> VIP GOLD
+                </div>
+              </div>
+
+              <div class="vip-card-chip">
+                <i class="fa-solid fa-microchip"></i>
+                <i class="fa-solid fa-wifi" style="transform: rotate(90deg); margin-left: 8px;"></i>
+              </div>
+
+              <div class="vip-card-middle">
+                <span class="vip-card-label">MEMBER NAME</span>
+                <h3 class="vip-card-name" id="card-display-name">คุณ สมาชิกคนพิเศษ</h3>
+              </div>
+
+              <div class="vip-card-bottom">
+                <div>
+                  <span class="vip-card-label">MEMBER ID</span>
+                  <p class="vip-card-id" id="card-display-id">DB-2026-8899</p>
+                </div>
+                <div>
+                  <span class="vip-card-label">WELCOME BONUS</span>
+                  <p class="vip-card-points" id="card-display-points">ส่วนลด 20%</p>
+                </div>
+                <div>
+                  <span class="vip-card-label">STATUS</span>
+                  <p class="vip-card-status" id="card-display-status" style="color: #55efc4; font-weight:700;">ACTIVE</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- VIP Perks List -->
+            <div class="vip-perks-box">
+              <h4><i class="fa-solid fa-gift" style="color: var(--accent-gold);"></i> สิทธิพิเศษสำหรับสมาชิก VIP</h4>
+              <div class="vip-perks-list">
+                <div class="vip-perk-item">
+                  <div class="vip-perk-icon"><i class="fa-solid fa-percent"></i></div>
+                  <div>
+                    <h5>ส่วนลด 20% ออเดอร์แรก</h5>
+                    <p>รับโค้ดส่วนลด <strong>DAILYVIP20</strong> อัตโนมัติเมื่อสมัครสำเร็จ</p>
+                  </div>
+                </div>
+                <div class="vip-perk-item">
+                  <div class="vip-perk-icon"><i class="fa-solid fa-cake-candles"></i></div>
+                  <div>
+                    <h5>ฟรี! เครื่องดื่ม + เบเกอรี ในเดือนเกิด</h5>
+                    <p>รับฟรีเครื่องดื่มแก้วโปรด 1 แก้ว + ขนม 1 ชิ้น ในเดือนเกิดของคุณ</p>
+                  </div>
+                </div>
+                <div class="vip-perk-item">
+                  <div class="vip-perk-icon"><i class="fa-solid fa-coins"></i></div>
+                  <div>
+                    <h5>สะสมแต้มแลกแก้วฟรี (10฿ = 1 แต้ม)</h5>
+                    <p>สะสมครบ 100 แต้ม แลกรับเครื่องดื่ม Signature ฟรีทันที</p>
+                  </div>
+                </div>
+                <div class="vip-perk-item">
+                  <div class="vip-perk-icon"><i class="fa-solid fa-bolt"></i></div>
+                  <div>
+                    <h5>Priority Fast Track</h5>
+                    <p>รับสิทธิ์ชงออเดอร์ก่อนใคร และสิทธิ์สั่งจองเมล็ดกาแฟล็อตพิเศษ</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. INTERACTIVE COFFEE FINDER QUIZ (Customer Engagement Funnel) -->
     <section class="quiz-section" id="quiz">
       <div class="container">
         <div class="section-header">

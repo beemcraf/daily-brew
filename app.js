@@ -127,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderMenuItems('all');
   setupEventListeners();
   loadSavedVoucher();
+  loadSavedVipMember();
 });
 
 function setupEventListeners() {
@@ -720,4 +721,129 @@ function showToast(message) {
     toast.style.transition = 'all 0.3s ease';
     setTimeout(() => toast.remove(), 300);
   }, 3200);
+}
+
+// ==========================================
+// 11. VIP MEMBERSHIP REGISTRATION (CRM & LOYALTY)
+// ==========================================
+function updateLiveCard() {
+  const nameInput = document.getElementById('member-fullname');
+  const nameDisplay = document.getElementById('card-display-name');
+  if (nameInput && nameDisplay) {
+    nameDisplay.textContent = nameInput.value.trim() ? nameInput.value.trim() : 'คุณ สมาชิกคนพิเศษ';
+  }
+}
+
+function handleVipRegistration(event) {
+  event.preventDefault();
+  
+  const fullname = document.getElementById('member-fullname').value.trim();
+  const phone = document.getElementById('member-phone').value.trim();
+  const email = document.getElementById('member-email').value.trim();
+  const birthday = document.getElementById('member-birthday').value;
+  const favoriteCoffee = document.getElementById('member-favorite-coffee').value;
+  const milk = document.getElementById('member-milk').value;
+  const address = document.getElementById('member-address').value.trim();
+
+  if (!fullname || !phone || !email) {
+    showToast('กรุณากรอกข้อมูลที่จำเป็นให้ครบถ้วนค่ะ');
+    return;
+  }
+
+  // Generate unique VIP Member ID
+  const randomIdNum = Math.floor(1000 + Math.random() * 9000);
+  const memberId = `DB-2026-${randomIdNum}`;
+
+  const memberData = {
+    fullname,
+    phone,
+    email,
+    birthday,
+    favoriteCoffee,
+    milk,
+    address,
+    memberId,
+    points: 100,
+    tier: 'VIP Gold Member',
+    joinedDate: new Date().toLocaleDateString('th-TH')
+  };
+
+  // Save to localStorage
+  localStorage.setItem('dailybrew_vip_member', JSON.stringify(memberData));
+
+  // Update card elements
+  const cardName = document.getElementById('card-display-name');
+  const cardId = document.getElementById('card-display-id');
+  const cardPoints = document.getElementById('card-display-points');
+  const cardStatus = document.getElementById('card-display-status');
+
+  if (cardName) cardName.textContent = fullname;
+  if (cardId) cardId.textContent = memberId;
+  if (cardPoints) cardPoints.textContent = '100 PTS + 20% OFF';
+  if (cardStatus) cardStatus.textContent = 'ACTIVE (GOLD)';
+
+  // Auto apply welcome voucher code
+  applyPromoAndScroll('DAILYVIP20');
+
+  // Replace form with congratulations confirmation
+  const formCard = document.getElementById('membership-form-card');
+  if (formCard) {
+    formCard.innerHTML = `
+      <div class="vip-registered-success">
+        <div style="font-size: 3rem; margin-bottom: 10px;">🎉</div>
+        <h4>ยินดีต้อนรับสู่ Daily Brew VIP Club!</h4>
+        <p>คุณ <strong>${fullname}</strong> ได้รับสถานะ <strong>VIP Gold Member</strong> เรียบร้อยแล้วค่ะ</p>
+        <div style="background: rgba(255,255,255,0.85); padding: 14px; border-radius: 12px; margin: 15px 0; text-align:left; font-size:0.88rem;">
+          <p style="margin:4px 0;"><strong>💳 รหัสสมาชิก:</strong> <code style="color:var(--accent-caramel); font-size:1rem;">${memberId}</code></p>
+          <p style="margin:4px 0;"><strong>⭐ แต้มต้อนรับ:</strong> 100 Points</p>
+          <p style="margin:4px 0;"><strong>🎁 ส่วนลดต้อนรับ:</strong> ส่วนลด 20% (โค้ด <code>DAILYVIP20</code> ใส่ในตะกร้าให้อัตโนมัติแล้ว)</p>
+          <p style="margin:4px 0;"><strong>🎂 สิทธิพิเศษวันเกิด:</strong> ฟรีเครื่องดื่ม + เบเกอรีในวันเกิด</p>
+        </div>
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:15px;">
+          <button class="btn btn-primary" onclick="openCartModal()">
+            <i class="fa-solid fa-bag-shopping"></i> ไปที่ตะกร้าเพื่อใช้ส่วนลด 20%
+          </button>
+          <button class="btn btn-secondary" onclick="resetVipForm()">
+            <i class="fa-solid fa-pen-to-square"></i> แก้ไขข้อมูลสมาชิก
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  showToast(`ยินดีต้อนรับคุณ ${fullname}! รับส่วนลด 20% เรียบร้อยแล้ว 👑`);
+}
+
+function loadSavedVipMember() {
+  try {
+    const saved = localStorage.getItem('dailybrew_vip_member');
+    if (!saved) return;
+    const member = JSON.parse(saved);
+    if (!member || !member.fullname) return;
+
+    const cardName = document.getElementById('card-display-name');
+    const cardId = document.getElementById('card-display-id');
+    const cardPoints = document.getElementById('card-display-points');
+
+    if (cardName) cardName.textContent = member.fullname;
+    if (cardId && member.memberId) cardId.textContent = member.memberId;
+    if (cardPoints) cardPoints.textContent = '100 PTS + 20% OFF';
+
+    // Update form if present
+    const nameInput = document.getElementById('member-fullname');
+    const phoneInput = document.getElementById('member-phone');
+    const emailInput = document.getElementById('member-email');
+    const addressInput = document.getElementById('member-address');
+    if (nameInput) nameInput.value = member.fullname || '';
+    if (phoneInput) phoneInput.value = member.phone || '';
+    if (emailInput) emailInput.value = member.email || '';
+    if (addressInput) addressInput.value = member.address || '';
+  } catch (e) {
+    console.error('Error loading VIP member', e);
+  }
+}
+
+function resetVipForm() {
+  localStorage.removeItem('dailybrew_vip_member');
+  location.reload();
 }
