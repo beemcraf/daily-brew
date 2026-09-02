@@ -634,16 +634,26 @@
           <p>เลือกสรรความอร่อยได้ตามใจชอบ พร้อมปรับระดับความหวานและประเภทนมได้ตามสไตล์คุณ</p>
         </div>
 
-        <!-- Smart AI Recommendation Banner (Time & Preference based) -->
+        <!-- Smart AI Recommendation Banner (Time & Preference based with Photos) -->
         <div class="smart-rec-banner" id="smart-rec-banner">
-          <div class="smart-rec-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-          <div class="smart-rec-content">
-            <span class="smart-rec-tag" id="smart-rec-tag">☀️ บาริสต้าแนะนำประจำช่วงเวลา</span>
-            <h4 id="smart-rec-title">Signature Dirty Coffee & Almond Croissant</h4>
-            <p id="smart-rec-desc">ช่วงเวลานี้เหมาะกับกาแฟเข้มข้นผสมผสานนมเย็นจัด ทานคู่กับครัวซองต์อบใหม่ร้อนๆ</p>
+          <div class="smart-rec-visuals">
+            <div class="smart-rec-img-wrapper" title="เครื่องดื่มแนะนำ">
+              <img id="smart-rec-img-drink" src="assets/dirty_matcha.jpg" alt="เครื่องดื่มแนะนำ" class="smart-rec-img">
+              <span class="smart-rec-pill-badge"><i class="fa-solid fa-mug-hot"></i> Drink</span>
+            </div>
+            <span class="smart-rec-plus-icon">+</span>
+            <div class="smart-rec-img-wrapper" title="ขนมแนะนำทานคู่กัน">
+              <img id="smart-rec-img-bakery" src="assets/strawberry_shortcake.jpg" alt="ขนมแนะนำ" class="smart-rec-img">
+              <span class="smart-rec-pill-badge"><i class="fa-solid fa-cake-candles"></i> Bakery</span>
+            </div>
           </div>
-          <button class="btn btn-primary" id="btn-smart-rec-order" onclick="directAddToCart('dirty-coffee')">
-            <i class="fa-solid fa-bag-shopping"></i> สั่งเมนูแนะนำนี้
+          <div class="smart-rec-content">
+            <span class="smart-rec-tag" id="smart-rec-tag">🌙 ผ่อนคลายยามเย็น (Evening Chill)</span>
+            <h4 id="smart-rec-title">Military Dirty Matcha & Hokkaido Strawberry Shortcake</h4>
+            <p id="smart-rec-desc">ยามเย็นชิลล์ๆ กับมัทฉะเกียวโต 3 เลเยอร์นุ่มละมุน ดื่มคู่กับสตรอว์เบอร์รีชอร์ตเค้กครีมสดฮอกไกโดหวานกำลังดี</p>
+          </div>
+          <button class="btn btn-primary" id="btn-smart-rec-order" onclick="addPairingSet('dirty-matcha', 'strawberry-shortcake')">
+            <i class="fa-solid fa-bag-shopping"></i> สั่งเซ็ตแนะนำนี้
           </button>
         </div>
 
@@ -653,7 +663,7 @@
           <button class="menu-tab-btn" data-category="espresso">☕ Espresso Bar</button>
           <button class="menu-tab-btn" data-category="coldbrew">❄️ Cold Brew & Specialty</button>
           <button class="menu-tab-btn" data-category="noncoffee">🌿 Non-Coffee & Tea</button>
-          <button class="menu-tab-btn" data-category="bakery">🥐 Artisanal Bakery</button>
+          <button class="menu-tab-btn" data-category="bakery">🥐 Bakery & Cakes</button>
         </div>
 
         <!-- Menu Items Grid -->

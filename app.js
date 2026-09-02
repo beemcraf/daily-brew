@@ -7,6 +7,7 @@
 // 1. DATA: MENU ITEMS DATABASE
 // ==========================================
 const MENU_ITEMS = [
+  // 1. ESPRESSO BAR
   {
     id: 'dirty-coffee',
     name: 'Signature Dirty Coffee',
@@ -19,6 +20,52 @@ const MENU_ITEMS = [
     description: 'ดับเบิลช็อตเอสเปรสโซเข้มข้นสกัดร้อน ไหลรินลงสู่นมสดผสมครีมสูตรลับเย็นจัด หอมมันเข้มข้นอย่างลงตัว'
   },
   {
+    id: 'coconut-espresso',
+    name: 'Coconut Cloud Espresso',
+    nameTh: 'เอสเปรสโซมะพร้าวน้ำหอมคลาวด์',
+    category: 'espresso',
+    price: 125,
+    badge: 'Signature 🥥',
+    badgeType: 'bestseller',
+    image: 'assets/coconut_espresso.jpg',
+    description: 'น้ำมะพร้าวน้ำหอมสดแท้ 100% หอมหวานธรรมชาติ ท็อปด้วยเอสเปรสโซสกัดร้อนและฟองครีมมะพร้าวนุ่มละมุน'
+  },
+  {
+    id: 'vanilla-oat-latte',
+    name: 'Vanilla Bean Oat Latte',
+    nameTh: 'วานิลลาบีน โอ๊ต ลาเต้',
+    category: 'espresso',
+    price: 130,
+    badge: 'Plant-Based 🌾',
+    badgeType: '',
+    image: 'assets/vanilla_oat_latte.jpg',
+    description: 'กาแฟลาเต้นมโอ๊ตเกรดพรีเมียม ผสานฝักวานิลลาแท้จากมาดากัสการ์ หอมนุ่มละมุน หวานน้อย สุขภาพดี'
+  },
+  {
+    id: 'flat-white',
+    name: 'Velvet Flat White',
+    nameTh: 'แฟลต ไวท์ ลาเต้อาร์ต',
+    category: 'espresso',
+    price: 105,
+    badge: 'Popular ☕',
+    badgeType: '',
+    image: 'assets/flat_white.jpg',
+    description: 'ดับเบิลริสเตรตโต้คั่วกลาง ผสานนมสตีมฟองละเอียดเนียนนุ่มดุจแพรไหม วาดลายหงส์ Swan Art สุดประณีต'
+  },
+  {
+    id: 'caramel-macchiato',
+    name: 'Iced Salted Caramel Macchiato',
+    nameTh: 'ไอซ์ คาราเมล มัคคิอาโต',
+    category: 'espresso',
+    price: 120,
+    badge: 'Sweet & Salty 🍮',
+    badgeType: '',
+    image: 'assets/caramel_macchiato.jpg',
+    description: 'นมสดวานิลลาเย็น ท็อปด้วยเอสเปรสโซเข้มข้น และซอส Salted Caramel เคี่ยวเองสูตรโฮมเมดหอมหวาน'
+  },
+
+  // 2. COLD BREW & SPECIALTY
+  {
     id: 'orange-coldbrew',
     name: 'Artisan Orange Cold Brew',
     nameTh: 'โคลด์บรูว์ ส้มวาเลนเซีย',
@@ -28,17 +75,6 @@ const MENU_ITEMS = [
     badgeType: '',
     image: 'assets/cold_brew.jpg',
     description: 'กาแฟสกัดเย็นนาน 18 ชั่วโมง ผสานกลิ่นหอมของผิวส้มวาเลนเซียอบแห้งและโทนิค สดชื่น ปลุกพลังยามบ่าย'
-  },
-  {
-    id: 'flat-white',
-    name: 'Velvet Flat White',
-    nameTh: 'แฟลต ไวท์ ลาเต้อาร์ต',
-    category: 'espresso',
-    price: 105,
-    badge: 'Popular',
-    badgeType: '',
-    image: 'assets/flat_white.jpg',
-    description: 'ดับเบิลริสเตรตโต้คั่วกลาง ผสานนมสตีมฟองละเอียดเนียนนุ่มดุจแพรไหม วาดลายหงส์ Swan Art สุดประณีต'
   },
   {
     id: 'yuzu-sparkling',
@@ -52,16 +88,64 @@ const MENU_ITEMS = [
     description: 'น้ำส้มยูซุแท้ 100% จากญี่ปุ่น ท็อปด้วยโซดาซ่าและช็อตเอสเปรสโซดอยช้าง เปรี้ยวหวานซ่า สดชื่นตื่นเต็มตา'
   },
   {
+    id: 'dirty-matcha',
+    name: 'Military Dirty Matcha Espresso',
+    nameTh: 'มิลลิทารี เดอร์ตี้ มัทฉะ',
+    category: 'coldbrew',
+    price: 140,
+    badge: 'Trending 3-Layers 🍵',
+    badgeType: 'bestseller',
+    image: 'assets/dirty_matcha.jpg',
+    description: 'ความลงตัวแบบ 3 เลเยอร์: ชามัทฉะอุจิเข้มข้น + นมสดเย็นจัด + ดับเบิลช็อตเอสเปรสโซ หอมทั้งชาและกาแฟ'
+  },
+
+  // 3. NON-COFFEE & ARTISANAL TEA
+  {
     id: 'uji-matcha-cloud',
     name: 'Kyoto Uji Matcha Cloud',
     nameTh: 'อุจิมัทฉะ คลาวด์',
     category: 'noncoffee',
     price: 125,
-    badge: 'Premium Grade 🍵',
+    badge: 'Ceremonial Grade 🍵',
     badgeType: '',
     image: 'assets/matcha.jpg',
     description: 'มัทฉะเกรดพิธีชงนำเข้าจากเมืองอุจิ เกียวโต ตีสดชามต่อชาม ท็อปด้วยโฟมนมมะพร้าวเนื้อนุ่มละมุน'
   },
+  {
+    id: 'valrhona-chocolate',
+    name: 'Valrhona Dark Chocolate Float',
+    nameTh: 'ดาร์กช็อกโกแลต วาลโรห์นา 70%',
+    category: 'noncoffee',
+    price: 135,
+    badge: 'French Valrhona 🍫',
+    badgeType: 'bestseller',
+    image: 'assets/valrhona_chocolate.jpg',
+    description: 'ช็อกโกแลตฝรั่งเศสแท้เข้มข้น 70% รสชาติเข้มลึก หวานน้อย ท็อปด้วยไอศกรีมวานิลลาและช็อกโกแลตเคิร์ล'
+  },
+  {
+    id: 'peach-cold-tea',
+    name: 'Strawberry Peach Sparkling Tea',
+    nameTh: 'ชาพีชสตรอว์เบอร์รีสปาร์กลิง',
+    category: 'noncoffee',
+    price: 115,
+    badge: 'Fruity Soda 🍑',
+    badgeType: '',
+    image: 'assets/peach_cold_tea.jpg',
+    description: 'ชาดำอินทรีย์สกัดเย็นเบลนด์เนื้อพีชและสตรอว์เบอร์รีสด ผสานโซดาซ่าสดชื่น เปรี้ยวหวานหอมผลไม้ ดับร้อน'
+  },
+  {
+    id: 'earl-grey-lavender',
+    name: 'Earl Grey Lavender Milk Tea',
+    nameTh: 'ชานมเอิร์ลเกรย์ ลาเวนเดอร์',
+    category: 'noncoffee',
+    price: 110,
+    badge: 'Floral & Relax 🪻',
+    badgeType: '',
+    image: 'assets/earl_grey_lavender.jpg',
+    description: 'ชาเอิร์ลเกรย์พรีเมียมหอมกลิ่นน้ำมันเบอร์กามอตและดอกลาเวนเดอร์ ผสมนมสดหอมมัน นุ่มนวล ชวนผ่อนคลาย'
+  },
+
+  // 4. ARTISANAL BAKERY & SIGNATURE CAKES
   {
     id: 'almond-croissant',
     name: 'French Almond Croissant',
@@ -74,26 +158,81 @@ const MENU_ITEMS = [
     description: 'ครัวซองต์เนยสดแท้จากฝรั่งเศส แป้งกรอบนอกนุ่มฉ่ำเนย สอดไส้ครีมอัลมอนด์และโรยแอลมอนด์สไลซ์อบกรอบ'
   },
   {
+    id: 'pain-au-chocolat',
+    name: 'French Pain au Chocolat',
+    nameTh: 'แปง โอ ช็อกโกลา ฝรั่งเศส',
+    category: 'bakery',
+    price: 90,
+    badge: 'Pure Butter 🍫',
+    badgeType: '',
+    image: 'assets/pain_au_chocolat.jpg',
+    description: 'แป้งพัฟเนยสดฝรั่งเศสอบกรอบเป็นชั้นเลเยอร์ สอดไส้แท่งดาร์กช็อกโกแลตเบลเยียม 2 แท่ง อบใหม่หอมฟุ้ง'
+  },
+  {
+    id: 'truffle-brioche',
+    name: 'Truffle Cheese Brioche Toast',
+    nameTh: 'บริออชโทสต์ ทรัฟเฟิลชีสเยิ้ม',
+    category: 'bakery',
+    price: 120,
+    badge: 'Chef Special 🧀',
+    badgeType: 'bestseller',
+    image: 'assets/truffle_brioche.jpg',
+    description: 'ขนมปังบริออชนุ่มฉ่ำเนย ปิ้งร้อนๆ สอดไส้มอสซาเรลล่าชีสยืดและซอสเห็ดทรัฟเฟิลดำ หอมฟุ้งสไตล์คาเฟ่บรันช์'
+  },
+  {
+    id: 'cinnamon-roll',
+    name: 'Cinnamon Roll Cream Cheese',
+    nameTh: 'ซินนามอนโรล ครีมชีสเกลซ',
+    category: 'bakery',
+    price: 95,
+    badge: 'Fresh Glazed 🌀',
+    badgeType: '',
+    image: 'assets/cinnamon_roll.jpg',
+    description: 'ขนมปังโรลเนื้อนุ่ม หอมกลิ่นอบเชยและน้ำตาลทรายแดง ราดด้วยครีมชีสฟรอสติ้งเนียนนุ่ม ทานคู่อเมริกาโน่ร้อน'
+  },
+  {
     id: 'basque-cheesecake',
     name: 'San Sebastian Basque Cheesecake',
     nameTh: 'บาสก์ชีสเค้กหน้าไหม้',
     category: 'bakery',
     price: 145,
-    badge: 'Chef Special 🍰',
+    badge: 'Best Seller 🍰',
     badgeType: 'bestseller',
     image: 'assets/cheesecake.jpg',
     description: 'ชีสเค้กสเปนหน้าไหม้คาราเมล เนื้อเนียนนุ่มละลายในปาก ตรงกลางลาวาเยิ้ม หอมกลิ่นวานิลลามาดากัสการ์'
   },
   {
-    id: 'caramel-macchiato',
-    name: 'Iced Salted Caramel Macchiato',
-    nameTh: 'ไอซ์ คาราเมล มัคคิอาโต',
-    category: 'espresso',
-    price: 120,
-    badge: 'Sweet & Salty 🍮',
+    id: 'tiramisu',
+    name: 'Classic Tiramisu Espresso Cup',
+    nameTh: 'ทีรามิสุ เอสเปรสโซมาสคาร์โปเน',
+    category: 'bakery',
+    price: 150,
+    badge: 'Authentic Italian ☕',
+    badgeType: 'bestseller',
+    image: 'assets/tiramisu.jpg',
+    description: 'เลดี้ฟิงเกอร์จุ่มช็อตเอสเปรสโซดอยช้าง สลับชั้นครีมชีสมาสคาร์โปเนแท้ โรยผงโกโก้เข้มข้น คู่แท้ร้านกาแฟ'
+  },
+  {
+    id: 'strawberry-shortcake',
+    name: 'Hokkaido Strawberry Shortcake',
+    nameTh: 'สตรอว์เบอร์รี ชอร์ตเค้ก ญี่ปุ่น',
+    category: 'bakery',
+    price: 140,
+    badge: 'Fresh Hokkaido 🍓',
     badgeType: '',
-    image: 'assets/dirty_coffee.jpg',
-    description: 'นมสดวานิลลาเย็น ท็อปด้วยเอสเปรสโซเข้มข้น และซอส Salted Caramel เคี่ยวเองสูตรโฮมเมด'
+    image: 'assets/strawberry_shortcake.jpg',
+    description: 'สปันจ์เค้กวานิลลานุ่มเบา ครีมสดฮอกไกโดแท้ และสตรอว์เบอร์รีสดลูกโต หวานละมุน ตัดเลี่ยนได้ดีเยี่ยม'
+  },
+  {
+    id: 'matcha-crepe-cake',
+    name: 'Kyoto Matcha Mille Crepe Cake',
+    nameTh: 'เครปเค้กมัทฉะ ถั่วแดงหลวง',
+    category: 'bakery',
+    price: 135,
+    badge: '20 Layers Mille 🍵',
+    badgeType: '',
+    image: 'assets/matcha_crepe_cake.jpg',
+    description: 'แป้งเครปมัทฉะบางนุ่มซ้อนกันกว่า 20 ชั้น ปาดครีมสดชาเขียวเข้มข้น เสิร์ฟพร้อมซอสถั่วแดงหลวงหวานละมุน'
   }
 ];
 
@@ -733,29 +872,87 @@ function calculateQuizResult() {
   document.getElementById('quiz-step-title').innerHTML = '<i class="fa-solid fa-sparkles"></i> Your Perfect Daily Brew Match';
 
   let recommendedItemId = 'dirty-coffee';
+  let pairingItemId = 'almond-croissant';
 
-  if (quizAnswers.step1 === 'refresh' || quizAnswers.step2 === 'fruity') {
-    recommendedItemId = 'yuzu-sparkling';
-  } else if (quizAnswers.step2 === 'matcha') {
-    recommendedItemId = 'uji-matcha-cloud';
-  } else if (quizAnswers.step3 === 'black' || quizAnswers.step1 === 'strong') {
-    recommendedItemId = 'orange-coldbrew';
-  } else if (quizAnswers.step1 === 'smooth' || quizAnswers.step3 === 'oat_milk') {
-    recommendedItemId = 'flat-white';
+  // Smart Matching Decision Tree
+  if (quizAnswers.step2 === 'matcha') {
+    if (quizAnswers.step1 === 'strong' || quizAnswers.step3 === 'creamy') {
+      recommendedItemId = 'dirty-matcha';
+      pairingItemId = 'matcha-crepe-cake';
+    } else {
+      recommendedItemId = 'uji-matcha-cloud';
+      pairingItemId = 'matcha-crepe-cake';
+    }
+  } else if (quizAnswers.step1 === 'refresh' || quizAnswers.step2 === 'fruity') {
+    if (quizAnswers.step3 === 'black') {
+      recommendedItemId = 'yuzu-sparkling';
+      pairingItemId = 'pain-au-chocolat';
+    } else if (quizAnswers.step3 === 'fresh_milk' || quizAnswers.step3 === 'oat_milk') {
+      recommendedItemId = 'coconut-espresso';
+      pairingItemId = 'strawberry-shortcake';
+    } else {
+      recommendedItemId = 'peach-cold-tea';
+      pairingItemId = 'basque-cheesecake';
+    }
+  } else if (quizAnswers.step1 === 'sweet' || quizAnswers.step2 === 'caramel') {
+    if (quizAnswers.step2 === 'espresso') {
+      recommendedItemId = 'valrhona-chocolate';
+      pairingItemId = 'truffle-brioche';
+    } else {
+      recommendedItemId = 'caramel-macchiato';
+      pairingItemId = 'cinnamon-roll';
+    }
+  } else if (quizAnswers.step3 === 'oat_milk') {
+    recommendedItemId = 'vanilla-oat-latte';
+    pairingItemId = 'almond-croissant';
+  } else if (quizAnswers.step1 === 'smooth') {
+    if (quizAnswers.step3 === 'fresh_milk' && quizAnswers.step2 === 'fruity') {
+      recommendedItemId = 'earl-grey-lavender';
+      pairingItemId = 'strawberry-shortcake';
+    } else {
+      recommendedItemId = 'flat-white';
+      pairingItemId = 'tiramisu';
+    }
+  } else if (quizAnswers.step1 === 'strong') {
+    if (quizAnswers.step3 === 'black') {
+      recommendedItemId = 'orange-coldbrew';
+      pairingItemId = 'pain-au-chocolat';
+    } else {
+      recommendedItemId = 'dirty-coffee';
+      pairingItemId = 'almond-croissant';
+    }
   } else {
-    recommendedItemId = 'dirty-coffee';
+    recommendedItemId = 'coconut-espresso';
+    pairingItemId = 'basque-cheesecake';
   }
 
   const recItem = MENU_ITEMS.find(i => i.id === recommendedItemId) || MENU_ITEMS[0];
+  const pairItem = MENU_ITEMS.find(i => i.id === pairingItemId) || MENU_ITEMS[5];
   const container = document.getElementById('quiz-result-card-content');
   
   container.innerHTML = `
     <img src="${recItem.image}" alt="${recItem.name}" class="quiz-result-img">
     <div class="quiz-result-details">
-      <h3>${recItem.name}</h3>
+      <span class="badge-tag" style="margin-bottom:6px; font-size:0.75rem;"><i class="fa-solid fa-star"></i> แนะนำตาม Mood ของคุณ</span>
+      <h3 style="margin: 0 0 6px 0; font-size: 1.4rem;">${recItem.name}</h3>
       <div class="quiz-result-price">${recItem.price} ฿</div>
       <p class="quiz-result-desc">${recItem.description}</p>
-      <div style="display:flex; gap:10px;">
+      
+      <!-- Food Pairing Suggestion inside Quiz Result -->
+      <div style="background: rgba(200, 137, 55, 0.08); border: 1px dashed rgba(200, 137, 55, 0.35); border-radius: 12px; padding: 10px 14px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+        <div style="display:flex; align-items:center; gap: 10px;">
+          <img src="${pairItem.image}" alt="${pairItem.name}" style="width: 42px; height: 42px; border-radius: 8px; object-fit: cover;">
+          <div style="text-align: left;">
+            <div style="font-size: 0.76rem; color: var(--accent-caramel); font-weight: 700;">🥐 แนะนำสั่งคู่กัน (Pairing Match):</div>
+            <div style="font-size: 0.88rem; font-weight: 600; color: var(--primary-espresso);">${pairItem.name} (${pairItem.price} ฿)</div>
+          </div>
+        </div>
+        <button class="btn btn-secondary btn-sm" style="font-size: 0.78rem; padding: 5px 10px; white-space: nowrap;" onclick="directAddToCart('${pairItem.id}')">
+          + สั่งขนมคู่กัน
+        </button>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap: wrap;">
         <button class="btn btn-primary" onclick="directAddToCart('${recItem.id}')">
           <i class="fa-solid fa-cart-shopping"></i> สั่งแก้วนี้ทันที
         </button>
@@ -989,25 +1186,73 @@ function initSmartRecommendation() {
   const descEl = document.getElementById('smart-rec-desc');
   const tagEl = document.getElementById('smart-rec-tag');
   const btnEl = document.getElementById('btn-smart-rec-order');
+  const drinkImg = document.getElementById('smart-rec-img-drink');
+  const bakeryImg = document.getElementById('smart-rec-img-bakery');
 
   if (!titleEl || !descEl) return;
 
   if (hour >= 6 && hour < 12) {
     tagEl.textContent = '☀️ บาริสต้าแนะนำรับเช้าวันใหม่ (Morning Booster)';
-    titleEl.textContent = 'Signature Dirty Coffee & Almond Croissant';
-    descEl.textContent = 'เช้าวันนี้เริ่มต้นด้วยดับเบิลช็อตกาแฟสกัดร้อนตัดกับนมเย็นจัด ทานคู่กับครัวซองต์กรอบนอกนุ่มใน';
-    if (btnEl) btnEl.setAttribute('onclick', "directAddToCart('dirty-coffee')");
+    titleEl.textContent = 'Coconut Cloud Espresso & Pain au Chocolat';
+    descEl.textContent = 'เช้าวันนี้สดชื่นด้วยเอสเปรสโซสกัดร้อนผสมผสานน้ำมะพร้าวน้ำหอมสด ทานคู่กับแปงโอช็อกโกลาอบกรอบเนยสดฝรั่งเศส';
+    if (drinkImg) drinkImg.src = 'assets/coconut_espresso.jpg';
+    if (bakeryImg) bakeryImg.src = 'assets/pain_au_chocolat.jpg';
+    if (btnEl) btnEl.setAttribute('onclick', "addPairingSet('coconut-espresso', 'pain-au-chocolat')");
   } else if (hour >= 12 && hour < 17) {
     tagEl.textContent = '🍊 เมนูสดชื่นยามบ่าย (Afternoon Refresh)';
-    titleEl.textContent = 'Artisan Orange Cold Brew & Basque Cheesecake';
-    descEl.textContent = 'ช่วงบ่ายคลายร้อนด้วยโคลด์บรูว์ส้มวาเลนเซียสดชื่นตาสว่าง ผสานความหวานละมุนของบาสก์ชีสเค้ก';
-    if (btnEl) btnEl.setAttribute('onclick', "directAddToCart('orange-coldbrew')");
+    titleEl.textContent = 'Artisan Orange Cold Brew & Truffle Cheese Brioche';
+    descEl.textContent = 'ช่วงบ่ายคลายร้อนด้วยโคลด์บรูว์ส้มวาเลนเซียสดชื่นตาสว่าง ผสานความหอมมันของบริออชโทสต์ทรัฟเฟิลชีสเยิ้ม';
+    if (drinkImg) drinkImg.src = 'assets/cold_brew.jpg';
+    if (bakeryImg) bakeryImg.src = 'assets/truffle_brioche.jpg';
+    if (btnEl) btnEl.setAttribute('onclick', "addPairingSet('orange-coldbrew', 'truffle-brioche')");
   } else {
     tagEl.textContent = '🌙 ผ่อนคลายยามเย็น (Evening Chill)';
-    titleEl.textContent = 'Kyoto Uji Matcha Cloud & Basque Cheesecake';
-    descEl.textContent = 'ยามเย็นชิลล์ๆ กับมัทฉะแท้เกรดพิธีชงจากเกียวโต นุ่มละมุน ดื่มสบายไม่รบกวนการนอนหลับ';
-    if (btnEl) btnEl.setAttribute('onclick', "directAddToCart('uji-matcha-cloud')");
+    titleEl.textContent = 'Military Dirty Matcha & Hokkaido Strawberry Shortcake';
+    descEl.textContent = 'ยามเย็นชิลล์ๆ กับมัทฉะเกียวโต 3 เลเยอร์นุ่มละมุน ดื่มคู่กับสตรอว์เบอร์รีชอร์ตเค้กครีมสดฮอกไกโดหวานกำลังดี';
+    if (drinkImg) drinkImg.src = 'assets/dirty_matcha.jpg';
+    if (bakeryImg) bakeryImg.src = 'assets/strawberry_shortcake.jpg';
+    if (btnEl) btnEl.setAttribute('onclick', "addPairingSet('dirty-matcha', 'strawberry-shortcake')");
   }
+}
+
+function addPairingSet(drinkId, foodId) {
+  const drinkItem = MENU_ITEMS.find(i => i.id === drinkId);
+  const foodItem = MENU_ITEMS.find(i => i.id === foodId);
+  if (!drinkItem || !foodItem) return;
+
+  // Add drink
+  const dIdx = cart.findIndex(c => c.id === drinkItem.id && c.options === 'Standard');
+  if (dIdx > -1) {
+    cart[dIdx].qty += 1;
+  } else {
+    cart.push({
+      id: drinkItem.id,
+      name: drinkItem.name,
+      price: drinkItem.price,
+      image: drinkItem.image,
+      options: 'Standard',
+      qty: 1
+    });
+  }
+
+  // Add bakery
+  const fIdx = cart.findIndex(c => c.id === foodItem.id && c.options === 'Standard');
+  if (fIdx > -1) {
+    cart[fIdx].qty += 1;
+  } else {
+    cart.push({
+      id: foodItem.id,
+      name: foodItem.name,
+      price: foodItem.price,
+      image: foodItem.image,
+      options: 'Standard',
+      qty: 1
+    });
+  }
+
+  updateCartUI();
+  openCartModal();
+  showToast(`เพิ่มเซ็ต "${drinkItem.name} + ${foodItem.name}" ลงในตะกร้าแล้ว ✨`);
 }
 
 // ==========================================
