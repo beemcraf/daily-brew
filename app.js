@@ -1127,8 +1127,13 @@ async function sendNewsletterWelcomeEmail(subscriberEmail) {
     return;
   }
 
-  // Use newsletterTemplateId if configured; fallback to templateId with newsletter params
-  const targetTemplateId = EMAILJS_CONFIG.newsletterTemplateId || EMAILJS_CONFIG.templateId;
+  // If newsletterTemplateId is not configured, do not fall back to VIP template (to prevent sending VIP card & 20% discount to newsletter subscribers)
+  if (!EMAILJS_CONFIG.newsletterTemplateId) {
+    console.info('ℹ️ Note: EMAILJS_CONFIG.newsletterTemplateId is not set yet. Please create a 2nd template in EmailJS using email-template-newsletter.html to send 10% welcome emails.');
+    return;
+  }
+
+  const targetTemplateId = EMAILJS_CONFIG.newsletterTemplateId;
 
   const templateParams = {
     to_email: subscriberEmail,
