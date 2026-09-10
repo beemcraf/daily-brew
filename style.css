@@ -2883,4 +2883,454 @@ nav {
   }
 }
 
+/* ==========================================
+   15. DEDICATED VIP PAGE & HOMEPAGE SHOWCASE BANNER
+   ========================================== */
+
+/* A. Homepage VIP Showcase Banner */
+.membership-showcase-section {
+  padding: 60px 0 40px;
+  background: var(--bg-main, #fbf8f5);
+}
+
+.vip-showcase-card {
+  background: linear-gradient(135deg, #170e08 0%, #26170e 45%, #150d07 100%);
+  border-radius: 24px;
+  border: 1px solid rgba(223, 177, 91, 0.35);
+  box-shadow: 0 16px 40px rgba(23, 14, 8, 0.25);
+  padding: 42px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.vip-showcase-card::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(223, 177, 91, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.vip-showcase-content {
+  flex: 1.25;
+  position: relative;
+  z-index: 1;
+}
+
+.vip-showcase-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.95rem;
+  color: #ffffff;
+  margin: 10px 0 10px 0;
+  line-height: 1.3;
+}
+
+.vip-showcase-content p {
+  color: #c4b5a5;
+  font-size: 0.96rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.vip-showcase-content p strong {
+  color: #f5d77f;
+}
+
+.vip-showcase-perks-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 24px;
+}
+
+.vip-perk-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(223, 177, 91, 0.35);
+  color: #f5d77f;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vip-showcase-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.vip-showcase-status {
+  font-size: 0.84rem;
+  color: #a89487;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vip-showcase-status strong {
+  color: #f5d77f;
+}
+
+.vip-showcase-visual {
+  flex: 0.9;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.vip-mini-card-wrap {
+  text-decoration: none;
+  display: block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.vip-mini-card-wrap:hover {
+  transform: translateY(-5px) scale(1.02);
+  filter: drop-shadow(0 12px 30px rgba(223, 177, 91, 0.25));
+}
+
+.vip-mini-card {
+  width: 320px;
+  background: linear-gradient(135deg, #130b07 0%, #2b1910 50%, #150c08 100%);
+  border-radius: 16px;
+  border: 1.5px solid #dfb15b;
+  padding: 20px 22px;
+  color: #ffffff;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+.vip-mini-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #f5d77f;
+  letter-spacing: 1px;
+}
+
+.vip-mini-tier {
+  background: rgba(223, 177, 91, 0.2);
+  color: #f5d77f;
+  border: 1px solid rgba(223, 177, 91, 0.5);
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.vip-mini-middle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 14px 0 10px;
+}
+
+.vip-mini-chip {
+  background: linear-gradient(135deg, #f3d78c 0%, #d4af37 50%, #9e780a 100%);
+  color: #3b2805;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vip-mini-crown-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.vip-mini-member-info {
+  margin-bottom: 10px;
+}
+
+.vip-mini-label {
+  font-size: 0.65rem;
+  color: #a89487;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.vip-mini-member-info h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 2px 0 0;
+  letter-spacing: 0.5px;
+}
+
+.vip-mini-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid rgba(223, 177, 91, 0.3);
+  padding-top: 8px;
+  font-size: 0.8rem;
+}
+
+.vip-mini-bottom p {
+  margin: 0;
+  font-family: monospace;
+  color: #f5d77f;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.vip-mini-status {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+.vip-mini-card-hint {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--accent-caramel, #c28b51);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.vip-mini-card-wrap:hover .vip-mini-card-hint {
+  color: #f5d77f;
+}
+
+/* B. Dedicated VIP Page Styles */
+.vip-page-body {
+  background: var(--bg-main, #fbf8f5);
+}
+
+.vip-page-main {
+  padding-top: 100px;
+  min-height: calc(100vh - 250px);
+}
+
+.vip-hero-banner {
+  padding: 40px 0 25px;
+  text-align: center;
+}
+
+.vip-hero-banner h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  color: var(--primary-espresso, #24140e);
+  margin: 10px 0 8px;
+}
+
+.vip-hero-banner p {
+  color: var(--text-muted, #63534b);
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 0.98rem;
+}
+
+.vip-content-container {
+  padding-bottom: 50px;
+}
+
+.vip-view-section {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* C. VIP Dashboard Layout */
+.vip-welcome-banner {
+  background: linear-gradient(135deg, #1a0f0a 0%, #2e1a10 50%, #1a0f0a 100%);
+  border-radius: 20px;
+  padding: 26px 32px;
+  color: #ffffff;
+  margin-bottom: 35px;
+  border: 1px solid rgba(223, 177, 91, 0.35);
+  box-shadow: 0 10px 30px rgba(26, 15, 10, 0.2);
+}
+
+.vip-welcome-badge {
+  display: inline-block;
+  background: rgba(223, 177, 91, 0.15);
+  color: #f5d77f;
+  border: 1px solid rgba(223, 177, 91, 0.4);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 9999px;
+  margin-bottom: 8px;
+}
+
+.vip-welcome-content h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+  color: #ffffff;
+}
+
+.vip-welcome-content p {
+  color: #c4b5a5;
+  font-size: 0.92rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.vip-dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.vip-dashboard-card {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.vip-card-action-bar {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.vip-card-action-bar .btn {
+  padding: 13px 20px;
+  font-size: 0.92rem;
+}
+
+.btn-text-subtle {
+  background: none;
+  border: none;
+  color: var(--text-muted, #7c6a5e);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.btn-text-subtle:hover {
+  color: #d62828;
+}
+
+/* D. VIP Profile Summary Box */
+.vip-profile-summary-box {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px;
+  border: 1px solid rgba(80, 49, 35, 0.1);
+  box-shadow: 0 10px 30px rgba(43, 24, 16, 0.06);
+}
+
+.profile-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(80, 49, 35, 0.08);
+}
+
+.profile-box-header h3 {
+  font-size: 1.25rem;
+  color: var(--primary-espresso, #24140e);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-details-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(80, 49, 35, 0.06);
+  font-size: 0.9rem;
+}
+
+.profile-detail-row:last-child {
+  border-bottom: none;
+}
+
+.profile-detail-row .detail-label {
+  color: var(--text-muted, #7c6a5e);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-detail-row .detail-label i {
+  color: var(--accent-caramel, #c28b51);
+  font-size: 0.82rem;
+}
+
+.profile-detail-row .detail-value {
+  font-weight: 600;
+  color: var(--text-main, #2c1a11);
+  text-align: right;
+}
+
+.profile-detail-row .detail-value.highlight {
+  color: var(--accent-caramel, #c28b51);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* E. VIP Edit Modal */
+.vip-edit-modal-content {
+  max-width: 600px;
+  width: 90%;
+}
+
+@media (max-width: 900px) {
+  .vip-showcase-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 32px 24px;
+    gap: 25px;
+  }
+  .vip-showcase-actions {
+    justify-content: center;
+  }
+  .vip-showcase-perks-row {
+    justify-content: center;
+  }
+  .vip-mini-card {
+    width: 100%;
+    max-width: 320px;
+  }
+  .vip-dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .vip-card-action-bar {
+    flex-direction: column;
+  }
+  .vip-card-action-bar .btn {
+    width: 100%;
+  }
+}
+
+
 

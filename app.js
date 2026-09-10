@@ -267,6 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupEventListeners();
   loadSavedVoucher();
   loadSavedVipMember();
+  initVipPage();
   initSmartRecommendation();
   initEmailJS();
 });
@@ -369,10 +370,12 @@ function setupEventListeners() {
   });
 
   // Cart Modal Triggers
-  document.getElementById('btn-open-cart').addEventListener('click', openCartModal);
+  const btnCart = document.getElementById('btn-open-cart');
+  if (btnCart) btnCart.addEventListener('click', openCartModal);
 
   // Marketing Deck Modal Triggers
-  document.getElementById('btn-open-mktg').addEventListener('click', openMktgModal);
+  const btnMktg = document.getElementById('btn-open-mktg');
+  if (btnMktg) btnMktg.addEventListener('click', openMktgModal);
 
   // Customizer Option Chips Setup
   setupCustomizerChips();
@@ -383,6 +386,7 @@ function setupEventListeners() {
 // ==========================================
 function renderMenuItems(category) {
   const menuGrid = document.getElementById('menu-grid');
+  if (!menuGrid) return;
   menuGrid.innerHTML = '';
 
   const filteredItems = category === 'all' 
@@ -1241,6 +1245,160 @@ function handleVipRegistration(event) {
   }
 
   showToast(`ยินดีต้อนรับคุณ ${fullname}! รับส่วนลด 20% เรียบร้อยแล้ว 👑`);
+  initVipPage();
+}
+
+function initVipPage() {
+  const saved = localStorage.getItem('dailybrew_vip_member');
+  const member = saved ? JSON.parse(saved) : null;
+
+  // 1. If on index.html, update the VIP showcase banner
+  const homeVipCta = document.getElementById('btn-home-vip-cta');
+  const homeVipStatus = document.getElementById('home-vip-status-text');
+  const homeVipCardName = document.getElementById('home-vip-card-name');
+  const homeVipCardId = document.getElementById('home-vip-card-id');
+
+  if (member && member.fullname) {
+    if (homeVipCta) {
+      homeVipCta.innerHTML = '<i class="fa-solid fa-id-card"></i> ดูบัตร VIP & แก้ไขข้อมูล';
+    }
+    if (homeVipStatus) {
+      homeVipStatus.innerHTML = `<i class="fa-solid fa-crown" style="color:#dfb15b;"></i> ยินดีต้อนรับกลับ <strong>คุณ ${member.fullname}</strong> (VIP Gold)`;
+    }
+    if (homeVipCardName) homeVipCardName.textContent = member.fullname;
+    if (homeVipCardId && member.memberId) homeVipCardId.textContent = member.memberId;
+  }
+
+  // 2. If on vip.html, toggle views and render member dashboard
+  const registerView = document.getElementById('vip-register-view');
+  const dashboardView = document.getElementById('vip-dashboard-view');
+
+  if (registerView && dashboardView) {
+    if (member && member.fullname) {
+      registerView.style.display = 'none';
+      dashboardView.style.display = 'block';
+
+      // Update Card on vip.html
+      const cardName = document.getElementById('card-display-name');
+      const cardId = document.getElementById('card-display-id');
+      const cardPoints = document.getElementById('card-display-points');
+      const cardStatus = document.getElementById('card-display-status');
+
+      if (cardName) cardName.textContent = member.fullname;
+      if (cardId) cardId.textContent = member.memberId || 'DB-2026-VIP';
+      if (cardPoints) cardPoints.textContent = '100 PTS + 20% OFF';
+      if (cardStatus) cardStatus.textContent = 'ACTIVE (GOLD)';
+
+      // Update Welcome Headline
+      const welcomeName = document.getElementById('vip-welcome-name');
+      if (welcomeName) welcomeName.textContent = member.fullname;
+
+      // Update Profile Details Grid
+      const pName = document.getElementById('vip-profile-name');
+      const pPhone = document.getElementById('vip-profile-phone');
+      const pEmail = document.getElementById('vip-profile-email');
+      const pBday = document.getElementById('vip-profile-birthday');
+      const pCoffee = document.getElementById('vip-profile-coffee');
+      const pMilk = document.getElementById('vip-profile-milk');
+      const pAddress = document.getElementById('vip-profile-address');
+      const pId = document.getElementById('vip-profile-id');
+      const pDate = document.getElementById('vip-profile-date');
+
+      if (pName) pName.textContent = member.fullname;
+      if (pPhone) pPhone.textContent = member.phone || '-';
+      if (pEmail) pEmail.textContent = member.email || '-';
+      if (pBday) pBday.textContent = member.birthday ? new Date(member.birthday).toLocaleDateString('th-TH') : '-';
+      if (pCoffee) pCoffee.textContent = member.favoriteCoffee || '-';
+      if (pMilk) pMilk.textContent = member.milk || '-';
+      if (pAddress) pAddress.textContent = member.address || 'ย่านสยาม / เดลิเวอรี';
+      if (pId) pId.textContent = member.memberId || 'DB-2026-VIP';
+      if (pDate) pDate.textContent = member.joinedDate || new Date().toLocaleDateString('th-TH');
+    } else {
+      registerView.style.display = 'block';
+      dashboardView.style.display = 'none';
+    }
+  }
+}
+
+function openEditVipProfile() {
+  const saved = localStorage.getItem('dailybrew_vip_member');
+  if (!saved) return;
+  const member = JSON.parse(saved);
+
+  const nameInput = document.getElementById('edit-member-fullname');
+  const phoneInput = document.getElementById('edit-member-phone');
+  const emailInput = document.getElementById('edit-member-email');
+  const birthdayInput = document.getElementById('edit-member-birthday');
+  const coffeeInput = document.getElementById('edit-member-favorite-coffee');
+  const milkInput = document.getElementById('edit-member-milk');
+  const addressInput = document.getElementById('edit-member-address');
+
+  if (nameInput) nameInput.value = member.fullname || '';
+  if (phoneInput) phoneInput.value = member.phone || '';
+  if (emailInput) emailInput.value = member.email || '';
+  if (birthdayInput) birthdayInput.value = member.birthday || '';
+  if (coffeeInput) coffeeInput.value = member.favoriteCoffee || 'Signature Dirty';
+  if (milkInput) milkInput.value = member.milk || 'Whole Milk';
+  if (addressInput) addressInput.value = member.address || '';
+
+  const modal = document.getElementById('vip-edit-modal');
+  if (modal) modal.classList.add('active');
+}
+
+function closeEditVipProfile() {
+  const modal = document.getElementById('vip-edit-modal');
+  if (modal) modal.classList.remove('active');
+}
+
+function saveVipProfile(event) {
+  event.preventDefault();
+
+  const nameInput = document.getElementById('edit-member-fullname');
+  const phoneInput = document.getElementById('edit-member-phone');
+  const emailInput = document.getElementById('edit-member-email');
+  const birthdayInput = document.getElementById('edit-member-birthday');
+  const coffeeInput = document.getElementById('edit-member-favorite-coffee');
+  const milkInput = document.getElementById('edit-member-milk');
+  const addressInput = document.getElementById('edit-member-address');
+
+  if (!nameInput || !phoneInput || !emailInput) return;
+
+  const fullname = nameInput.value.trim();
+  const phone = phoneInput.value.trim();
+  const email = emailInput.value.trim();
+
+  if (!fullname || !phone || !email) {
+    showToast('กรุณากรอกข้อมูลที่จำเป็นให้ครบถ้วนค่ะ');
+    return;
+  }
+
+  const saved = localStorage.getItem('dailybrew_vip_member');
+  const existing = saved ? JSON.parse(saved) : {};
+
+  const updatedMember = {
+    ...existing,
+    fullname: fullname,
+    phone: phone,
+    email: email,
+    birthday: birthdayInput ? birthdayInput.value : existing.birthday,
+    favoriteCoffee: coffeeInput ? coffeeInput.value : existing.favoriteCoffee,
+    milk: milkInput ? milkInput.value : existing.milk,
+    address: addressInput ? addressInput.value.trim() : existing.address,
+    lastUpdated: new Date().toLocaleDateString('th-TH')
+  };
+
+  localStorage.setItem('dailybrew_vip_member', JSON.stringify(updatedMember));
+  closeEditVipProfile();
+  initVipPage();
+  showToast('💾 บันทึกการแก้ไขข้อมูลสมาชิก VIP สำเร็จแล้วค่ะ! ✨');
+}
+
+function switchVipMember() {
+  if (confirm('คุณต้องการออกจากระบบบัตรนี้ หรือสมัครให้สมาชิกท่านอื่นใช่หรือไม่?')) {
+    localStorage.removeItem('dailybrew_vip_member');
+    initVipPage();
+    showToast('สลับเข้าสู่โหมดสมัครสมาชิกใหม่เรียบร้อยแล้วค่ะ');
+  }
 }
 
 function loadSavedVipMember() {
