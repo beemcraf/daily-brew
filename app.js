@@ -1028,7 +1028,7 @@ function showToast(message) {
 const EMAILJS_CONFIG = {
   serviceId: 'service_qhds3fs',
   templateId: 'template_chdjvqq',
-  newsletterTemplateId: '',
+  newsletterTemplateId: 'template_wgjanoh',
   publicKey: 'jyZHhgyTHnSr8wFkn'
 };
 
