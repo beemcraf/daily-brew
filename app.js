@@ -1066,7 +1066,8 @@ async function sendVipWelcomeEmail(memberData) {
     const res = await emailjs.send(
       EMAILJS_CONFIG.serviceId,
       EMAILJS_CONFIG.templateId,
-      templateParams
+      templateParams,
+      EMAILJS_CONFIG.publicKey
     );
     console.log('✅ VIP welcome email sent via EmailJS:', res.status, res.text);
     showToast(`✉️ ส่งอีเมลต้อนรับ VIP ไปที่ ${memberData.email} เรียบร้อยแล้วค่ะ!`);
