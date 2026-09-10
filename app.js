@@ -1060,7 +1060,7 @@ async function sendVipWelcomeEmail(memberData) {
     address: memberData.address || '-',
     points: '100 PTS',
     promo_code: 'DAILYVIP20',
-    message: `ขอต้อนรับคุณ ${memberData.fullname} เข้าสู่ครอบครัว Daily Brew VIP Club ค่ะ!\n\n💳 รหัสสมาชิกของคุณ: ${memberData.memberId}\n🎁 โค้ดส่วนลด 20%: DAILYVIP20\n⭐ แต้มสะสมต้อนรับ: 100 Points\n🎂 สิทธิพิเศษวันเกิด: รับเครื่องดื่มและเบเกอรีฟรีในเดือนเกิด\n\nสามารถนำรหัสสมาชิกไปแจ้งที่หน้าร้าน หรือใช้โค้ด DAILYVIP20 สั่งซื้อบนเว็บไซต์เพื่อรับส่วนลด 20% ได้ทันทีนะคะ ❤️`
+    message: `ขอต้อนรับคุณ ${memberData.fullname} เข้าสู่ครอบครัว Daily Brew VIP Club ค่ะ!\n\n💳 รหัสสมาชิกของคุณ: ${memberData.memberId}\n🎁 โค้ดส่วนลด 20%: DAILYVIP20\n⭐ แต้มสะสมต้อนรับ: 100 Points\n🎂 สิทธิพิเศษวันเกิด: รับเครื่องดื่มและเบเกอรีฟรีในเดือนเกิด\n\nสามารถใช้โค้ด DAILYVIP20 สั่งซื้อบนเว็บไซต์ Daily Brew หรือเดลิเวอรีเพื่อรับส่วนลด 20% ได้ทันทีนะคะ ❤️`
   };
 
   try {
