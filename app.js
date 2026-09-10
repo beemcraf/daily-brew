@@ -1252,7 +1252,18 @@ function initVipPage() {
   const saved = localStorage.getItem('dailybrew_vip_member');
   const member = saved ? JSON.parse(saved) : null;
 
-  // 1. If on index.html, update the VIP showcase banner
+  // 1. Update the VIP nav button if present
+  const navVipBtn = document.getElementById('btn-nav-vip');
+  if (navVipBtn) {
+    if (member && member.fullname) {
+      const firstName = member.fullname.split(' ')[0];
+      navVipBtn.innerHTML = `<i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> <span>บัตร VIP (${firstName})</span>`;
+    } else {
+      navVipBtn.innerHTML = `<i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> <span>สมัครสมาชิก VIP</span>`;
+    }
+  }
+
+  // Update showcase banner if on index.html
   const homeVipCta = document.getElementById('btn-home-vip-cta');
   const homeVipStatus = document.getElementById('home-vip-status-text');
   const homeVipCardName = document.getElementById('home-vip-card-name');
