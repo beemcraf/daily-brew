@@ -2725,3 +2725,162 @@ nav {
   }
 }
 
+/* ==========================================
+   14. NEWSLETTER SUBSCRIPTION (DAILY BREW JOURNAL)
+   ========================================== */
+.newsletter-section {
+  padding: 40px 0 20px 0;
+  background: var(--bg-main, #fbf8f5);
+}
+
+.newsletter-card {
+  background: linear-gradient(135deg, #1b120c 0%, #291a11 50%, #1a100a 100%);
+  border-radius: 20px;
+  padding: 36px 40px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 16px 36px rgba(27, 18, 12, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(223, 177, 91, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.newsletter-info {
+  flex: 1.2;
+  position: relative;
+  z-index: 1;
+}
+
+.newsletter-info .badge-tag {
+  background: rgba(223, 177, 91, 0.15);
+  color: #f5d77f;
+  border: 1px solid rgba(223, 177, 91, 0.4);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.newsletter-info h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+.newsletter-info p {
+  color: #c4b5a5;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.newsletter-info p strong {
+  color: #f5d77f;
+}
+
+.newsletter-action {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  min-width: 320px;
+}
+
+.newsletter-input-wrap {
+  display: flex;
+  background: #ffffff;
+  border-radius: 9999px;
+  padding: 6px 6px 6px 18px;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.newsletter-input-wrap:focus-within {
+  border-color: var(--accent-caramel, #c28b51);
+  box-shadow: 0 6px 20px rgba(194, 139, 81, 0.35);
+}
+
+.newsletter-input-wrap .newsletter-icon {
+  color: #a89487;
+  font-size: 1rem;
+}
+
+.newsletter-input-wrap input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.92rem;
+  background: transparent;
+  color: #2c1a11;
+  font-family: inherit;
+}
+
+.newsletter-input-wrap button {
+  border-radius: 9999px;
+  padding: 12px 24px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(194, 139, 81, 0.4);
+}
+
+.newsletter-disclaimer {
+  display: block;
+  font-size: 0.78rem;
+  color: #a89487;
+  margin-top: 10px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .newsletter-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 24px;
+    gap: 20px;
+  }
+  .newsletter-action {
+    width: 100%;
+    min-width: 0;
+  }
+  .newsletter-input-wrap {
+    flex-direction: column;
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .newsletter-input-wrap input {
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+  }
+  .newsletter-input-wrap button {
+    width: 100%;
+    border-radius: 10px;
+  }
+}
+
+

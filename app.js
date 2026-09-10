@@ -1024,6 +1024,7 @@ function showToast(message) {
 const EMAILJS_CONFIG = {
   serviceId: 'service_qhds3fs',
   templateId: 'template_chdjvqq',
+  newsletterTemplateId: '',
   publicKey: 'jyZHhgyTHnSr8wFkn'
 };
 
@@ -1074,6 +1075,79 @@ async function sendVipWelcomeEmail(memberData) {
     showToast(`✉️ ส่งอีเมลต้อนรับ VIP ไปที่ ${memberData.email} เรียบร้อยแล้วค่ะ!`);
   } catch (error) {
     console.error('❌ Failed to send welcome email via EmailJS:', error);
+  }
+}
+
+// ==========================================
+// 11.5 NEWSLETTER SUBSCRIPTION (DAILY BREW JOURNAL)
+// ==========================================
+async function handleNewsletterSubscription(event) {
+  event.preventDefault();
+  const emailInput = document.getElementById('newsletter-email');
+  if (!emailInput) return;
+
+  const email = emailInput.value.trim();
+  if (!email) {
+    showToast('กรุณากรอกอีเมลของคุณค่ะ');
+    return;
+  }
+
+  // Save to localStorage
+  try {
+    const saved = localStorage.getItem('dailybrew_newsletter_subscribers');
+    const subscribers = saved ? JSON.parse(saved) : [];
+    if (!subscribers.includes(email)) {
+      subscribers.push(email);
+      localStorage.setItem('dailybrew_newsletter_subscribers', JSON.stringify(subscribers));
+    }
+  } catch (e) {
+    console.warn('localStorage note:', e);
+  }
+
+  // Auto apply welcome voucher code
+  applyPromoAndScroll('WELCOME10');
+
+  // Show immediate feedback to user
+  showToast(`🎉 ขอบคุณที่ติดตาม! โค้ดส่วนลด WELCOME10 ถูกใส่ในตะกร้าให้แล้วค่ะ`);
+
+  // Clear input
+  emailInput.value = '';
+
+  // Trigger real email dispatch via EmailJS in background
+  sendNewsletterWelcomeEmail(email);
+}
+
+async function sendNewsletterWelcomeEmail(subscriberEmail) {
+  if (typeof emailjs === 'undefined') {
+    console.warn('EmailJS SDK not loaded');
+    return;
+  }
+
+  // Use newsletterTemplateId if configured; fallback to templateId with newsletter params
+  const targetTemplateId = EMAILJS_CONFIG.newsletterTemplateId || EMAILJS_CONFIG.templateId;
+
+  const templateParams = {
+    to_email: subscriberEmail,
+    email: subscriberEmail,
+    customer_name: 'เพื่อนคอกาแฟ',
+    name: 'เพื่อนคอกาแฟ',
+    to_name: 'เพื่อนคอกาแฟ',
+    title: '🎉 ขอบคุณที่ติดตาม Daily Brew Journal ☕ (รับส่วนลด 10%)',
+    promo_code: 'WELCOME10',
+    message: `ขอบคุณที่กดติดตามข่าวสาร Daily Brew ค่ะ!\n\nเราขอมอบของขวัญต้อนรับส่วนลด 10% ให้คุณ:\n🎁 โค้ดส่วนลด 10%: WELCOME10\n\nสามารถใช้โค้ด WELCOME10 สั่งซื้อเครื่องดื่มหรือเบเกอรีบนเว็บไซต์ Daily Brew เพื่อรับส่วนลด 10% ได้ทันทีนะคะ ❤️`
+  };
+
+  try {
+    const res = await emailjs.send(
+      EMAILJS_CONFIG.serviceId,
+      targetTemplateId,
+      templateParams,
+      EMAILJS_CONFIG.publicKey
+    );
+    console.log('✅ Newsletter welcome email sent via EmailJS:', res.status, res.text);
+    showToast(`✉️ ส่งอีเมลต้อนรับและโค้ดส่วนลดไปที่ ${subscriberEmail} แล้วค่ะ!`);
+  } catch (error) {
+    console.error('❌ Failed to send newsletter welcome email via EmailJS:', error);
   }
 }
 
