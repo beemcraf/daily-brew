@@ -268,6 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadSavedVoucher();
   loadSavedVipMember();
   initSmartRecommendation();
+  initEmailJS();
 });
 
 function setupEventListeners() {
@@ -1020,6 +1021,60 @@ function showToast(message) {
 // ==========================================
 // 11. VIP MEMBERSHIP REGISTRATION (CRM & LOYALTY)
 // ==========================================
+const EMAILJS_CONFIG = {
+  serviceId: 'service_qhds3fs',
+  templateId: 'template_chdjvqq',
+  publicKey: 'jyZHhgyTHnSr8wFkn'
+};
+
+function initEmailJS() {
+  if (typeof emailjs !== 'undefined' && EMAILJS_CONFIG.publicKey) {
+    try {
+      emailjs.init({
+        publicKey: EMAILJS_CONFIG.publicKey
+      });
+      console.log('✅ EmailJS initialized successfully with public key');
+    } catch (e) {
+      console.warn('EmailJS initialization note:', e);
+    }
+  }
+}
+
+async function sendVipWelcomeEmail(memberData) {
+  if (typeof emailjs === 'undefined') {
+    console.warn('EmailJS SDK not loaded');
+    return;
+  }
+
+  const templateParams = {
+    to_email: memberData.email,
+    email: memberData.email,
+    to_name: memberData.fullname,
+    name: memberData.fullname,
+    title: 'ต้อนรับสมาชิก VIP คนพิเศษ 👑☕',
+    member_id: memberData.memberId,
+    favorite_coffee: memberData.favoriteCoffee || '-',
+    milk_type: memberData.milk || '-',
+    birthday: memberData.birthday || 'ไม่ได้ระบุ',
+    address: memberData.address || '-',
+    points: '100 PTS',
+    promo_code: 'DAILYVIP20',
+    message: `ขอต้อนรับคุณ ${memberData.fullname} เข้าสู่ครอบครัว Daily Brew VIP Club ค่ะ!\n\n💳 รหัสสมาชิกของคุณ: ${memberData.memberId}\n🎁 โค้ดส่วนลด 20%: DAILYVIP20\n⭐ แต้มสะสมต้อนรับ: 100 Points\n🎂 สิทธิพิเศษวันเกิด: รับเครื่องดื่มและเบเกอรีฟรีในเดือนเกิด\n\nสามารถนำรหัสสมาชิกไปแจ้งที่หน้าร้าน หรือใช้โค้ด DAILYVIP20 สั่งซื้อบนเว็บไซต์เพื่อรับส่วนลด 20% ได้ทันทีนะคะ ❤️`
+  };
+
+  try {
+    const res = await emailjs.send(
+      EMAILJS_CONFIG.serviceId,
+      EMAILJS_CONFIG.templateId,
+      templateParams
+    );
+    console.log('✅ VIP welcome email sent via EmailJS:', res.status, res.text);
+    showToast(`✉️ ส่งอีเมลต้อนรับ VIP ไปที่ ${memberData.email} เรียบร้อยแล้วค่ะ!`);
+  } catch (error) {
+    console.error('❌ Failed to send welcome email via EmailJS:', error);
+  }
+}
+
 function updateLiveCard() {
   const nameInput = document.getElementById('member-fullname');
   const nameDisplay = document.getElementById('card-display-name');
@@ -1079,6 +1134,9 @@ function handleVipRegistration(event) {
   // Auto apply welcome voucher code
   applyPromoAndScroll('DAILYVIP20');
 
+  // Trigger real email dispatch via EmailJS in background
+  sendVipWelcomeEmail(memberData);
+
   // Replace form with congratulations confirmation
   const formCard = document.getElementById('membership-form-card');
   if (formCard) {
@@ -1092,6 +1150,7 @@ function handleVipRegistration(event) {
           <p style="margin:4px 0;"><strong>⭐ แต้มต้อนรับ:</strong> 100 Points</p>
           <p style="margin:4px 0;"><strong>🎁 ส่วนลดต้อนรับ:</strong> ส่วนลด 20% (โค้ด <code>DAILYVIP20</code> ใส่ในตะกร้าให้อัตโนมัติแล้ว)</p>
           <p style="margin:4px 0;"><strong>🎂 สิทธิพิเศษวันเกิด:</strong> ฟรีเครื่องดื่ม + เบเกอรีในวันเกิด</p>
+          <p style="margin:4px 0; color:var(--text-muted); font-size:0.82rem;"><i class="fa-solid fa-envelope-circle-check" style="color:#22c55e;"></i> ส่งข้อมูลบัตร VIP และสิทธิพิเศษไปที่ <strong>${email}</strong> เรียบร้อยแล้วค่ะ</p>
         </div>
         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:15px;">
           <button class="btn btn-primary" onclick="openCartModal()">
