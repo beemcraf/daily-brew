@@ -1851,6 +1851,8 @@ nav {
   grid-template-columns: 1.15fr 0.85fr;
   gap: 40px;
   align-items: start;
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
 .membership-form-card {
@@ -3156,7 +3158,8 @@ nav {
   border-radius: 20px;
   padding: 26px 32px;
   color: #ffffff;
-  margin-bottom: 35px;
+  margin: 0 auto 35px auto;
+  max-width: 1140px;
   border: 1px solid rgba(223, 177, 91, 0.35);
   box-shadow: 0 10px 30px rgba(26, 15, 10, 0.2);
 }
@@ -3192,6 +3195,8 @@ nav {
   grid-template-columns: 1fr 1fr;
   gap: 36px;
   align-items: start;
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
 .vip-dashboard-card {
