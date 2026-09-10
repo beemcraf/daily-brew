@@ -1051,6 +1051,7 @@ async function sendVipWelcomeEmail(memberData) {
     email: memberData.email,
     to_name: memberData.fullname,
     name: memberData.fullname,
+    customer_name: memberData.fullname,
     title: 'ต้อนรับสมาชิก VIP คนพิเศษ 👑☕',
     member_id: memberData.memberId,
     favorite_coffee: memberData.favoriteCoffee || '-',
