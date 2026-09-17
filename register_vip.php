@@ -119,6 +119,32 @@ $birthdayDisplay = !empty($birthday) ? htmlspecialchars($birthday) : 'ไม่�
 $addressDisplay = !empty($address) ? htmlspecialchars($address) : 'จัดส่งตามที่อยู่ที่ระบุในออเดอร์';
 
 // --------------------------------------------------------------------------
+// 4.5 บันทึกข้อมูลสมาชิก VIP ลงฐานข้อมูล MySQL (สำหรับดูใน MySQL Workbench)
+// --------------------------------------------------------------------------
+$dbHost = '127.0.0.1';
+$dbUser = 'root';
+$dbPass = '';
+$dbName = 'daily_brew_db';
+
+$dbSaved = false;
+try {
+    $conn = @new mysqli($dbHost, $dbUser, $dbPass, $dbName);
+    if (!$conn->connect_error) {
+        $stmt = $conn->prepare("INSERT INTO `vip_members` (`member_id`, `fullname`, `phone`, `email`, `birthday`, `favorite_coffee`, `milk_type`, `address`, `points`, `promo_code`, `recommended_product`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 100, 'DAILYVIP20', ?)");
+        if ($stmt) {
+            $bdayVal = !empty($birthday) ? $birthday : null;
+            $stmt->bind_param("sssssssss", $memberId, $fullname, $phone, $email, $bdayVal, $favoriteCoffee, $milk, $address, $recProductTitle);
+            $stmt->execute();
+            $stmt->close();
+            $dbSaved = true;
+        }
+        $conn->close();
+    }
+} catch (Exception $e) {
+    // Graceful fallback
+}
+
+// --------------------------------------------------------------------------
 // 5. ดึงและแทนที่ข้อมูลในแม่แบบ HTML (email-template-vip.html)
 // --------------------------------------------------------------------------
 $templatePath = __DIR__ . '/email-template-vip.html';

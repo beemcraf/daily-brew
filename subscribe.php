@@ -61,7 +61,32 @@ if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // --------------------------------------------------------------------------
-// 3. เตรียมเนื้อหาอีเมลจากแม่แบบ HTML (email-template-newsletter.html)
+// 3. บันทึกข้อมูลผู้ติดตามลงฐานข้อมูล MySQL (สำหรับดูใน MySQL Workbench)
+// --------------------------------------------------------------------------
+$dbHost = '127.0.0.1';
+$dbUser = 'root';
+$dbPass = '';
+$dbName = 'daily_brew_db';
+
+$dbSaved = false;
+try {
+    $conn = @new mysqli($dbHost, $dbUser, $dbPass, $dbName);
+    if (!$conn->connect_error) {
+        $stmt = $conn->prepare("INSERT INTO `subscribers` (`email`, `promo_code`, `discount_percent`) VALUES (?, 'WELCOME10', 10) ON DUPLICATE KEY UPDATE `email`=`email`");
+        if ($stmt) {
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->close();
+            $dbSaved = true;
+        }
+        $conn->close();
+    }
+} catch (Exception $e) {
+    // Graceful fallback: ถ้ายังไม่ได้เปิด MySQL สคริปต์ก็ยังทำงานส่งอีเมลต่อได้โดยไม่ Error
+}
+
+// --------------------------------------------------------------------------
+// 4. เตรียมเนื้อหาอีเมลจากแม่แบบ HTML (email-template-newsletter.html)
 // --------------------------------------------------------------------------
 $templatePath = __DIR__ . '/email-template-newsletter.html';
 $htmlBody = '';
