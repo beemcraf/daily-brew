@@ -56,6 +56,20 @@ function sendDailyBrewMail($toEmail, $subject, $htmlBody, $fromName = 'Daily Bre
             $mail->addAddress($toEmail);
             $mail->addReplyTo(SMTP_USER, $fromName);
 
+            // ฝังรูปภาพลงในอีเมลโดยตรง (Inline CID Attachment)
+            // ทำให้รูปภาพแสดงผล 100% เสมอในทุกอุปกรณ์ โดยไม่ต้องโหลดจากภายนอก
+            $vipBannerPath = __DIR__ . '/assets/email_banner_vip.jpg';
+            if (file_exists($vipBannerPath) && stripos($htmlBody, 'email_banner_vip') !== false) {
+                $mail->addEmbeddedImage($vipBannerPath, 'email_banner_vip', 'email_banner_vip.jpg', 'base64', 'image/jpeg');
+                $htmlBody = preg_replace('/src="[^"]*email_banner_vip\.jpg[^"]*"/', 'src="cid:email_banner_vip"', $htmlBody);
+            }
+
+            $newsBannerPath = __DIR__ . '/assets/email_banner_newsletter.jpg';
+            if (file_exists($newsBannerPath) && stripos($htmlBody, 'email_banner_newsletter') !== false) {
+                $mail->addEmbeddedImage($newsBannerPath, 'email_banner_newsletter', 'email_banner_newsletter.jpg', 'base64', 'image/jpeg');
+                $htmlBody = preg_replace('/src="[^"]*email_banner_newsletter\.jpg[^"]*"/', 'src="cid:email_banner_newsletter"', $htmlBody);
+            }
+
             // เนื้อหาอีเมล
             $mail->isHTML(true);
             $mail->Subject = $subject;
