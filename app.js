@@ -662,12 +662,21 @@ function applyCartPromo() {
   updateCartUI();
 }
 
+// ==========================================
+// ORDER CHECKOUT & EMAIL RECEIPT FLOW
+// ==========================================
+let pendingCheckoutData = null;
+
 function proceedToCheckout() {
   if (cart.length === 0) {
-    showToast('กรุณาเลือกเครื่องดื่มลงในตะกร้าก่อนสั่งซื้อนะคะ ☕');
+    showToast('กรุณาเลือกเครื่องดื่มหรือขนมลงในตะกร้าก่อนนะคะ ☕');
     return;
   }
+  closeCartModal();
+  renderCheckoutSummaryModal();
+}
 
+function renderCheckoutSummaryModal() {
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
   let discountAmount = 0;
   if (appliedDiscountPercent > 0) {
@@ -677,72 +686,332 @@ function proceedToCheckout() {
   }
   const finalTotal = Math.max(0, subtotal - discountAmount);
   const pointsEarned = Math.floor(finalTotal / 10);
-  const orderId = `DB-ORD-${Math.floor(1000 + Math.random() * 9000)}`;
-  const nowStr = new Date().toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' });
+  const orderId = `DB-ORD-2026-${Math.floor(1000 + Math.random() * 9000)}`;
 
-  // Record into Order History
-  const orderRecord = {
-    id: orderId,
+  // Autofill from existing VIP member data if available
+  let defaultName = '';
+  let defaultEmail = '';
+  let defaultPhone = '';
+  let defaultAddress = '';
+  try {
+    const savedMember = localStorage.getItem('dailybrew_vip_member');
+    if (savedMember) {
+      const member = JSON.parse(savedMember);
+      defaultName = member.fullname || '';
+      defaultEmail = member.email || '';
+      defaultPhone = member.phone || '';
+      defaultAddress = member.address || '';
+    }
+  } catch (e) {}
+
+  pendingCheckoutData = {
+    orderId,
+    subtotal,
+    discountAmount,
+    couponCode: appliedCouponCode || 'None',
+    finalTotal,
+    pointsEarned,
+    items: JSON.parse(JSON.stringify(cart))
+  };
+
+  const checkoutModal = document.getElementById('checkout-modal');
+  if (!checkoutModal) return;
+
+  const modalBody = checkoutModal.querySelector('.modal-body');
+  const modalTitle = checkoutModal.querySelector('.modal-header h3');
+  if (modalTitle) {
+    modalTitle.innerHTML = '<i class="fa-solid fa-receipt" style="color: var(--accent-caramel);"></i> สรุปคำสั่งซื้อ & ออกใบเสร็จรับเงิน';
+  }
+
+  // Items list HTML
+  let itemsListHtml = pendingCheckoutData.items.map(it => `
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px dashed rgba(80,49,35,0.12); font-size:0.88rem;">
+      <div>
+        <strong style="color:var(--primary-espresso);">${it.name}</strong>
+        ${it.custom ? `<div style="font-size:0.75rem; color:var(--text-muted);">${it.custom}</div>` : ''}
+      </div>
+      <div style="text-align:right;">
+        <span style="color:var(--text-muted); font-size:0.8rem; margin-right:8px;">x${it.qty}</span>
+        <strong style="color:var(--primary-espresso);">${it.price * it.qty} ฿</strong>
+      </div>
+    </div>
+  `).join('');
+
+  modalBody.innerHTML = `
+    <!-- Top Notice Banner -->
+    <div style="background: rgba(230,179,96,0.14); border: 1px solid #e6b360; padding: 10px 14px; border-radius: 12px; margin-bottom: 16px; font-size: 0.85rem; color: #7a4613; display: flex; align-items: center; gap: 10px; text-align: left;">
+      <i class="fa-solid fa-envelope-circle-check" style="font-size: 1.25rem; color: #b8621b; flex-shrink:0;"></i>
+      <div>
+        <strong>ระบบส่งใบเสร็จจริงทางอีเมล:</strong> กรอกอีเมลด้านล่างเพื่อรับใบเสร็จรับเงินและสรุปคำสั่งซื้อทันทีที่สั่งซื้อค่ะ
+      </div>
+    </div>
+
+    <!-- 1. Order Summary Card -->
+    <div style="background: var(--bg-cream-soft); padding: 14px 16px; border-radius: 14px; margin-bottom: 18px; border: 1px solid rgba(80,49,35,0.08); text-align: left;">
+      <div style="display:flex; justify-content:space-between; margin-bottom: 8px;">
+        <span style="font-size:0.82rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">หมายเลขออเดอร์:</span>
+        <strong style="color:var(--accent-caramel); font-size:0.95rem;">#${orderId}</strong>
+      </div>
+      <div style="max-height: 140px; overflow-y: auto; margin-bottom: 10px;">
+        ${itemsListHtml}
+      </div>
+      <div style="padding-top: 6px; font-size: 0.88rem;">
+        <div style="display:flex; justify-content:space-between; margin-bottom: 4px; color:var(--text-muted);">
+          <span>ยอดรวมสินค้า:</span>
+          <span>${subtotal} ฿</span>
+        </div>
+        ${discountAmount > 0 ? `
+          <div style="display:flex; justify-content:space-between; margin-bottom: 4px; color:#d62828; font-weight:600;">
+            <span>ส่วนลด (${appliedCouponCode}):</span>
+            <span>-${discountAmount} ฿</span>
+          </div>
+        ` : ''}
+        <div style="display:flex; justify-content:space-between; margin-bottom: 4px; color:var(--accent-green); font-size:0.84rem;">
+          <span>ค่าจัดส่ง:</span>
+          <span>ฟรี (บริการส่งด่วนพิเศษ)</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(80,49,35,0.15); font-size: 1.05rem;">
+          <strong style="color:var(--primary-espresso);">ยอดชำระสุทธิ:</strong>
+          <strong style="color:var(--accent-caramel); font-size:1.25rem;">${finalTotal} ฿</strong>
+        </div>
+        <div style="text-align:right; font-size:0.8rem; color:var(--accent-green); font-weight:700; margin-top:2px;">
+          ⭐ ได้รับแต้มสะสม +${pointsEarned} Points
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Customer & Shipping Form -->
+    <div style="text-align: left; margin-bottom: 18px;">
+      <h5 style="color:var(--primary-espresso); margin-bottom: 10px; font-size: 0.95rem; font-weight: 700;">
+        <i class="fa-solid fa-user-check" style="color:var(--accent-caramel);"></i> ข้อมูลผู้สั่งซื้อ & จัดส่งใบเสร็จ
+      </h5>
+      
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+        <div>
+          <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:3px;">ชื่อ-นามสกุล *</label>
+          <input type="text" id="order-customer-name" value="${defaultName}" placeholder="ชื่อของคุณ" style="width:100%; padding:9px 12px; border-radius:8px; border:1px solid rgba(80,49,35,0.2); font-size:0.88rem; outline:none; box-sizing:border-box;" required>
+        </div>
+        <div>
+          <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:3px;">เบอร์โทรศัพท์ *</label>
+          <input type="tel" id="order-customer-phone" value="${defaultPhone}" placeholder="08x-xxx-xxxx" style="width:100%; padding:9px 12px; border-radius:8px; border:1px solid rgba(80,49,35,0.2); font-size:0.88rem; outline:none; box-sizing:border-box;" required>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <label style="font-size:0.8rem; color:var(--primary-espresso); font-weight:700; display:block; margin-bottom:3px;">
+          <i class="fa-solid fa-envelope" style="color:var(--accent-caramel);"></i> อีเมลสำหรับรับใบเสร็จและยืนยันคำสั่งซื้อ *
+        </label>
+        <input type="email" id="order-customer-email" value="${defaultEmail}" placeholder="your.email@gmail.com (สำคัญมาก: เมลจะส่งไปที่นี่)" style="width:100%; padding:10px 12px; border-radius:8px; border:2px solid var(--accent-caramel); font-size:0.9rem; outline:none; background:#fffdfa; box-sizing:border-box;" required>
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:3px;">ที่อยู่จัดส่ง / สาขาที่ต้องการรับ</label>
+        <textarea id="order-customer-address" rows="2" placeholder="ระบุบ้านเลขที่ ถนน หรือแจ้งรับที่หน้าร้าน Daily Brew" style="width:100%; padding:8px 12px; border-radius:8px; border:1px solid rgba(80,49,35,0.2); font-size:0.85rem; outline:none; resize:none; box-sizing:border-box;">${defaultAddress}</textarea>
+      </div>
+
+      <div>
+        <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:6px;">วิธีชำระเงิน</label>
+        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; font-size: 0.8rem;">
+          <label style="display:flex; align-items:center; gap:5px; padding:7px 8px; border:1px solid #e0d5c8; border-radius:8px; cursor:pointer; background:#ffffff;">
+            <input type="radio" name="payment_method" value="PromptPay QR" checked>
+            <span>📱 PromptPay</span>
+          </label>
+          <label style="display:flex; align-items:center; gap:5px; padding:7px 8px; border:1px solid #e0d5c8; border-radius:8px; cursor:pointer; background:#ffffff;">
+            <input type="radio" name="payment_method" value="บัตรเครดิต/เดบิต">
+            <span>💳 บัตรเครดิต</span>
+          </label>
+          <label style="display:flex; align-items:center; gap:5px; padding:7px 8px; border:1px solid #e0d5c8; border-radius:8px; cursor:pointer; background:#ffffff;">
+            <input type="radio" name="payment_method" value="เก็บเงินปลายทาง (COD)">
+            <span>💵 ปลายทาง</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div style="display:flex; gap:10px; margin-top: 18px;">
+      <button class="btn btn-secondary" style="flex:1;" onclick="closeCheckoutModal(); openCartModal();">
+        <i class="fa-solid fa-arrow-left"></i> กลับไปตะกร้า
+      </button>
+      <button class="btn btn-primary" id="btn-confirm-order" style="flex:2; padding:12px 16px; font-size:0.95rem;" onclick="confirmOrderAndSendEmail()">
+        <i class="fa-solid fa-envelope-circle-check"></i> ยืนยันสั่งซื้อ & ส่งใบเสร็จ ✉️
+      </button>
+    </div>
+  `;
+
+  checkoutModal.classList.add('active');
+}
+
+async function confirmOrderAndSendEmail() {
+  if (!pendingCheckoutData) return;
+
+  const nameInput = document.getElementById('order-customer-name');
+  const emailInput = document.getElementById('order-customer-email');
+  const phoneInput = document.getElementById('order-customer-phone');
+  const addressInput = document.getElementById('order-customer-address');
+  const paymentMethodInput = document.querySelector('input[name="payment_method"]:checked');
+
+  const customerName = (nameInput ? nameInput.value.trim() : '') || 'ลูกค้าคนพิเศษ';
+  const customerEmail = (emailInput ? emailInput.value.trim() : '');
+  const customerPhone = (phoneInput ? phoneInput.value.trim() : '') || '-';
+  const customerAddress = (addressInput ? addressInput.value.trim() : '') || 'จัดส่งตามที่อยู่ที่ระบุในระบบ';
+  const paymentMethod = paymentMethodInput ? paymentMethodInput.value : 'PromptPay QR';
+
+  if (!customerEmail || !customerEmail.includes('@')) {
+    showToast('กรุณาระบุอีเมลที่ถูกต้องสำหรับรับใบเสร็จด้วยนะคะ ✉️');
+    if (emailInput) emailInput.focus();
+    return;
+  }
+
+  const btnConfirm = document.getElementById('btn-confirm-order');
+  if (btnConfirm) {
+    btnConfirm.disabled = true;
+    btnConfirm.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึกและส่งใบเสร็จ...';
+  }
+
+  const orderPayload = {
+    order_id: pendingCheckoutData.orderId,
+    customer_name: customerName,
+    customer_email: customerEmail,
+    customer_phone: customerPhone,
+    customer_address: customerAddress,
+    payment_method: paymentMethod,
+    items: pendingCheckoutData.items,
+    subtotal: pendingCheckoutData.subtotal,
+    discount: pendingCheckoutData.discountAmount,
+    coupon_code: pendingCheckoutData.couponCode,
+    total: pendingCheckoutData.finalTotal,
+    points_earned: pendingCheckoutData.pointsEarned
+  };
+
+  // 1. Dual Dispatch: Call order_checkout.php (MySQL + PHPMailer Gmail SMTP)
+  try {
+    const phpRes = await fetch('order_checkout.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderPayload)
+    });
+    const phpData = await phpRes.json();
+    console.log('🐘 PHP order_checkout.php response:', phpData);
+  } catch (err) {
+    console.warn('PHP order_checkout.php call note:', err);
+  }
+
+  // 2. Dual Dispatch: EmailJS fallback (for static hosting like GitHub Pages)
+  if (typeof emailjs !== 'undefined') {
+    try {
+      const itemsText = orderPayload.items.map(it => `${it.name} x${it.qty} (${it.price * it.qty}฿)`).join(', ');
+      await emailjs.send(
+        EMAILJS_CONFIG.serviceId,
+        EMAILJS_CONFIG.templateId,
+        {
+          to_email: customerEmail,
+          email: customerEmail,
+          to_name: customerName,
+          name: customerName,
+          customer_name: customerName,
+          title: `ใบเสร็จคำสั่งซื้อ #${orderPayload.order_id} ☕`,
+          member_id: orderPayload.order_id,
+          favorite_coffee: itemsText,
+          points: `+${orderPayload.points_earned} PTS`,
+          promo_code: orderPayload.coupon_code,
+          message: `ขอบคุณสำหรับคำสั่งซื้อกับ Daily Brew ค่ะ!\n\n🧾 หมายเลขออเดอร์: #${orderPayload.order_id}\n📦 รายการสินค้า: ${itemsText}\n💰 ยอดรวม: ${orderPayload.subtotal} ฿\n🎁 ส่วนลด: -${orderPayload.discount} ฿\n✨ ยอดชำระสุทธิ: ${orderPayload.total} ฿\n⭐ แต้มสะสมที่ได้รับ: +${orderPayload.points_earned} Points\n🛵 สถานะ: กำลังเตรียมจัดส่งด่วน\n\nเรากำลังเตรียมเครื่องดื่มและเบเกอรีอย่างพิถีพิถันเพื่อจัดส่งให้เร็วที่สุดนะคะ ❤️`
+        },
+        EMAILJS_CONFIG.publicKey
+      );
+    } catch (e) {
+      console.warn('EmailJS fallback note:', e);
+    }
+  }
+
+  // 3. Save into Order History in LocalStorage
+  const nowStr = new Date().toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' });
+  const localRecord = {
+    id: orderPayload.order_id,
     date: nowStr,
-    items: JSON.parse(JSON.stringify(cart)),
-    subtotal: subtotal,
-    discount: discountAmount,
-    coupon: appliedCouponCode || 'None',
-    total: finalTotal,
-    pointsEarned: pointsEarned,
+    items: orderPayload.items,
+    subtotal: orderPayload.subtotal,
+    discount: orderPayload.discount,
+    coupon: orderPayload.coupon_code,
+    total: orderPayload.total,
+    pointsEarned: orderPayload.points_earned,
     status: 'จัดส่งสำเร็จ'
   };
 
   try {
     const existingOrders = JSON.parse(localStorage.getItem('dailybrew_order_history') || '[]');
-    existingOrders.unshift(orderRecord);
+    existingOrders.unshift(localRecord);
     localStorage.setItem('dailybrew_order_history', JSON.stringify(existingOrders));
 
     // Update VIP Member points & lifetime spend
     const savedMember = localStorage.getItem('dailybrew_vip_member');
     if (savedMember) {
       const member = JSON.parse(savedMember);
-      member.points = (member.points || 100) + pointsEarned;
-      member.totalSpent = (member.totalSpent || 0) + finalTotal;
+      member.points = (member.points || 100) + orderPayload.points_earned;
+      member.totalSpent = (member.totalSpent || 0) + orderPayload.total;
       localStorage.setItem('dailybrew_vip_member', JSON.stringify(member));
       loadSavedVipMember();
     }
   } catch (err) {
-    console.error('Error recording order history', err);
+    console.error('Error saving order history locally', err);
   }
 
-  closeCartModal();
+  // Reset Cart
+  cart = [];
+  appliedDiscountPercent = 0;
+  appliedDiscountAmount = 0;
+  appliedCouponCode = '';
+  updateCartUI();
 
-  // Update Checkout Modal Content with Real Order Data
-  const checkoutBody = document.querySelector('#checkout-modal .modal-body');
-  if (checkoutBody) {
-    let itemsHtml = orderRecord.items.map(it => `
+  // 4. Render Step 2: Success & Receipt Sent Screen
+  const checkoutModal = document.getElementById('checkout-modal');
+  if (checkoutModal) {
+    const modalBody = checkoutModal.querySelector('.modal-body');
+    const modalTitle = checkoutModal.querySelector('.modal-header h3');
+    if (modalTitle) {
+      modalTitle.innerHTML = '<i class="fa-solid fa-circle-check" style="color: var(--accent-green);"></i> สั่งซื้อสำเร็จและส่งใบเสร็จแล้ว!';
+    }
+
+    let itemsHtml = orderPayload.items.map(it => `
       <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:0.85rem;">
         <span>${it.name} x${it.qty}</span>
         <span>${it.price * it.qty} ฿</span>
       </div>
     `).join('');
 
-    checkoutBody.innerHTML = `
-      <div style="font-size: 3.5rem; color: var(--accent-green); margin-bottom: 10px;">
-        <i class="fa-solid fa-mug-hot"></i>
+    modalBody.innerHTML = `
+      <div style="font-size: 3.5rem; color: var(--accent-green); margin-bottom: 10px; text-align:center;">
+        <i class="fa-solid fa-circle-check"></i>
       </div>
-      <h4 style="font-size: 1.3rem; color: var(--primary-espresso); margin-bottom: 4px;">สั่งซื้อสำเร็จแล้วค่ะ! (Order Placed)</h4>
-      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 16px;">
-        ออเดอร์หมายเลข <strong style="color:var(--accent-caramel);">${orderId}</strong> บันทึกลงระบบ CDP แล้ว
+      <h4 style="font-size: 1.3rem; color: var(--primary-espresso); margin-bottom: 4px; text-align:center;">
+        สั่งซื้อสำเร็จเรียบร้อยแล้วค่ะ!
+      </h4>
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 16px; text-align:center;">
+        ออเดอร์หมายเลข <strong style="color:var(--accent-caramel); font-size:1.05rem;">#${orderPayload.order_id}</strong>
       </p>
 
+      <!-- Email Sent Notification Box -->
+      <div style="background: #eafaf1; border: 1.5px solid #2ecc71; padding: 14px 16px; border-radius: 12px; margin-bottom: 18px; text-align: left;">
+        <div style="font-weight: 700; color: #1e824c; margin-bottom: 4px; display:flex; align-items:center; gap:8px;">
+          <i class="fa-solid fa-envelope-circle-check" style="font-size:1.15rem;"></i> จัดส่งใบเสร็จรับเงินเรียบร้อยแล้ว!
+        </div>
+        <div style="font-size: 0.86rem; color: #274936; line-height: 1.5;">
+          ระบบได้จัดส่งสรุปคำสั่งซื้อและใบเสร็จรับเงินฉบับเต็มไปยังอีเมล <strong style="color:#0e5a2c; text-decoration:underline;">${customerEmail}</strong> เรียบร้อยแล้วค่ะ กรุณาตรวจสอบกล่องจดหมายของคุณได้เลยนะคะ ✉️✨
+        </div>
+      </div>
+
+      <!-- Receipt Breakdown -->
       <div style="background: var(--bg-cream-soft); padding: 16px 18px; border-radius: 14px; text-align: left; margin-bottom: 18px; font-size: 0.88rem; border: 1px solid rgba(80,49,35,0.08);">
         <div style="padding-bottom:10px; margin-bottom:10px; border-bottom:1px dashed rgba(80,49,35,0.15);">
           ${itemsHtml}
         </div>
         <div style="display:flex; justify-content:space-between; margin-bottom: 4px;">
           <span>ยอดรวมสุทธิ:</span>
-          <strong style="color:var(--accent-caramel); font-size:1.05rem;">${finalTotal} ฿</strong>
+          <strong style="color:var(--accent-caramel); font-size:1.1rem;">${orderPayload.total} ฿</strong>
         </div>
         <div style="display:flex; justify-content:space-between; margin-bottom: 4px;">
           <span>แต้มที่ได้รับ (10฿ = 1pt):</span>
-          <span style="color:var(--accent-green); font-weight:700;">+${pointsEarned} Points ⭐</span>
+          <span style="color:var(--accent-green); font-weight:700;">+${orderPayload.points_earned} Points ⭐</span>
         </div>
         <div style="display:flex; justify-content:space-between;">
           <span>สถานะจัดส่ง:</span>
@@ -755,26 +1024,23 @@ function proceedToCheckout() {
           <i class="fa-solid fa-clock-rotate-left"></i> ดูประวัติสั่งซื้อ
         </button>
         <button class="btn btn-primary" style="flex:1;" onclick="closeCheckoutModal()">
-          สั่งเมนูอื่นเพิ่ม
+          <i class="fa-solid fa-mug-hot"></i> สั่งเมนูอื่นเพิ่ม
         </button>
       </div>
     `;
   }
 
-  document.getElementById('checkout-modal').classList.add('active');
-
-  // Reset Cart after purchase
-  cart = [];
-  appliedDiscountPercent = 0;
-  appliedDiscountAmount = 0;
-  appliedCouponCode = '';
-  updateCartUI();
-  showToast(`ชำระเงินสำเร็จ! รับแต้มสะสม +${pointsEarned} Points 🌟`);
+  showToast(`สั่งซื้อสำเร็จ! จัดส่งใบเสร็จไปยัง ${customerEmail} แล้วค่ะ ☕💌`);
+  pendingCheckoutData = null;
 }
 
 function closeCheckoutModal() {
-  document.getElementById('checkout-modal').classList.remove('active');
+  const checkoutModal = document.getElementById('checkout-modal');
+  if (checkoutModal) {
+    checkoutModal.classList.remove('active');
+  }
 }
+
 
 // ==========================================
 // 7. MARKETING CAMPAIGN HELPERS
