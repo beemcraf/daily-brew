@@ -3371,5 +3371,225 @@ nav {
   }
 }
 
+/* ==========================================================================
+   COMPREHENSIVE RESPONSIVE UX/UI (Desktop, Tablet, Mobile)
+   ========================================================================== */
+
+/* Universal Viewport Safety */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* 1. TABLET ENHANCEMENTS (768px - 1024px) */
+@media (max-width: 1024px) {
+  .packages-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .menu-filter-bar {
+    justify-content: center;
+    gap: 8px;
+  }
+  .menu-tab-btn {
+    padding: 8px 16px;
+    font-size: 0.88rem;
+  }
+  .smart-rec-banner {
+    padding: 24px 20px;
+  }
+}
+
+/* 2. TABLET & COMPACT SCREENS (max-width: 900px) */
+@media (max-width: 900px) {
+  .nav-actions {
+    gap: 6px;
+  }
+  .btn-mktg-deck span,
+  .btn-cdp-portal span {
+    display: none;
+  }
+  .btn-mktg-deck,
+  .btn-cdp-portal {
+    padding: 8px 11px;
+  }
+  .navbar-container {
+    padding: 0 16px;
+  }
+}
+
+/* 3. MOBILE MASTER (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Dynamic Fluid Typography */
+  .hero-content h1 {
+    font-size: clamp(1.85rem, 6.5vw, 2.4rem);
+    line-height: 1.25;
+  }
+  .hero-content h1 .hero-slogan-highlight {
+    font-size: clamp(1.35rem, 5vw, 1.8rem);
+  }
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  /* Horizontal Smooth Swipeable Filter Pills */
+  .menu-filter-bar {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 16px 14px 16px;
+    margin-left: -16px;
+    margin-right: -16px;
+    scrollbar-width: none;
+  }
+  .menu-filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+  .menu-tab-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 8px 18px;
+    font-size: 0.88rem;
+  }
+
+  /* Menu Cards */
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .menu-card {
+    max-width: 440px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Smart AI Recommendation Banner */
+  .smart-rec-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+  .smart-rec-visuals {
+    justify-content: center;
+  }
+  .smart-rec-img {
+    width: 80px;
+    height: 80px;
+  }
+  #btn-smart-rec-order {
+    width: 100%;
+  }
+
+  /* Modals: Cart, Checkout & CDP */
+  .modal-overlay {
+    padding: 12px;
+  }
+  .modal-content {
+    width: 95%;
+    max-width: 95%;
+    margin: auto;
+    border-radius: 18px;
+    max-height: 90vh;
+  }
+  .modal-header {
+    padding: 16px 18px;
+  }
+  .modal-body {
+    padding: 16px 18px 20px 18px;
+  }
+
+  /* Form Inputs: Prevent iOS Safari auto-zoom with 16px base font size */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Newsletter Box */
+  .lead-capture-box {
+    padding: 28px 20px;
+    border-radius: 20px;
+  }
+  .newsletter-form-inline {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .newsletter-form-inline input,
+  .newsletter-form-inline button {
+    width: 100%;
+  }
+}
+
+/* 4. ULTRA-COMPACT MOBILE PHONES (max-width: 480px) */
+@media (max-width: 480px) {
+  .navbar-container {
+    height: 70px;
+  }
+  .brand-logo {
+    width: 38px;
+    height: 38px;
+  }
+  .brand-name {
+    font-size: 1.15rem;
+  }
+  .btn-nav-vip {
+    padding: 6px 10px;
+    font-size: 0.76rem;
+  }
+  .cart-toggle-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+  .menu-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+
+  /* Digital VIP Member Card */
+  .vip-card-wrapper {
+    padding: 0;
+  }
+  .vip-digital-card {
+    padding: 18px 16px;
+    border-radius: 18px;
+  }
+  .vip-card-id {
+    font-size: 1.05rem !important;
+    letter-spacing: 2px;
+  }
+  .vip-card-name {
+    font-size: 1.1rem;
+  }
+
+  /* CDP History & Tables */
+  .cdp-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -8px;
+  }
+  .cdp-orders-table th,
+  .cdp-orders-table td {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+}
+
+
 
 
