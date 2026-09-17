@@ -1873,39 +1873,95 @@ function addPairingSet(drinkId, foodId) {
 // 14. MEMBER PORTAL & CDP DASHBOARD CONTROLS
 // ==========================================
 function openMemberPortalModal() {
-  renderCdpProfile();
-  renderOrderHistory();
-  document.getElementById('member-portal-modal').classList.add('active');
+  try {
+    renderCdpProfile();
+  } catch (err) {
+    console.warn('renderCdpProfile note:', err);
+  }
+  try {
+    renderOrderHistory();
+  } catch (err) {
+    console.warn('renderOrderHistory note:', err);
+  }
+  const modal = document.getElementById('member-portal-modal');
+  if (modal) {
+    modal.classList.add('active');
+  }
 }
 
 function closeMemberPortalModal() {
-  document.getElementById('member-portal-modal').classList.remove('active');
+  const modal = document.getElementById('member-portal-modal');
+  if (modal) {
+    modal.classList.remove('active');
+  }
 }
 
-function switchPortalTab(e, tabId) {
-  document.querySelectorAll('#member-portal-modal .mktg-tab-btn').forEach(btn => btn.classList.remove('active'));
-  document.querySelectorAll('#member-portal-modal .mktg-tab-pane').forEach(pane => pane.classList.remove('active'));
+function switchPortalTab(arg1, arg2) {
+  let targetTabId = '';
+  let clickedBtn = null;
 
-  e.target.classList.add('active');
-  const targetPane = document.getElementById(tabId);
-  if (targetPane) targetPane.classList.add('active');
+  if (typeof arg1 === 'string') {
+    // Called from vip.html: switchPortalTab('orders')
+    targetTabId = arg1;
+    if (arg1 === 'orders') targetTabId = 'portal-tab-orders';
+    if (arg1 === 'profile') targetTabId = 'portal-tab-profile';
+    if (arg1 === 'coupons') targetTabId = 'portal-tab-coupons';
+  } else if (arg1 && arg1.target) {
+    // Called from index.html: switchPortalTab(event, 'portal-orders')
+    clickedBtn = arg1.target;
+    targetTabId = arg2;
+  } else if (arg2) {
+    targetTabId = arg2;
+  }
+
+  const modal = document.getElementById('member-portal-modal');
+  if (!modal) return;
+
+  // Deactivate all tab buttons & content panes across both markup styles
+  modal.querySelectorAll('.mktg-tab-btn, .portal-tab-btn').forEach(btn => btn.classList.remove('active'));
+  modal.querySelectorAll('.mktg-tab-pane, .portal-tab-content').forEach(pane => pane.classList.remove('active'));
+
+  // Activate clicked button or matching button
+  if (clickedBtn) {
+    clickedBtn.classList.add('active');
+  } else if (typeof arg1 === 'string') {
+    const btn = modal.querySelector(`#tab-btn-${arg1}`) || modal.querySelector(`[onclick*="${arg1}"]`);
+    if (btn) btn.classList.add('active');
+  }
+
+  // Activate target pane
+  const targetPane = document.getElementById(targetTabId);
+  if (targetPane) {
+    targetPane.classList.add('active');
+  } else {
+    const fallbackPane = document.getElementById(`portal-${targetTabId}`) || document.getElementById(`portal-tab-${targetTabId}`);
+    if (fallbackPane) fallbackPane.classList.add('active');
+  }
 }
 
 function renderCdpProfile() {
   const saved = localStorage.getItem('dailybrew_vip_member');
   const fieldsContainer = document.getElementById('cdp-fields-container');
-  
+  const orders = JSON.parse(localStorage.getItem('dailybrew_order_history') || '[]');
+  const totalSpent = orders.reduce((sum, o) => sum + (o.total || 0), 0);
+
+  const tierEl = document.getElementById('portal-stat-tier');
+  const pointsEl = document.getElementById('portal-stat-points');
+  const spentEl = document.getElementById('portal-stat-spent') || document.getElementById('portal-stat-spend');
+  const ordersEl = document.getElementById('portal-stat-orders');
+
   if (!saved) {
     // Default Guest / Demo Profile
-    document.getElementById('portal-stat-tier').textContent = 'Guest Member';
-    document.getElementById('portal-stat-points').textContent = '0 Points';
-    document.getElementById('portal-stat-spent').textContent = '0 ฿';
+    if (tierEl) tierEl.textContent = 'Guest Member';
+    if (pointsEl) pointsEl.textContent = '0 Points';
+    if (spentEl) spentEl.textContent = '0 ฿';
+    if (ordersEl) ordersEl.textContent = `${orders.length} ออเดอร์`;
     
     if (fieldsContainer) {
       fieldsContainer.innerHTML = `
         <div style="grid-column: 1 / -1; text-align:center; padding:20px; color:var(--text-muted);">
           <p style="margin-bottom:12px;">ยังไม่ได้ลงทะเบียนสมาชิก VIP</p>
-          <a href="#membership" class="btn btn-primary" onclick="closeMemberPortalModal()">
+          <a href="vip.html" class="btn btn-primary" onclick="closeMemberPortalModal()">
             <i class="fa-solid fa-crown"></i> ไปหน้าสมัครสมาชิกรับส่วนลด 20%
           </a>
         </div>
@@ -1915,30 +1971,28 @@ function renderCdpProfile() {
   }
 
   const member = JSON.parse(saved);
-  const orders = JSON.parse(localStorage.getItem('dailybrew_order_history') || '[]');
-  const totalSpent = orders.reduce((sum, o) => sum + (o.total || 0), 0);
-
-  document.getElementById('portal-stat-tier').textContent = member.tier || 'VIP Gold Member';
-  document.getElementById('portal-stat-points').textContent = `${member.points || 100} Points`;
-  document.getElementById('portal-stat-spent').textContent = `${totalSpent} ฿`;
+  if (tierEl) tierEl.textContent = member.tier || 'VIP Gold Member';
+  if (pointsEl) pointsEl.textContent = `${member.points || 100} Points`;
+  if (spentEl) spentEl.textContent = `${totalSpent} ฿`;
+  if (ordersEl) ordersEl.textContent = `${orders.length} ออเดอร์`;
 
   if (fieldsContainer) {
     fieldsContainer.innerHTML = `
       <div class="cdp-field-item">
         <span class="cdp-field-label"><i class="fa-solid fa-id-badge"></i> รหัสสมาชิก (Member ID)</span>
-        <span class="cdp-field-val" style="color:var(--accent-caramel); font-weight:700;">${member.memberId || 'DB-2026-8899'}</span>
+        <span class="cdp-field-val" style="color:var(--accent-caramel); font-weight:700;">${member.memberId || 'DB-2026-VIP-1001'}</span>
       </div>
       <div class="cdp-field-item">
         <span class="cdp-field-label"><i class="fa-solid fa-user"></i> ชื่อ - นามสกุล</span>
-        <span class="cdp-field-val">${member.fullname}</span>
+        <span class="cdp-field-val">${member.fullname || '-'}</span>
       </div>
       <div class="cdp-field-item">
         <span class="cdp-field-label"><i class="fa-solid fa-envelope"></i> อีเมล (Gmail / Email)</span>
-        <span class="cdp-field-val">${member.email}</span>
+        <span class="cdp-field-val">${member.email || '-'}</span>
       </div>
       <div class="cdp-field-item">
         <span class="cdp-field-label"><i class="fa-solid fa-phone"></i> เบอร์โทรศัพท์</span>
-        <span class="cdp-field-val">${member.phone}</span>
+        <span class="cdp-field-val">${member.phone || '-'}</span>
       </div>
       <div class="cdp-field-item">
         <span class="cdp-field-label"><i class="fa-solid fa-cake-candles"></i> วันเกิด (Birthday Freebie)</span>
