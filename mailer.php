@@ -16,11 +16,13 @@ require_once __DIR__ . '/phpmailer/SMTP.php';
 // ==============================================================================
 // ⚙️ การตั้งค่า GMAIL SMTP สำหรับส่งอีเมลจริง
 // ==============================================================================
-define('SMTP_HOST', 'smtp.gmail.com');
-define('SMTP_USER', 'pomsanbeem9@gmail.com');       // อีเมล Gmail ที่ใช้เป็นผู้ส่ง
-define('SMTP_PASS', 'YOUR_GMAIL_APP_PASSWORD');   // รหัสผ่านแอป 16 หลักจาก Google (เช่น abcd efgh ijkl mnop)
-define('SMTP_PORT', 465);                          // พอร์ต SSL ของ Gmail (465) หรือ TLS (587)
-define('SMTP_SECURE', 'ssl');                      // 'ssl' สำหรับพอร์ต 465 หรือ 'tls' สำหรับพอร์ต 587
+$localConfig = file_exists(__DIR__ . '/config.local.php') ? require __DIR__ . '/config.local.php' : [];
+
+define('SMTP_HOST', $localConfig['smtp_host'] ?? 'smtp.gmail.com');
+define('SMTP_USER', $localConfig['smtp_user'] ?? 'pomsanbeem9@gmail.com');       // อีเมล Gmail ผู้ส่ง
+define('SMTP_PASS', $localConfig['smtp_pass'] ?? 'YOUR_GMAIL_APP_PASSWORD');   // ดึงจาก config.local.php
+define('SMTP_PORT', $localConfig['smtp_port'] ?? 465);                          // พอร์ต SSL ของ Gmail (465)
+define('SMTP_SECURE', $localConfig['smtp_secure'] ?? 'ssl');                    // 'ssl' หรือ 'tls'
 
 /**
  * ฟังก์ชันกลางสำหรับส่งอีเมล HTML แบบ UTF-8
