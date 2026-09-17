@@ -70,6 +70,12 @@ function sendDailyBrewMail($toEmail, $subject, $htmlBody, $fromName = 'Daily Bre
                 $htmlBody = preg_replace('/src="[^"]*email_banner_newsletter\.jpg[^"]*"/', 'src="cid:email_banner_newsletter"', $htmlBody);
             }
 
+            $orderBannerPath = __DIR__ . '/assets/email_banner_order.jpg';
+            if (file_exists($orderBannerPath) && stripos($htmlBody, 'email_banner_order') !== false) {
+                $mail->addEmbeddedImage($orderBannerPath, 'email_banner_order', 'email_banner_order.jpg', 'base64', 'image/jpeg');
+                $htmlBody = preg_replace('/src="[^"]*email_banner_order\.jpg[^"]*"/', 'src="cid:email_banner_order"', $htmlBody);
+            }
+
             // เนื้อหาอีเมล
             $mail->isHTML(true);
             $mail->Subject = $subject;

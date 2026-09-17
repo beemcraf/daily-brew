@@ -7,179 +7,280 @@
 </head>
 <body style="margin: 0; padding: 0; background-color: #f4efe9; font-family: 'Prompt', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #2c1a11;">
   
-  <!-- Outer Wrapper -->
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f4efe9; padding: 20px 8px;">
+  <!-- Outer Wrapper with warm cafe background -->
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f4efe9; padding: 15px 8px;">
     <tr>
       <td align="center">
         
-        <!-- Main Card Container -->
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width: 580px; background-color: #ffffff; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 36px rgba(0,0,0,0.09); border: 1px solid #e8ded4;">
+        <!-- Main Card Container (Compact & Luxury Matching VIP) -->
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width: 560px; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e8ded4;">
           
-          <!-- Brand Header -->
+          <!-- Compact Top Brand Header -->
           <tr>
-            <td style="background-color: #1a0f0a; padding: 14px 24px; text-align: center;">
+            <td style="background-color: #1a0f0a; padding: 12px 20px; text-align: center;">
               <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tr>
-                  <td align="left" style="font-size: 15px; font-weight: 800; letter-spacing: 2px; color: #e6b360;">
+                  <td align="left" style="font-size: 14px; font-weight: 800; letter-spacing: 2px; color: #e6b360;">
                     ☕ DAILY BREW
                   </td>
-                  <td align="right" style="font-size: 11px; color: #a89487; letter-spacing: 1px; text-transform: uppercase;">
-                    Specialty Coffee & Roastery
+                  <td align="right" style="font-size: 10px; color: #a89487; letter-spacing: 1px; text-transform: uppercase;">
+                    Specialty Roastery & Cafe
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- Sleek Header Banner -->
+          <!-- Sleek Compact Banner Artwork (Natural Proportions with CID Embedding) -->
           <tr>
-            <td align="center" style="background: linear-gradient(135deg, #24140e 0%, #3e2216 100%); padding: 30px 24px; text-align: center; border-bottom: 2px solid #e6b360;">
-              <div style="font-size: 40px; margin-bottom: 8px;">☕✨</div>
-              <span style="display: inline-block; background-color: rgba(230, 179, 96, 0.18); color: #f5d77f; font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 9999px; border: 1px solid #e6b360; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px;">
-                ORDER CONFIRMED & RECEIPT
-              </span>
-              <h1 style="color: #ffffff; font-size: 22px; font-weight: 800; margin: 0 0 6px 0; line-height: 1.3;">
-                ขอบคุณสำหรับคำสั่งซื้อค่ะ!
-              </h1>
-              <p style="color: #d1c2b7; font-size: 13px; margin: 0;">
-                เราได้รับออเดอร์ของ <strong style="color: #f5d77f;">คุณ {{customer_name}}</strong> แล้ว และกำลังเตรียมจัดส่งให้คุณค่ะ
-              </p>
+            <td align="center" style="padding: 0; background-color: #1a0f0a; line-height: 0; font-size: 0;">
+              <img src="https://beemcraf.github.io/daily-brew/assets/email_banner_order.jpg" 
+                   alt="Daily Brew Order Confirmed" 
+                   width="560" 
+                   height="315" 
+                   style="display: block; width: 100%; max-width: 560px; height: auto; border: 0; outline: none; text-decoration: none;" />
             </td>
           </tr>
 
-          <!-- Receipt Content Body -->
+          <!-- Compact Body Content -->
           <tr>
-            <td style="padding: 24px 24px 18px 24px; background-color: #ffffff;">
-
-              <!-- Order Metadata Badge Box -->
-              <table width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #faf6f0; border: 1px solid #eadbc9; border-radius: 12px; padding: 14px 16px; margin-bottom: 22px;">
+            <td style="padding: 20px 24px 18px 24px; background-color: #ffffff;">
+              
+              <!-- Greeting Section -->
+              <table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom: 14px;">
                 <tr>
-                  <td width="50%" valign="top" style="padding: 4px;">
-                    <span style="font-size: 11px; color: #8c7668; text-transform: uppercase; letter-spacing: 0.5px;">หมายเลขออเดอร์:</span>
-                    <div style="font-size: 15px; font-weight: 800; color: #b8621b; margin-top: 2px;">
-                      {{order_id}}
-                    </div>
-                  </td>
-                  <td width="50%" align="right" valign="top" style="padding: 4px;">
-                    <span style="font-size: 11px; color: #8c7668; text-transform: uppercase; letter-spacing: 0.5px;">วันที่สั่งซื้อ:</span>
-                    <div style="font-size: 13px; font-weight: 600; color: #2c1a11; margin-top: 2px;">
-                      {{order_date}}
-                    </div>
+                  <td>
+                    <span style="display: inline-block; background-color: #24140e; color: #e6b360; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 9999px; border: 1px solid #e6b360; letter-spacing: 1px;">
+                      🧾 OFFICIAL RECEIPT & ORDER CONFIRMED
+                    </span>
+                    <h2 style="color: #24140e; font-size: 20px; font-weight: 800; margin: 8px 0 4px 0; line-height: 1.3;">
+                      ขอบคุณสำหรับคำสั่งซื้อค่ะ! ☕
+                    </h2>
+                    <p style="color: #63534b; font-size: 14px; margin: 0;">
+                      สวัสดีค่ะคุณ <strong style="color: #c28b51;">{{customer_name}}</strong> เราได้รับออเดอร์ของคุณเรียบร้อยแล้ว บาริสต้ากำลังพิถีพิถันเตรียมชงสดใหม่เพื่อจัดส่งด่วนค่ะ
+                    </p>
                   </td>
                 </tr>
+              </table>
+
+              <!-- Realistic Luxury Digital Order Pass / Receipt Ticket (Matching VIP Card Styling) -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin: 18px 0 22px 0;">
                 <tr>
-                  <td colspan="2" style="padding-top: 10px; border-top: 1px dashed #dfcebc; margin-top: 8px;">
-                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                  <td align="center">
+                    
+                    <!-- Card Body with Realistic Luxury Aspect Ratio & Gold Border -->
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width: 480px; background: linear-gradient(135deg, #160e0a 0%, #291810 40%, #170d08 70%, #321e14 100%); border-radius: 20px; border: 2px solid #dfb15b; box-shadow: 0 16px 36px rgba(22, 14, 10, 0.35); overflow: hidden;">
                       <tr>
-                        <td align="left">
-                          <span style="font-size: 11px; color: #8c7668;">วิธีชำระเงิน:</span>
-                          <strong style="font-size: 12px; color: #2c1a11;"> {{payment_method}}</strong>
-                        </td>
-                        <td align="right">
-                          <span style="display: inline-block; background-color: #e6f9ed; color: #0d8a43; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 9999px; border: 1px solid #a3e9be;">
-                            ● ชำระเงินเรียบร้อย
-                          </span>
+                        <td style="padding: 24px 28px;">
+                          
+                          <!-- Top Row: Brand & Payment Status Badge -->
+                          <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                              <td valign="top">
+                                <div style="font-size: 15px; font-weight: 900; color: #f5d77f; letter-spacing: 2px; text-transform: uppercase;">
+                                  ☕ DAILY BREW
+                                </div>
+                                <div style="font-size: 10px; color: #b8a69a; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px;">
+                                  OFFICIAL DIGITAL ORDER PASS
+                                </div>
+                              </td>
+                              <td align="right" valign="top">
+                                <span style="display: inline-block; background: rgba(74, 222, 128, 0.15); color: #4ade80; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 9999px; border: 1px solid rgba(74, 222, 128, 0.5); letter-spacing: 1px;">
+                                  ● ชำระเงินสำเร็จ
+                                </span>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <!-- Middle Row: Metallic Smart Receipt Emblem -->
+                          <table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin: 20px 0 16px 0;">
+                            <tr>
+                              <td valign="middle">
+                                <!-- Metallic Smart Chip Design -->
+                                <table cellspacing="0" cellpadding="0" border="0" style="width: 48px; height: 36px; background: linear-gradient(135deg, #f3d78c 0%, #d4af37 50%, #9e780a 100%); border-radius: 6px; border: 1px solid #ffe8a3; box-shadow: 0 2px 6px rgba(0,0,0,0.4);">
+                                  <tr>
+                                    <td align="center" valign="middle">
+                                      <div style="width: 38px; height: 26px; border: 1px solid rgba(110, 78, 8, 0.5); border-radius: 4px;">
+                                        <div style="border-top: 1px solid rgba(110, 78, 8, 0.5); margin-top: 8px;"></div>
+                                        <div style="border-top: 1px solid rgba(110, 78, 8, 0.5); margin-top: 8px;"></div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                              <td align="right" valign="middle">
+                                <div style="font-size: 32px; line-height: 1; filter: drop-shadow(0 2px 8px rgba(223, 177, 91, 0.45));">
+                                  🧾
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <!-- Embossed Order ID in Courier New Monospace -->
+                          <div style="font-family: 'Courier New', Courier, monospace; font-size: 21px; font-weight: 700; color: #f5d77f; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.6); margin-bottom: 14px;">
+                            #{{order_id}}
+                          </div>
+
+                          <!-- Bottom Row: Customer Name, Date & Total Paid -->
+                          <table width="100%" cellspacing="0" cellpadding="0" border="0" style="border-top: 1px solid rgba(223, 177, 91, 0.3); padding-top: 12px;">
+                            <tr>
+                              <td valign="bottom">
+                                <div style="font-size: 9px; color: #a89487; text-transform: uppercase; letter-spacing: 1.5px;">
+                                  CUSTOMER
+                                </div>
+                                <div style="font-size: 15px; font-weight: 800; color: #ffffff; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px;">
+                                  {{customer_name}}
+                                </div>
+                              </td>
+                              <td align="center" valign="bottom">
+                                <div style="font-size: 9px; color: #a89487; text-transform: uppercase; letter-spacing: 1.5px;">
+                                  DATE & TIME
+                                </div>
+                                <div style="font-size: 12px; font-weight: 600; color: #e8ded4; margin-top: 2px;">
+                                  {{order_date}}
+                                </div>
+                              </td>
+                              <td align="right" valign="bottom">
+                                <div style="font-size: 9px; color: #a89487; text-transform: uppercase; letter-spacing: 1.5px;">
+                                  TOTAL PAID
+                                </div>
+                                <div style="font-size: 17px; font-weight: 900; color: #f5d77f; margin-top: 2px;">
+                                  {{total}}
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+
                         </td>
                       </tr>
                     </table>
+
                   </td>
                 </tr>
               </table>
 
-              <!-- Order Items Breakdown -->
-              <h3 style="color: #24140e; font-size: 16px; font-weight: 800; margin: 0 0 12px 0; border-bottom: 2px solid #f0e6dc; padding-bottom: 8px;">
-                📦 รายการสินค้าที่สั่งซื้อ
-              </h3>
+              <!-- Order Items Breakdown Table -->
+              <div style="background-color: #faf7f4; border-radius: 12px; padding: 14px 16px; margin-bottom: 18px; border: 1px solid #ebd9c5;">
+                <div style="font-size: 13px; font-weight: 800; color: #24140e; margin-bottom: 10px; border-bottom: 1.5px solid #ebd9c5; padding-bottom: 6px;">
+                  📦 รายการสินค้าที่สั่งซื้อ (Order Items)
+                </div>
+                
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                  <thead>
+                    <tr style="background-color: #ede4d9; font-size: 11px; color: #735d4f; text-transform: uppercase; letter-spacing: 0.5px;">
+                      <th align="left" style="padding: 8px 10px; border-radius: 6px 0 0 6px;">รายการ</th>
+                      <th align="center" style="padding: 8px 6px;">จำนวน</th>
+                      <th align="right" style="padding: 8px 10px; border-radius: 0 6px 6px 0;">ราคารวม</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{items_html}}
+                  </tbody>
+                </table>
+              </div>
 
-              <table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom: 20px;">
-                <thead>
-                  <tr style="background-color: #f7f3ee; font-size: 11px; color: #735d4f; text-transform: uppercase; letter-spacing: 0.5px;">
-                    <th align="left" style="padding: 8px 10px; border-radius: 6px 0 0 6px;">รายการ</th>
-                    <th align="center" style="padding: 8px 6px;">จำนวน</th>
-                    <th align="right" style="padding: 8px 10px; border-radius: 0 6px 6px 0;">ราคารวม</th>
+              <!-- Price Breakdown & VIP Points Badge Box -->
+              <div style="background: linear-gradient(135deg, #fffcf7 0%, #fff6ea 100%); border: 1.5px solid #ebd3be; border-radius: 12px; padding: 14px 18px; margin-bottom: 18px;">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                  <tr>
+                    <td style="font-size: 13px; color: #63534b; padding: 4px 0;">ยอดรวมสินค้า (Subtotal):</td>
+                    <td align="right" style="font-size: 13px; color: #2c1a11; font-weight: 600;">{{subtotal}}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {{items_html}}
-                </tbody>
-              </table>
+                  <tr>
+                    <td style="font-size: 13px; color: #0d8a43; padding: 4px 0;">
+                      ส่วนลดโปรโมชั่น ({{coupon_code}}):
+                    </td>
+                    <td align="right" style="font-size: 13px; color: #0d8a43; font-weight: 700;">-{{discount}}</td>
+                  </tr>
+                  <tr>
+                    <td style="font-size: 13px; color: #63534b; padding: 4px 0;">ค่าจัดส่งแบบควบคุมอุณหภูมิ:</td>
+                    <td align="right" style="font-size: 13px; color: #0d8a43; font-weight: 700;">ฟรี (Free)</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" style="border-top: 1px dashed #dfcebc; padding-top: 8px; margin-top: 6px;"></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size: 16px; font-weight: 800; color: #24140e;">ยอดชำระสุทธิ (Net Total):</td>
+                    <td align="right" style="font-size: 21px; font-weight: 900; color: #b8621b;">{{total}}</td>
+                  </tr>
+                </table>
 
-              <!-- Price Summary Box -->
-              <table width="100%" cellspacing="0" cellpadding="0" border="0" style="background: #fdfaf6; border: 1px solid #ebd9c5; border-radius: 12px; padding: 14px 18px; margin-bottom: 22px;">
-                <tr>
-                  <td style="font-size: 13px; color: #63534b; padding: 4px 0;">ยอดรวมสินค้า (Subtotal):</td>
-                  <td align="right" style="font-size: 13px; color: #2c1a11; font-weight: 600;">{{subtotal}}</td>
-                </tr>
-                <tr>
-                  <td style="font-size: 13px; color: #0d8a43; padding: 4px 0;">
-                    ส่วนลดโปรโมชั่น ({{coupon_code}}):
-                  </td>
-                  <td align="right" style="font-size: 13px; color: #0d8a43; font-weight: 700;">-{{discount}}</td>
-                </tr>
-                <tr>
-                  <td colspan="2" style="border-top: 1px dashed #d9c4af; padding-top: 8px; margin-top: 6px;"></td>
-                </tr>
-                <tr>
-                  <td style="font-size: 16px; font-weight: 800; color: #24140e;">ยอดชำระสุทธิ (Total):</td>
-                  <td align="right" style="font-size: 20px; font-weight: 900; color: #b8621b;">{{total}}</td>
-                </tr>
-                <tr>
-                  <td colspan="2" style="padding-top: 8px;">
-                    <div style="background: #ebfbee; border-radius: 8px; padding: 6px 12px; font-size: 12px; color: #1e7e34; font-weight: 700; text-align: center;">
-                      ⭐ ได้รับแต้มสะสม +{{points_earned}} Points สำหรับออเดอร์นี้
-                    </div>
-                  </td>
-                </tr>
-              </table>
+                <!-- VIP Points Earned Badge (Matching VIP Club) -->
+                <div style="background: #ebfbee; border: 1px solid #b7ebc5; border-radius: 8px; padding: 8px 12px; font-size: 12.5px; color: #1e7e34; font-weight: 700; text-align: center; margin-top: 12px;">
+                  ⭐ ได้รับแต้มสะสม +{{points_earned}} PTS เพิ่มเข้าบัญชี VIP สมาชิกของคุณเรียบร้อยแล้วค่ะ!
+                </div>
+              </div>
 
-              <!-- Customer Shipping & Contact Information -->
-              <h3 style="color: #24140e; font-size: 15px; font-weight: 800; margin: 0 0 10px 0;">
-                📍 ข้อมูลการจัดส่ง (Delivery Details)
-              </h3>
-              <table width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #faf6f0; border-radius: 10px; padding: 12px 16px; margin-bottom: 22px; font-size: 13px; line-height: 1.6; color: #4a382c;">
-                <tr>
-                  <td width="30%" style="color: #8c7668;">ผู้รับ:</td>
-                  <td><strong>{{customer_name}}</strong></td>
-                </tr>
-                <tr>
-                  <td style="color: #8c7668;">เบอร์โทร:</td>
-                  <td>{{customer_phone}}</td>
-                </tr>
-                <tr>
-                  <td style="color: #8c7668;">อีเมล:</td>
-                  <td>{{customer_email}}</td>
-                </tr>
-                <tr>
-                  <td style="color: #8c7668; vertical-align: top;">ที่อยู่จัดส่ง:</td>
-                  <td>{{customer_address}}</td>
-                </tr>
-              </table>
+              <!-- Shipping & Payment Details Grid -->
+              <div style="background-color: #faf7f4; border-radius: 12px; padding: 14px 16px; margin-bottom: 18px;">
+                <div style="font-size: 13px; font-weight: 800; color: #24140e; margin-bottom: 8px;">
+                  📍 รายละเอียดการจัดส่งและการชำระเงิน:
+                </div>
+                <table width="100%" cellspacing="0" cellpadding="4" border="0" style="font-size: 12.5px; color: #4a382f;">
+                  <tr>
+                    <td width="50%" valign="top">
+                      👤 <strong>ผู้รับ:</strong> {{customer_name}}
+                    </td>
+                    <td width="50%" valign="top">
+                      📞 <strong>เบอร์โทร:</strong> {{customer_phone}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="50%" valign="top" style="padding-top: 6px;">
+                      ✉️ <strong>อีเมล:</strong> {{customer_email}}
+                    </td>
+                    <td width="50%" valign="top" style="padding-top: 6px;">
+                      💳 <strong>ช่องทางชำระ:</strong> {{payment_method}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" valign="top" style="padding-top: 8px; border-top: 1px dashed #dfcebc;">
+                      🛵 <strong>ที่อยู่จัดส่ง:</strong> {{customer_address}}
+                    </td>
+                  </tr>
+                </table>
+              </div>
 
               <!-- Live Delivery Status Tracker -->
-              <table width="100%" cellspacing="0" cellpadding="0" border="0" style="background: #24140e; border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; color: #ffffff; text-align: center;">
-                <tr>
-                  <td>
-                    <div style="font-size: 11px; color: #e6b360; letter-spacing: 1px; text-transform: uppercase; font-weight: 700;">
-                      สถานะออเดอร์ปัจจุบัน
-                    </div>
-                    <div style="font-size: 15px; font-weight: 800; color: #4ade80; margin-top: 4px;">
-                      🛵 {{delivery_status}}
-                    </div>
-                    <div style="font-size: 11px; color: #b8a69a; margin-top: 4px;">
-                      บาริสต้ากำลังคัดสรรเมล็ดกาแฟและชงอย่างพิถีพิถันเพื่อจัดส่งให้เร็วที่สุดค่ะ
-                    </div>
-                  </td>
-                </tr>
-              </table>
+              <div style="background: #24140e; border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; color: #ffffff; text-align: center;">
+                <div style="font-size: 11px; color: #e6b360; letter-spacing: 1px; text-transform: uppercase; font-weight: 700;">
+                  สถานะคำสั่งซื้อแบบเรียลไทม์
+                </div>
+                <div style="font-size: 15px; font-weight: 800; color: #4ade80; margin-top: 4px;">
+                  {{delivery_status}}
+                </div>
+                <div style="font-size: 11.5px; color: #b8a69a; margin-top: 4px;">
+                  บาริสต้ากำลังคัดสรรเมล็ดกาแฟ Specialty และอบเบเกอรีสดใหม่อย่างพิถีพิถันค่ะ
+                </div>
+              </div>
 
-              <!-- Call To Action Button -->
-              <table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin: 10px 0 15px 0;">
+              <!-- Next Order Reward Voucher (Matching VIP Voucher Box) -->
+              <div style="background: linear-gradient(135deg, #fffcf7 0%, #fff6ea 100%); border: 1.5px dashed #c28b51; border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; text-align: center;">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                  <tr>
+                    <td align="left" valign="middle">
+                      <div style="font-size: 12px; color: #8c5b23; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                        🎁 โค้ดส่วนลด 15% สำหรับการสั่งซื้อครั้งถัดไป
+                      </div>
+                      <div style="font-size: 11px; color: #9e8a7c; margin-top: 2px;">
+                        ขอบคุณที่ไว้วางใจ Daily Brew ใส่โค้ดนี้เพื่อรับส่วนลดรอบหน้าได้ทันที
+                      </div>
+                    </td>
+                    <td align="right" valign="middle">
+                      <span style="display: inline-block; background: #ffffff; border: 1.5px solid #c28b51; color: #b87333; font-size: 18px; font-weight: 900; padding: 5px 14px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px; box-shadow: 0 2px 6px rgba(194,139,81,0.15);">
+                        BREWNEXT15
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <!-- Compact CTA Button (Matching VIP) -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tr>
                   <td align="center">
-                    <a href="https://beemcraf.github.io/daily-brew/" 
-                       target="_blank" 
-                       style="display: inline-block; background-color: #b8621b; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 700; padding: 13px 32px; border-radius: 9999px; box-shadow: 0 4px 14px rgba(184, 98, 27, 0.35);">
-                      ☕ แวะชมเมนูอื่นที่ Daily Brew
+                    <a href="https://beemcraf.github.io/daily-brew/#menu" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #c28b51 0%, #8c5b23 100%); color: #ffffff; font-size: 14px; font-weight: 700; text-decoration: none; padding: 12px 32px; border-radius: 9999px; box-shadow: 0 4px 14px rgba(194,139,81,0.35);">
+                      🛍️ ตรวจสอบสถานะ & สั่งซื้อเมนูอื่นเพิ่ม
                     </a>
                   </td>
                 </tr>
@@ -188,20 +289,33 @@
             </td>
           </tr>
 
-          <!-- Compact Footer -->
+          <!-- Authentic Daily Brew Footer (Matching VIP & Website) -->
           <tr>
-            <td style="background-color: #1a0f0a; padding: 18px 24px; text-align: center; border-top: 1px solid #331f14;">
-              <p style="color: #a89487; font-size: 11px; margin: 0 0 6px 0;">
-                <strong>Daily Brew Specialty Roastery & Cafe</strong><br>
-                บริการส่งความสุขและกาแฟพรีเมียมทุกวัน 07:00 - 18:00 น.
-              </p>
-              <p style="color: #665043; font-size: 10px; margin: 0;">
-                อีเมลนี้เป็นใบเสร็จรับเงินและการยืนยันคำสั่งซื้ออัตโนมัติ หากมีข้อสงสัยติดต่อได้ที่ info@dailybrew.com
-              </p>
+            <td style="background-color: #1a0f0a; color: #a89487; padding: 18px 24px; text-align: center; border-top: 1px solid #2e1d13;">
+              <div style="font-size: 13px; font-weight: 800; color: #e6b360; margin-bottom: 4px;">
+                ☕ Daily Brew Specialty Coffee
+              </div>
+              
+              <!-- Store Status Badge matching website -->
+              <div style="margin: 8px 0;">
+                <span style="display: inline-block; background: rgba(255,255,255,0.08); border: 1px dashed rgba(230,179,96,0.4); color: #f5eedc; font-size: 11px; padding: 4px 12px; border-radius: 8px;">
+                  🛵 ขณะนี้ให้บริการผ่านช่องทาง <strong>Online & Delivery</strong> (เตรียมพบกับหน้าร้านเร็วๆ นี้)
+                </span>
+              </div>
+
+              <!-- Delivery Partners -->
+              <div style="font-size: 11px; color: #c4b5a5; margin-top: 6px;">
+                สั่งผ่านแอป: <strong>GrabFood • LINE MAN • Robinhood • ShopeeFood</strong>
+              </div>
+
+              <div style="padding-top: 8px; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 10px; color: #78665a;">
+                <em>"Coffee First, Everything Later."</em> • © 2026 Daily Brew Coffee Co. All rights reserved.
+              </div>
             </td>
           </tr>
 
         </table>
+
       </td>
     </tr>
   </table>

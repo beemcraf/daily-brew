@@ -252,7 +252,7 @@ $emailBody = str_replace(array_keys($replacements), array_values($replacements),
 
 // สั่งส่งอีเมลผ่าน Mailer (Gmail SMTP)
 $emailSubject = "☕ ใบเสร็จรับเงินและยืนยันคำสั่งซื้อ #{$orderId} — Daily Brew Specialty Coffee";
-$mailResult = sendDailyBrewMail($customerEmail, $customerName, $emailSubject, $emailBody);
+$mailResult = sendDailyBrewMail($customerEmail, $emailSubject, $emailBody, 'Daily Brew Coffee');
 
 // --------------------------------------------------------------------------
 // 6. ส่งผลลัพธ์การสั่งซื้อกลับไปยังหน้าเว็บ
