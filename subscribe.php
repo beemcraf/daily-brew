@@ -109,23 +109,14 @@ if (file_exists($templatePath)) {
 }
 
 // --------------------------------------------------------------------------
-// 4. ตั้งค่าหัวข้อและ Header สำหรับส่งอีเมลแบบ HTML UTF-8
+// 5. สั่งส่งอีเมลด้วยฟังก์ชัน sendDailyBrewMail() (รองรับ Gmail SMTP & mail())
 // --------------------------------------------------------------------------
+require_once __DIR__ . '/mailer.php';
+
 $to = $email;
-$subject = '=?UTF-8?B?' . base64_encode('🎁 ขอบคุณที่ติดตาม Daily Brew Journal! รับโค้ดส่วนลด 10% (WELCOME10) ☕') . '?=';
-
-// กำหนด MIME Headers ให้รองรับภาษาไทยและแสดงผล HTML สวยงาม
-$headers = "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-$headers .= "From: Daily Brew Coffee <no-reply@dailybrew.cafe>\r\n";
-$headers .= "Reply-To: no-reply@dailybrew.cafe\r\n";
-$headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-
-// --------------------------------------------------------------------------
-// 5. สั่งส่งอีเมลด้วยฟังก์ชัน mail() ของ PHP
-// --------------------------------------------------------------------------
-// หมายเหตุสำหรับทดสอบบน XAMPP: ต้องตั้งค่า sendmail หรือ mail server ใน php.ini
-$mailSent = @mail($to, $subject, $htmlBody, $headers);
+$subject = '🎁 ขอบคุณที่ติดตาม Daily Brew Journal! รับโค้ดส่วนลด 10% (WELCOME10) ☕';
+$mailResult = sendDailyBrewMail($to, $subject, $htmlBody, 'Daily Brew Coffee');
+$mailSent = $mailResult['success'];
 
 // --------------------------------------------------------------------------
 // 6. ส่งผลลัพธ์กลับไปยังผู้ใช้งาน

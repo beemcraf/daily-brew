@@ -187,21 +187,14 @@ if (file_exists($templatePath)) {
 }
 
 // --------------------------------------------------------------------------
-// 6. ตั้งค่าหัวข้อและ Header สำหรับส่งอีเมลแบบ HTML UTF-8
+// 7. สั่งส่งอีเมลด้วยฟังก์ชัน sendDailyBrewMail() (รองรับ Gmail SMTP & mail())
 // --------------------------------------------------------------------------
+require_once __DIR__ . '/mailer.php';
+
 $to = $email;
-$subject = '=?UTF-8?B?' . base64_encode('👑 ยินดีต้อนรับสู่ Daily Brew Club! บัตร VIP & ส่วนลด 20% (DAILYVIP20) ☕') . '?=';
-
-$headers = "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-$headers .= "From: Daily Brew Coffee <vip@dailybrew.cafe>\r\n";
-$headers .= "Reply-To: no-reply@dailybrew.cafe\r\n";
-$headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-
-// --------------------------------------------------------------------------
-// 7. สั่งส่งอีเมลด้วยฟังก์ชัน mail() ของ PHP
-// --------------------------------------------------------------------------
-$mailSent = @mail($to, $subject, $htmlBody, $headers);
+$subject = '👑 ยินดีต้อนรับสู่ Daily Brew Club! บัตร VIP & ส่วนลด 20% (DAILYVIP20) ☕';
+$mailResult = sendDailyBrewMail($to, $subject, $htmlBody, 'Daily Brew VIP Club');
+$mailSent = $mailResult['success'];
 
 // --------------------------------------------------------------------------
 // 8. ส่งผลลัพธ์กลับไปยังผู้ใช้งาน
