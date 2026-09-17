@@ -1051,6 +1051,21 @@ async function sendVipWelcomeEmail(memberData) {
     return;
   }
 
+  // Requirement 3: Personalized Marketing Recommendation based on favorite coffee
+  let recTitle = 'Signature Dirty Coffee & Basque Burnt Cheesecake';
+  let recDesc = 'เมนูขายดีอันดับ 1 รสชาติหวานมันเข้มข้น ทานคู่กับชีสเค้กหน้าไหม้สไตล์บาสก์ ละมุนลงตัวที่สุดค่ะ';
+  const fav = (memberData.favoriteCoffee || '').toLowerCase();
+  if (fav.includes('cold brew') || fav.includes('โคลด์บรูว์')) {
+    recTitle = 'Artisan Orange Cold Brew & Pain au Chocolat';
+    recDesc = 'คัดสรรสำหรับคอกาแฟสกัดเย็น สดชื่นตาสว่าง ผสานรสชาติกลมกล่อมกับแปงโอช็อกโกลาอบเนยสดฝรั่งเศสค่ะ';
+  } else if (fav.includes('matcha') || fav.includes('ชา') || fav.includes('tea')) {
+    recTitle = 'Kyoto Dirty Matcha & Hokkaido Strawberry Shortcake';
+    recDesc = 'มัทฉะอุจิแท้เข้มข้น 3 เลเยอร์ ตัดรสชาติด้วยความหวานอมเปรี้ยวของสตรอว์เบอร์รีเค้กครีมสดฮอกไกโดค่ะ';
+  } else if (fav.includes('latte') || fav.includes('ลาเต้')) {
+    recTitle = 'Caramel Macchiato & Almond Croissant';
+    recDesc = 'ละมุนกับฟองนมนุ่มและกลิ่นวานิลลาคาราเมล ทานคู่กับครัวซองต์อัลมอนด์หอมเนยสดกรอบนอกนุ่มในค่ะ';
+  }
+
   const templateParams = {
     to_email: memberData.email,
     email: memberData.email,
@@ -1065,8 +1080,21 @@ async function sendVipWelcomeEmail(memberData) {
     address: memberData.address || '-',
     points: '100 PTS',
     promo_code: 'DAILYVIP20',
-    message: `ขอต้อนรับคุณ ${memberData.fullname} เข้าสู่ครอบครัว Daily Brew VIP Club ค่ะ!\n\n💳 รหัสสมาชิกของคุณ: ${memberData.memberId}\n🎁 โค้ดส่วนลด 20%: DAILYVIP20\n⭐ แต้มสะสมต้อนรับ: 100 Points\n🎂 สิทธิพิเศษวันเกิด: รับเครื่องดื่มและเบเกอรีฟรีในเดือนเกิด\n\nสามารถใช้โค้ด DAILYVIP20 สั่งซื้อบนเว็บไซต์ Daily Brew หรือเดลิเวอรีเพื่อรับส่วนลด 20% ได้ทันทีนะคะ ❤️`
+    recommended_product_title: recTitle,
+    recommended_product_desc: recDesc,
+    message: `ขอต้อนรับคุณ ${memberData.fullname} เข้าสู่ครอบครัว Daily Brew VIP Club ค่ะ!\n\n💳 รหัสสมาชิกของคุณ: ${memberData.memberId}\n🎁 โค้ดส่วนลด 20%: DAILYVIP20\n⭐ แต้มสะสมต้อนรับ: 100 Points\n🎂 สิทธิพิเศษวันเกิด: รับเครื่องดื่มและเบเกอรีฟรีในเดือนเกิด\n\n🎯 เมนูแนะนำพิเศษสำหรับคุณ: ${recTitle}\n${recDesc}\n\nสามารถใช้โค้ด DAILYVIP20 สั่งซื้อบนเว็บไซต์ Daily Brew หรือเดลิเวอรีเพื่อรับส่วนลด 20% ได้ทันทีนะคะ ❤️`
   };
+
+  // Dual Dispatch: Call register_vip.php if hosted on PHP server (Graceful Fallback)
+  try {
+    fetch('register_vip.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(memberData)
+    }).then(res => res.json())
+      .then(data => console.log('🐘 PHP register_vip.php response:', data))
+      .catch(() => {});
+  } catch (e) {}
 
   try {
     const res = await emailjs.send(
@@ -1145,6 +1173,17 @@ async function sendNewsletterWelcomeEmail(subscriberEmail) {
     promo_code: 'WELCOME10',
     message: `ขอบคุณที่กดติดตามข่าวสาร Daily Brew ค่ะ!\n\nเราขอมอบของขวัญต้อนรับส่วนลด 10% ให้คุณ:\n🎁 โค้ดส่วนลด 10%: WELCOME10\n\nสามารถใช้โค้ด WELCOME10 สั่งซื้อเครื่องดื่มหรือเบเกอรีบนเว็บไซต์ Daily Brew เพื่อรับส่วนลด 10% ได้ทันทีนะคะ ❤️`
   };
+
+  // Dual Dispatch: Call subscribe.php if hosted on PHP server (Graceful Fallback)
+  try {
+    fetch('subscribe.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: subscriberEmail })
+    }).then(res => res.json())
+      .then(data => console.log('🐘 PHP subscribe.php response:', data))
+      .catch(() => {});
+  } catch (e) {}
 
   try {
     const res = await emailjs.send(
