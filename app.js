@@ -383,39 +383,91 @@ function setupEventListeners() {
 }
 
 /**
- * Handle URL deep-linking to automatically scroll to and open item customizer
- * Supports ?order=dirty-coffee, ?item=dirty-coffee, #order-dirty-coffee, or #dirty-coffee
+ * Extract target order item from URL search params, hash, or full URL
  */
-function initUrlDeepLink() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const hash = window.location.hash || '';
-  
-  let targetItemId = urlParams.get('order') || urlParams.get('item');
-  if (!targetItemId && hash) {
-    if (hash.startsWith('#order-') || hash.startsWith('#item-')) {
-      targetItemId = hash.replace(/^#(order|item)-/, '');
-    } else if (hash === '#dirty-coffee' || hash === '#yuzu-cold-brew' || hash === '#cheesecake' || hash === '#caramel-macchiato') {
-      targetItemId = hash.replace('#', '');
+function getDeepLinkTarget() {
+  const fullHref = window.location.href;
+  const searchParams = new URLSearchParams(window.location.search);
+  let orderParam = searchParams.get('order') || searchParams.get('item');
+
+  // Also check if query params got attached after hash e.g. #menu?order=dirty-coffee
+  if (!orderParam && window.location.hash.includes('?')) {
+    const hashQuery = window.location.hash.split('?')[1];
+    const hashParams = new URLSearchParams(hashQuery);
+    orderParam = hashParams.get('order') || hashParams.get('item');
+  }
+
+  // Also check direct hash e.g. #dirty-coffee or #order-dirty-coffee
+  if (!orderParam && window.location.hash) {
+    const cleanHash = window.location.hash.replace(/^#(order|item)-?/, '').replace('#', '');
+    if (cleanHash && cleanHash !== 'menu' && cleanHash !== 'hero' && cleanHash !== 'promotions') {
+      orderParam = cleanHash;
     }
   }
 
-  if (targetItemId) {
-    setTimeout(() => {
-      const item = MENU_ITEMS.find(i => i.id === targetItemId || i.id.includes(targetItemId));
-      if (item) {
-        const itemCard = document.getElementById('menu-item-' + item.id);
-        if (itemCard) {
-          itemCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          const menuEl = document.getElementById('menu');
-          if (menuEl) menuEl.scrollIntoView({ behavior: 'smooth' });
-        }
-        openCustomizer(item.id);
-        showToast(`เลือกปรับแต่งกาแฟ "${item.name}" ได้เลยค่ะ ☕✨`);
-      }
-    }, 450);
+  // Fallback regex match across entire URL string
+  if (!orderParam) {
+    const match = fullHref.match(/[?&#](order|item)=([a-zA-Z0-9_-]+)/i);
+    if (match) orderParam = match[2];
   }
+
+  return orderParam ? orderParam.toLowerCase() : null;
 }
+
+let deepLinkExecuted = false;
+
+function initUrlDeepLink() {
+  const targetId = getDeepLinkTarget();
+  if (!targetId || deepLinkExecuted) return;
+
+  const tryOpen = (attempt = 1) => {
+    if (deepLinkExecuted) return;
+
+    // Find matching menu item
+    const item = MENU_ITEMS.find(i => 
+      i.id === targetId || 
+      i.id.includes(targetId) || 
+      targetId.includes(i.id) ||
+      i.name.toLowerCase().includes(targetId.replace(/-/g, ' '))
+    );
+
+    const modal = document.getElementById('customizer-modal');
+    if (!item || !modal) {
+      if (attempt < 8) {
+        setTimeout(() => tryOpen(attempt + 1), 200);
+      }
+      return;
+    }
+
+    deepLinkExecuted = true;
+
+    // Scroll to item or menu
+    const itemCard = document.getElementById('menu-item-' + item.id);
+    if (itemCard) {
+      itemCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      itemCard.style.transition = 'all 0.5s ease';
+      itemCard.style.outline = '3px solid var(--accent-gold)';
+      itemCard.style.boxShadow = '0 0 30px rgba(223, 177, 91, 0.45)';
+    } else {
+      const menuEl = document.getElementById('menu');
+      if (menuEl) menuEl.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Open customizer popup
+    openCustomizer(item.id);
+    showToast(`☕ กำลังเปิดเมนู "${item.name}" ให้เลือกสั่งซื้อทันทีค่ะ! ✨`);
+  };
+
+  // Run at multiple intervals to guarantee execution across fast and slow networks
+  setTimeout(() => tryOpen(1), 150);
+  setTimeout(() => tryOpen(2), 500);
+  setTimeout(() => tryOpen(3), 1000);
+}
+
+// Also trigger on window load
+window.addEventListener('load', () => {
+  initUrlDeepLink();
+});
 
 // ==========================================
 // 4. MENU RENDERING
