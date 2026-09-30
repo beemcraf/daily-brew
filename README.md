@@ -5,7 +5,9 @@
 [![Project](https://img.shields.io/badge/Course-Digital%20Marketing%20Project-orange)](#)
 [![Developer](https://img.shields.io/badge/Developer-beemcraf-blue)](https://github.com/beemcraf)
 
-🌐 **เข้าชมเว็บไซต์จริงได้ที่:** [https://beemcraf.github.io/daily-brew/](https://beemcraf.github.io/daily-brew/)
+🌐 **เข้าชมเว็บไซต์จริงได้ที่:** [https://beemcraf.github.io/daily-brew/](https://beemcraf.github.io/daily-brew/)  
+💬 **LINE Official Account:** `@285arhlw`  
+💳 **บัตรสะสมแต้มดิจิทัล (LINE Reward Card):** [https://u.lin.ee/um3QCOs](https://u.lin.ee/um3QCOs)
 
 ---
 
