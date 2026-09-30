@@ -270,6 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initVipPage();
   initSmartRecommendation();
   initEmailJS();
+  initUrlDeepLink();
 });
 
 function setupEventListeners() {
@@ -381,6 +382,41 @@ function setupEventListeners() {
   setupCustomizerChips();
 }
 
+/**
+ * Handle URL deep-linking to automatically scroll to and open item customizer
+ * Supports ?order=dirty-coffee, ?item=dirty-coffee, #order-dirty-coffee, or #dirty-coffee
+ */
+function initUrlDeepLink() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const hash = window.location.hash || '';
+  
+  let targetItemId = urlParams.get('order') || urlParams.get('item');
+  if (!targetItemId && hash) {
+    if (hash.startsWith('#order-') || hash.startsWith('#item-')) {
+      targetItemId = hash.replace(/^#(order|item)-/, '');
+    } else if (hash === '#dirty-coffee' || hash === '#yuzu-cold-brew' || hash === '#cheesecake' || hash === '#caramel-macchiato') {
+      targetItemId = hash.replace('#', '');
+    }
+  }
+
+  if (targetItemId) {
+    setTimeout(() => {
+      const item = MENU_ITEMS.find(i => i.id === targetItemId || i.id.includes(targetItemId));
+      if (item) {
+        const itemCard = document.getElementById('menu-item-' + item.id);
+        if (itemCard) {
+          itemCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          const menuEl = document.getElementById('menu');
+          if (menuEl) menuEl.scrollIntoView({ behavior: 'smooth' });
+        }
+        openCustomizer(item.id);
+        showToast(`เลือกปรับแต่งกาแฟ "${item.name}" ได้เลยค่ะ ☕✨`);
+      }
+    }, 450);
+  }
+}
+
 // ==========================================
 // 4. MENU RENDERING
 // ==========================================
@@ -396,6 +432,7 @@ function renderMenuItems(category) {
   filteredItems.forEach(item => {
     const card = document.createElement('div');
     card.className = 'menu-card';
+    card.id = 'menu-item-' + item.id;
     card.innerHTML = `
       <div class="menu-card-img-wrap">
         <img src="${item.image}" alt="${item.name}" loading="lazy">
