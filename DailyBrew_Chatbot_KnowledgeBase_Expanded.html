@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>เอกสารข้อมูลร้านค้าและฐานความรู้สำหรับ AI Chatbot — Daily Brew</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 16mm 18mm 16mm 18mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Sarabun', 'Prompt', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13px;
+      line-height: 1.65;
+      color: #2c2724;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .page {
+      page-break-after: always !important; break-after: page !important;
+      min-height: 980px;
+      display: block; clear: both;
+      position: relative;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Prompt', sans-serif;
+      color: #24160e;
+      margin: 0 0 8px 0;
+      font-weight: 600;
+    }
+
+    /* Page Header & Footer */
+    .page-header {
+      border-bottom: 2px solid #8c531b;
+      padding-bottom: 8px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #8c531b;
+      font-family: 'Prompt', sans-serif;
+    }
+
+    .page-header span.doc-title {
+      font-weight: 600;
+      color: #4a2810;
+    }
+
+    .page-footer {
+      margin-top: auto;
+      border-top: 1px solid #ebd9c8;
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #8d6e63;
+      font-family: 'Prompt', sans-serif;
+    }
+
+    /* Content Cards */
+    .card {
+      background: #ffffff;
+      border: 1px solid #ebd9c8;
+      border-left: 5px solid #8c531b;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    }
+
+    .card.highlight {
+      background: #faf6f1;
+      border-left-color: #d4a373;
+    }
+
+    .topic-badge {
+      display: inline-block;
+      background: #8c531b;
+      color: #ffffff;
+      font-family: 'Prompt', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 12px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .topic-title {
+      font-size: 18px;
+      color: #3e2723;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 20px;
+    }
+
+    .info-item {
+      margin-bottom: 8px;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: #5d4037;
+      display: block;
+      margin-bottom: 2px;
+      font-size: 13px;
+    }
+
+    .info-val {
+      color: #2c2724;
+      font-size: 13px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin: 12px 0;
+    }
+
+    th {
+      background: #3e2723;
+      color: #ffffff;
+      padding: 9px 12px;
+      text-align: left;
+      font-family: 'Prompt', sans-serif;
+      font-weight: 500;
+      border: 1px solid #3e2723;
+    }
+
+    td {
+      padding: 8px 12px;
+      border: 1px solid #e0d6cb;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #faf6f1;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .tag-gold { background: #fff8e1; color: #b78103; border: 1px solid #ffe082; }
+    .tag-green { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+    .tag-blue { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+
+    .faq-block {
+      background: #fdfcfb;
+      border: 1px solid #ece4db;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+    }
+
+    .faq-q {
+      font-weight: 600;
+      color: #8c531b;
+      margin-bottom: 4px;
+      font-size: 13.5px;
+    }
+
+    .faq-a {
+      color: #332b26;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .rule-card {
+      background: #fdfaf6;
+      border: 1px solid #ebd9c8;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    .rule-if { color: #c0392b; font-weight: 700; }
+    .rule-then { color: #27ae60; font-weight: 700; }
+
+    /* Cover Page Styles */
+    .cover-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 940px;
+      border: 3px double #8c531b;
+      padding: 40px 30px;
+      background: radial-gradient(circle at center, #ffffff 0%, #faf5ef 100%);
+      border-radius: 12px;
+    }
+
+    .cover-logo {
+      font-size: 52px;
+      margin-bottom: 16px;
+    }
+
+    .cover-title {
+      font-size: 26px;
+      color: #3e2723;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .cover-subtitle {
+      font-size: 16px;
+      color: #8c531b;
+      font-weight: 500;
+      margin-bottom: 30px;
+    }
+
+    .cover-divider {
+      width: 120px;
+      height: 3px;
+      background: #d4a373;
+      margin: 0 auto 35px auto;
+    }
+
+    .cover-info-box {
+      background: #ffffff;
+      border: 1px solid #ebd9c8;
+      border-radius: 8px;
+      padding: 24px 36px;
+      text-align: left;
+      width: 80%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      background: #3e2723;
+      color: #ffffff;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      margin-top: 35px;
+      font-family: 'Prompt', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= PAGE 1: COVER PAGE ================= -->
+  <div class="page">
+    <div class="cover-container">
+      <div class="cover-logo">☕</div>
+      <h1 class="cover-title">
+        เอกสารนำเสนอข้อมูลร้านค้าและคลังความรู้สำหรับ AI Chatbot<br>
+        (Business Knowledge Base & AI Chatbot Specification)
+      </h1>
+      <p class="cover-subtitle">
+        โครงการพัฒนาช่องทางธุรกิจดิจิทัลและระบบตอบกลับอัตโนมัติ<br>
+        ร้าน Daily Brew (Specialty Coffee & Roastery)
+      </p>
+      <div class="cover-divider"></div>
+
+      <div class="cover-info-box">
+        <div style="margin-bottom: 6px;"><strong>ชื่อธุรกิจ:</strong> Daily Brew (Specialty Coffee & Roastery)</div>
+        <div style="margin-bottom: 6px;"><strong>รูปแบบธุรกิจ:</strong> Cloud Roastery & Online Delivery 100% (ไม่มีหน้าร้าน)</div>
+        <div style="margin-bottom: 6px;"><strong>วัตถุประสงค์:</strong> เพื่อจัดเตรียมข้อมูล 14 หัวข้อตามเกณฑ์ สำหรับฝึกสอน AI Chatbot</div>
+        <div style="margin-bottom: 6px;"><strong>รายวิชา:</strong> โครงงานการตลาดดิจิทัลและเทคโนโลยีสารสนเทศ (Digital Project)</div>
+        <div style="margin-bottom: 6px;"><strong>ช่องทางจำหน่าย:</strong> เว็บไซต์ทางการ <code>beemcraf.github.io/daily-brew/</code> & Delivery</div>
+        <div><strong>วันที่จัดทำเอกสาร:</strong> ภาคเรียนปัจจุบัน ปีการศึกษา 2569</div>
+      </div>
+
+      <div class="cover-badge">
+        เอกสารฉบับสมบูรณ์ (14 หัวข้อครบถ้วนตามข้อกำหนด)
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 2: TABLE OF CONTENTS ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>สารบัญเนื้อหา</span>
+    </div>
+
+    <div class="card highlight">
+      <h2 style="font-size: 20px; color: #3e2723; margin-bottom: 10px;">📋 สารบัญโครงสร้างเนื้อหา (14 หัวข้อหลัก)</h2>
+      <p style="margin: 0; color: #6d4c41; font-size: 13.5px;">
+        เอกสารฉบับนี้ถูกจัดทำขึ้นเพื่อเป็นฐานข้อมูลอ้างอิงระดับองค์กรสำหรับร้าน Daily Brew โดยรวบรวมเนื้อหาครบถ้วนตามกรอบการจัดทำ AI Chatbot ที่สถาบันกำหนดไว้ 14 หัวข้อหลัก เพื่อนำไปใช้เป็น System Prompt และ Knowledge Retrieval (RAG):
+      </p>
+    </div>
+
+    <div class="card" style="padding: 10px 20px;">
+      <table style="margin: 4px 0;">
+        <thead>
+          <tr>
+            <th style="width: 15%;">ลำดับ</th>
+            <th style="width: 65%;">ชื่อหัวข้อและรายละเอียดสาระสำคัญ</th>
+            <th style="width: 20%; text-align: center;">หน้า</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>หัวข้อที่ 1</strong></td>
+            <td><strong>ข้อมูลทั่วไปของร้าน/ธุรกิจ (Business Profile)</strong> — ชื่อ, สโลแกน, โมเดลธุรกิจ, ช่องทางติดต่อ</td>
+            <td style="text-align: center;">หน้า 3</td>
+          </tr>
+          <tr>
+            <td><strong>หัวข้อที่ 2</strong></td>
+            <td><strong>ข้อมูลสินค้าและบริการ (Products & Services Part 1)</strong> — เมนู Espresso Bar & Cold Brew</td>
+            <td style="text-align: center;">หน้า 4</td>
+          </tr>
+          <tr>
+            <td><strong>หัวข้อที่ 2</strong></td>
+            <td><strong>ข้อมูลสินค้าและบริการ (Products & Services Part 2)</strong> — Non-Coffee, เบเกอรี่, เมล็ดกาแฟคั่ว</td>
+            <td style="text-align: center;">หน้า 5</td>
+          </tr>
+          <tr>
+            <td><strong>หัวข้อที่ 3</strong></td>
+            <td><strong>หมวดหมู่สินค้าและบริการ (Product Categorization)</strong> — ขายดี, มาใหม่, ซิกเนเจอร์</td>
+            <td style="text-align: center;">หน้า 6</td>
+          </tr>
+          <tr>
+            <td><strong>หัวข้อที่ 4</strong></td>
+            <td><strong>การเลือกสินค้าให้เหมาะกับลูกค้า (Personalization Guide)</strong> — ตามความต้องการ, งบประมาณ, โอกาส</td>
+            <td style="text-align: center;">หน้า 7</td>
+          </tr>
+          <tr>
+            <td><strong>หัวข้อที่ 5</strong></td>
+            <td><strong>ข้อมูลและตารางเปรียบเทียบสินค้า (Product Comparison Matrix)</strong> — วิเคราะห์คุณสมบัติและรสสัมผัส</td>
+            <td style="text-align: center;">หน้า 8</td>
+          </tr>
+          <tr>
+            <td><strong>หัวข้อที่ 6</strong></td>
+            <td><strong>โปรโมชั่นและสิทธิพิเศษ (Promotions & VIP Privileges)</strong> — โค้ดส่วนลด, บัตรสะสมแต้ม, Daily Pass</td>
+            <td style="text-align: center;">หน้า 9</td>
+          </tr>
+          <tr>
+            <td><strong>หัวข้อที่ 7-9</strong></td>
+            <td><strong>ขั้นตอนการสั่งซื้อ, ชำระเงิน และการจัดส่งเดลิเวอรี (Ordering, Payment & Delivery)</strong></td>
+            <td style="text-align: center;">หน้า 10</td>
+          </tr>
+          <tr>
+            <td><strong>หัวข้อที่ 10</strong></td>
+            <td><strong>นโยบายการคืน, เปลี่ยน และเคลมสินค้า (Refund & Claim Policy)</strong> — การประกันความพึงพอใจ</td>
+            <td style="text-align: center;">หน้า 11</td>
+          </tr>
+          <tr>
+            <td><strong>หัวข้อที่ 11</strong></td>
+            <td><strong>คลังคำถาม-คำตอบที่พบบ่อย (FAQ Database 20 ข้อ)</strong> — เจาะลึกคำถามลูกค้ายอดนิยม</td>
+            <td style="text-align: center;">หน้า 12</td>
+          </tr>
+          <tr>
+            <td><strong>หัวข้อที่ 12-13</strong></td>
+            <td><strong>คำถามวินิจฉัยและกฎในการแนะนำสินค้า (Diagnostic Questions & Decision Rules)</strong></td>
+            <td style="text-align: center;">หน้า 13</td>
+          </tr>
+          <tr>
+            <td><strong>หัวข้อที่ 14</strong></td>
+            <td><strong>ข้อมูลติดต่อ, บริการหลังการขาย และสถาปัตยกรรมระบบ (Contact & Chatbot Architecture)</strong></td>
+            <td style="text-align: center;">หน้า 14</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 2 จาก 14</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 3: TOPIC 1 ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>หัวข้อที่ 1: ข้อมูลทั่วไปของร้าน</span>
+    </div>
+
+    <span class="topic-badge">หัวข้อที่ 1</span>
+    <h2 class="topic-title">ข้อมูลทั่วไปของร้าน/ธุรกิจ (General Business Profile)</h2>
+
+    <div class="card highlight">
+      <h3 style="color: #4a2810; margin-bottom: 6px;">☕ อัตลักษณ์และแนวคิดของแบรนด์ (Brand Identity)</h3>
+      <p style="margin: 0; line-height: 1.7;">
+        <strong>Daily Brew</strong> คือแบรนด์กาแฟสเปเชียลตี้และโรงคั่วขนาดเล็ก (Specialty Coffee & Micro Roastery) ที่ดำเนินธุรกิจภายใต้แนวคิด <em>"Coffee First, Everything Later."</em> มุ่งเน้นการส่งมอบคุณภาพกาแฟระดับ Specialty สู่มือผู้บริโภคด้วยความสดใหม่ โดยคัดสรรเมล็ดกาแฟสายพันธุ์ไทยจากแหล่งปลูกที่มีชื่อเสียง ผสานเทคนิคการคั่วอย่างประณีต เพื่อให้ทุกแก้วที่จัดส่งถึงมือลูกค้ารักษาอรรถรสและเอกลักษณ์ของกาแฟได้อย่างสมบูรณ์แบบ
+      </p>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #4a2810; margin-bottom: 12px;">🏢 รายละเอียดการดำเนินงานและข้อมูลติดต่อ</h3>
+      <div class="grid-2">
+        <div class="info-item">
+          <span class="info-label">ชื่อร้าน / แบรนด์:</span>
+          <span class="info-val"><strong>Daily Brew (เดลี่ บริว)</strong> | Specialty Coffee & Roastery</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">ประเภทธุรกิจ:</span>
+          <span class="info-val">โรงคั่วกาแฟสเปเชียลตี้ & สตูดิโอชงเครื่องดื่มออนไลน์เดลิเวอรี 100%</span>
+        </div>
+        <div class="info-item" style="grid-column: span 2;">
+          <span class="info-label">สถานะหน้าร้านและที่ตั้ง:</span>
+          <span class="info-val">
+            <span class="tag tag-blue">🛵 Online & Delivery 100% (ขณะนี้ยังไม่มีหน้าร้านสำหรับนั่งทาน)</span><br>
+            ดำเนินการชงสดแก้วต่อแก้วส่งตรงจากสตูดิโอคั่วกาแฟในเขตกรุงเทพมหานคร ให้บริการจัดส่งถึงบ้านและที่ทำงานผ่านเว็บไซต์และแอปพลิเคชัน (มีแผนเปิด Flagship Store นั่งทานในอนาคต)
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">เวลาเปิดทำการรับออเดอร์:</span>
+          <span class="info-val">
+            • วันจันทร์ – วันศุกร์: 07:00 – 18:00 น.<br>
+            • วันเสาร์ – วันอาทิตย์ และวันหยุดนักขัตฤกษ์: 08:00 – 19:00 น.
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">ช่องทางติดต่อเจ้าหน้าที่:</span>
+          <span class="info-val">
+            • เบอร์โทรศัพท์: 02-999-8888, 081-234-5678<br>
+            • LINE Official Account: <strong>@285arhlw</strong><br>
+            • อีเมล: dailybrew.coffee@gmail.com
+          </span>
+        </div>
+        <div class="info-item" style="grid-column: span 2;">
+          <span class="info-label">ช่องทางการสั่งซื้อสินค้า:</span>
+          <span class="info-val">
+            1) <strong>เว็บไซต์หลัก (Direct Order):</strong> <code>https://beemcraf.github.io/daily-brew/</code> (พร้อมระบบคำนวณส่วนลดและสะสมแต้ม)<br>
+            2) <strong>Delivery Application:</strong> GrabFood, LINE MAN, Robinhood (พิมพ์ค้นหา "Daily Brew Specialty Coffee")
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #4a2810; margin-bottom: 6px;">✨ 4 จุดเด่นเชิงกลยุทธ์ของร้าน (Core Strengths)</h3>
+      <ul style="margin: 0; padding-left: 20px; line-height: 1.7;">
+        <li><strong>Single Origin คัดเกรดพิเศษ:</strong> ใช้เมล็ดกาแฟดอยช้าง เกรด Peaberry เมล็ดโทนกลมเอกลักษณ์ ให้บอดี้แน่น ช็อกโกแลต คาราเมล</li>
+        <li><strong>บรรจุภัณฑ์สุญญากาศสำหรับเดลิเวอรี:</strong> ออกแบบการจัดส่งแยกชั้นน้ำแข็งและซีลสุญญากาศพิเศษ ส่งถึงมือเย็นเจี๊ยบ ไม่ละลาย</li>
+        <li><strong>ทางเลือก Plant-Based ครบครัน:</strong> รองรับสายสุขภาพด้วยนมโอ๊ตพรีเมียมจากสวีเดน (Oatly) และนมอัลมอนด์นำเข้า</li>
+        <li><strong>Customer Data Platform (CDP):</strong> ระบบสะสมแต้ม LINE Reward Card 10 บาท = 1 แต้ม และสมาชิกระดับ VIP รับส่วนลด 20%</li>
+      </ul>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 3 จาก 14</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 4: TOPIC 2 PART 1 ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>หัวข้อที่ 2: ข้อมูลสินค้าและบริการ (หมวดกาแฟ)</span>
+    </div>
+
+    <span class="topic-badge">หัวข้อที่ 2 (ส่วนที่ 1)</span>
+    <h2 class="topic-title">ข้อมูลสินค้า/บริการ — หมวด Espresso Bar & Cold Brew</h2>
+
+    <p style="margin-top: 0; color: #555;">
+      ข้อมูลแคตตาล็อกสินค้าที่ผ่านการจัดโครงสร้างอย่างเป็นระบบ เพื่อให้ AI Chatbot สามารถดึงคุณลักษณะ ราคา ส่วนผสม และตัวเลือกในการตอบคำถามลูกค้าได้อย่างถูกต้องแม่นยำ:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 20%;">ชื่อเมนู</th>
+          <th style="width: 10%;">ราคา</th>
+          <th style="width: 40%;">รายละเอียดและจุดเด่นของเมนู</th>
+          <th style="width: 30%;">ตัวเลือกที่ปรับแต่งได้ (Options)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>Signature Dirty Coffee</strong><br>
+            <span class="tag tag-gold">Best Seller ⭐</span>
+          </td>
+          <td><strong>120 ฿</strong></td>
+          <td>ดับเบิลช็อตเอสเปรสโซสกัดร้อน ไหลรินลงสู่นมสดผสมครีมสูตรลับเย็นจัด หอมมันเข้มข้น ไม่ใส่น้ำแข็ง แยกส่งชั้นความเย็นอย่างดี</td>
+          <td>
+            • ความหวาน: 0%, 25%, 50%, 100%<br>
+            • นม: นมสดพรีเมียม / นมโอ๊ต (+15฿)<br>
+            • Extra Shot: +20฿
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Coconut Cloud Espresso</strong><br>
+            <span class="tag tag-gold">Signature 🥥</span>
+          </td>
+          <td><strong>125 ฿</strong></td>
+          <td>น้ำมะพร้าวน้ำหอมสดแท้ 100% ท็อปด้วยเอสเปรสโซสกัดร้อนและฟองครีมมะพร้าวนุ่ม หอมหวานธรรมชาติ สดชื่นเบาสบาย</td>
+          <td>
+            • ความหวาน: ธรรมชาติ 100% / หวานน้อย<br>
+            • กาแฟ: คั่วกลาง / คั่วเข้ม<br>
+            • Extra Shot: +20฿
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Vanilla Bean Oat Latte</strong><br>
+            <span class="tag tag-green">Plant-Based 🌾</span>
+          </td>
+          <td><strong>130 ฿</strong></td>
+          <td>กาแฟลาเต้นมโอ๊ตเกรดพรีเมียมนำเข้าจากสวีเดน ผสานฝักวานิลลาแท้มาดากัสการ์ หอมนุ่มละมุน ย่อยง่าย สุขภาพดี</td>
+          <td>
+            • อุณหภูมิ: ร้อน / เย็น<br>
+            • ความหวาน: 0%, 25%, 50%<br>
+            • นม: นมโอ๊ต / นมอัลมอนด์
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Velvet Flat White</strong><br>
+            <span class="tag tag-gold">Barista Cup ☕</span>
+          </td>
+          <td><strong>105 ฿</strong></td>
+          <td>ดับเบิลริสเตรตโต้คั่วกลาง ผสานนมสตีมเนียนนุ่มดุจแพรไหม บอดี้แน่น ละมุนคอ รสชาติเข้มข้นกลมกล่อม</td>
+          <td>
+            • อุณหภูมิ: ร้อน / เย็น<br>
+            • ความหวาน: 0%, 50%, 100%<br>
+            • เปลี่ยนเป็นนมโอ๊ต (+15฿)
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Artisan Orange Cold Brew</strong><br>
+            <span class="tag tag-blue">Signature Cold Brew 🍊</span>
+          </td>
+          <td><strong>135 ฿</strong></td>
+          <td>กาแฟสกัดเย็นนาน 18 ชั่วโมง ผสานกลิ่นหอมของผิวส้มวาเลนเซียอบแห้งและโทนิค บรรจุขวดแก้วพรีเมียม สดชื่น ปลุกพลังยามบ่าย</td>
+          <td>
+            • ระดับความซ่า: โซดาปกติ / Extra Tonic<br>
+            • ความหวาน: 0% / 50%<br>
+            • บรรจุขวดแก้วพร้อมดื่ม
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Sparkling Yuzu Tonic</strong><br>
+            <span class="tag tag-gold">Refreshing 🍋</span>
+          </td>
+          <td><strong>130 ฿</strong></td>
+          <td>น้ำส้มยูซุแท้ 100% จากประเทศญี่ปุ่น ผสานโซดาซ่าและช็อตเอสเปรสโซดอยช้าง เปรี้ยวหวานซ่า สดชื่นตื่นเต็มตา</td>
+          <td>
+            • ความหวาน: หวานปกติ / หวาน 50%<br>
+            • Extra Shot: +20฿<br>
+            • เสิร์ฟแยกน้ำแข็ง
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card" style="margin-top: 10px;">
+      <strong>💡 มาตรฐานคุณภาพการจัดส่งเครื่องดื่ม (Beverage Delivery QA):</strong>
+      <p style="margin: 4px 0 0 0; font-size: 12.5px;">
+        เครื่องดื่มเย็นทุกแก้วในหมวดนี้ จะถูกจัดส่งโดยแยกน้ำแข็งลงในถุงฟอยล์เก็บความเย็น ฝาแก้วปิดด้วยแผ่นซีลสุญญากาศกันหก 100% เพื่อให้รสชาติและเลเยอร์ของกาแฟสดใหม่เหมือนทานที่บาร์
+      </p>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 4 จาก 14</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 5: TOPIC 2 PART 2 ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>หัวข้อที่ 2: ข้อมูลสินค้าและบริการ (Non-Coffee & Bakery)</span>
+    </div>
+
+    <span class="topic-badge">หัวข้อที่ 2 (ส่วนที่ 2)</span>
+    <h2 class="topic-title">ข้อมูลสินค้า/บริการ — Non-Coffee, เบเกอรีโฮมเมด และเมล็ดกาแฟ</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 22%;">ชื่อสินค้า</th>
+          <th style="width: 10%;">ราคา</th>
+          <th style="width: 38%;">รายละเอียดและจุดเด่น</th>
+          <th style="width: 30%;">ตัวเลือก / ข้อมูลการจัดส่ง</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>Kyoto Uji Matcha Cloud</strong><br>
+            <span class="tag tag-green">Ceremonial Grade 🍵</span>
+          </td>
+          <td><strong>125 ฿</strong></td>
+          <td>มัทฉะเกรดพิธีชงนำเข้าจากเมืองอุจิ เกียวโต ตีสดชามต่อชาม ท็อปด้วยโฟมนมมะพร้าวเนื้อนุ่มละมุน หอมเข้มข้น ไม่หวานเลี่ยน</td>
+          <td>
+            • ความหวาน: 0%, 25%, 50%, 100%<br>
+            • นม: นมสดแท้ / นมโอ๊ต (+15฿)<br>
+            • สถานะ: ชงสดส่งทันที
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Valrhona Chocolate Float</strong><br>
+            <span class="tag tag-gold">French Valrhona 🍫</span>
+          </td>
+          <td><strong>135 ฿</strong></td>
+          <td>ช็อกโกแลตฝรั่งเศสแท้เข้มข้น 70% รสชาติเข้มลึก ท็อปด้วยไอศกรีมวานิลลาและช็อกโกแลตเคิร์ล หวานมันระดับพรีเมียม</td>
+          <td>
+            • ความหวาน: หวานน้อย / หวานปกติ<br>
+            • แยกไอศกรีมใส่กระปุกเย็นให้<br>
+            • สถานะ: พร้อมส่ง
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>San Sebastian Basque Cheesecake</strong><br>
+            <span class="tag tag-gold">Signature Bakery 🍰</span>
+          </td>
+          <td><strong>145 ฿</strong></td>
+          <td>ชีสเค้กสเปนหน้าไหม้คาราเมล ตรงกลางเนื้อลาวาเยิ้ม หอมกลิ่นวานิลลามาดากัสการ์ ใช้ครีมชีสแท้นำเข้า อบใหม่ทุกเช้า</td>
+          <td>
+            • บรรจุกล่องเบเกอรี่พร้อมเจลเย็น<br>
+            • ทานเย็น / อุณหภูมิห้อง<br>
+            • อบสดใหม่ทุกเช้า
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>French Almond Croissant</strong><br>
+            <span class="tag tag-gold">Freshly Baked 🥐</span>
+          </td>
+          <td><strong>85 ฿</strong></td>
+          <td>ครัวซองต์เนยสดแท้จากฝรั่งเศส กรอบนอกนุ่มฉ่ำเนย สอดไส้ครีมอัลมอนด์และโรยแอลมอนด์สไลซ์อบกรอบ หอมฟุ้ง</td>
+          <td>
+            • บรรจุห่อฟอยล์รักษาความกรอบ<br>
+            • อบใหม่ทุกเช้าวันต่อวัน<br>
+            • จำนวนจำกัดต่อวัน
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Truffle Cheese Brioche Toast</strong><br>
+            <span class="tag tag-green">Chef Special 🧀</span>
+          </td>
+          <td><strong>120 ฿</strong></td>
+          <td>ขนมปังบริออชนุ่มฉ่ำเนย ปิ้งร้อนๆ สอดไส้มอสซาเรลล่าชีสยืดและซอสเห็ดทรัฟเฟิลดำ หอมกลิ่นทรัฟเฟิลเข้มข้น</td>
+          <td>
+            • บรรจุกล่องเก็บความร้อน<br>
+            • พร้อมทานทันที<br>
+            • ทำสดใหม่ตามออเดอร์
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>เมล็ดกาแฟดอยช้าง Peaberry (250g)</strong><br>
+            <span class="tag tag-blue">Single Origin Beans</span>
+          </td>
+          <td><strong>280 ฿</strong></td>
+          <td>เมล็ดกาแฟคั่วกลาง (Medium Roast) โทน Dark Chocolate, Hazelnut, Caramel คั่วสดใหม่รายสัปดาห์ มีวาล์วคายก๊าซ</td>
+          <td>
+            • แบบเมล็ดทั้งถุง<br>
+            • บริการบดฟรี (Espresso, Drip, Moka, Cold Brew)<br>
+            • ส่งพัสดุทั่วไทย 1-2 วัน
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card" style="margin-top: 10px;">
+      <h4 style="color: #4a2810; margin-bottom: 4px;">🧁 ข้อมูลสารก่อภูมิแพ้ (Allergen Advisory):</h4>
+      <p style="margin: 0; font-size: 12px; color: #666;">
+        เบเกอรี่มีส่วนผสมของ แป้งสาลี ไข่ไก่ นมวัว และถั่วอัลมอนด์ หากลูกค้ามีประวัติการแพ้อาหาร สามารถสอบถามบาริสต้าหรือแชทบอทเพื่อแนะนำเมนูที่เหมาะสมได้ตลอดเวลา
+      </p>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 5 จาก 14</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 6: TOPIC 3 ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>หัวข้อที่ 3: หมวดหมู่สินค้าและบริการ</span>
+    </div>
+
+    <span class="topic-badge">หัวข้อที่ 3</span>
+    <h2 class="topic-title">หมวดหมู่สินค้า/บริการ (Product Categorization Matrix)</h2>
+
+    <p style="margin-top: 0; color: #555;">
+      โครงสร้างการจัดหมวดหมู่สินค้าสำหรับการสืบค้นของ AI Chatbot แบ่งออกเป็น 2 มิติหลัก: มิติความนิยมของสินค้า และมิติประเภททางกายภาพของผลิตภัณฑ์:
+    </p>
+
+    <div class="grid-2">
+      <div class="card highlight">
+        <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 8px;">🔥 1. สินค้าขายดี (Best Sellers)</h3>
+        <p style="font-size: 12.5px; margin: 0 0 6px 0;">สินค้าที่มียอดสั่งซื้อซ้ำสูงสุดและเป็นเอกลักษณ์ของแบรนด์:</p>
+        <ul style="margin: 0; padding-left: 18px; font-size: 12.5px; line-height: 1.6;">
+          <li><strong>Signature Dirty Coffee:</strong> รสชาติมันนัว นมเย็นตัดกาแฟร้อน ยอดขายอันดับ 1</li>
+          <li><strong>San Sebastian Basque Cheesecake:</strong> เค้กหน้าไหม้โฮมเมดยอดนิยม</li>
+          <li><strong>Sparkling Yuzu Tonic:</strong> กาแฟส้มยูซุโซดา เมนูรีเฟรชดับร้อน</li>
+          <li><strong>Valrhona Dark Chocolate Float:</strong> ช็อกโกแลตเข้ม 70% ขวัญใจสายหวานน้อย</li>
+        </ul>
+      </div>
+
+      <div class="card highlight">
+        <h3 style="color: #2e7d32; font-size: 15px; margin-bottom: 8px;">✨ 2. สินค้าใหม่ (New Arrivals)</h3>
+        <p style="font-size: 12.5px; margin: 0 0 6px 0;">เมนูนวัตกรรมที่เพิ่งเปิดตัวเพื่อขยายฐานลูกค้า:</p>
+        <ul style="margin: 0; padding-left: 18px; font-size: 12.5px; line-height: 1.6;">
+          <li><strong>Coconut Cloud Espresso:</strong> กาแฟมะพร้าวน้ำหอมสดแท้และครีมคลาวด์</li>
+          <li><strong>Military Dirty Matcha:</strong> ชามัทฉะอุจิ 3 เลเยอร์ ผสานช็อตเอสเปรสโซ</li>
+          <li><strong>Truffle Cheese Brioche Toast:</strong> โทสต์บริออชอบร้อนไส้ทรัฟเฟิลชีส</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 style="color: #0369a1; font-size: 15px; margin-bottom: 8px;">⭐ 3. สินค้าแนะนำ (Barista Picks)</h3>
+        <p style="font-size: 12.5px; margin: 0 0 6px 0;">เมนูที่บาริสต้าผู้เชี่ยวชาญแนะนำให้สัมผัส:</p>
+        <ul style="margin: 0; padding-left: 18px; font-size: 12.5px; line-height: 1.6;">
+          <li><strong>Artisan Orange Cold Brew:</strong> สกัดเย็น 18 ชม. กลิ่นส้มวาเลนเซีย</li>
+          <li><strong>Vanilla Bean Oat Latte:</strong> นมโอ๊ตและฝักวานิลลามาดากัสการ์แท้</li>
+          <li><strong>French Almond Croissant:</strong> ครัวซองต์เนยฝรั่งเศสอบกรอบฉ่ำเนย</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 style="color: #4a2810; font-size: 15px; margin-bottom: 8px;">📦 4. จัดหมวดหมู่ตามประเภทผลิตภัณฑ์</h3>
+        <p style="font-size: 12.5px; margin: 0 0 6px 0;">โครงสร้างแคตตาล็อกระบบหลังบ้าน:</p>
+        <ul style="margin: 0; padding-left: 18px; font-size: 12.5px; line-height: 1.6;">
+          <li><strong>หมวดที่ 1:</strong> Espresso Bar (กาแฟนมและกาแฟร้อน/เย็น)</li>
+          <li><strong>หมวดที่ 2:</strong> Cold Brew & Specialty (กาแฟสกัดเย็นและสปาร์กลิง)</li>
+          <li><strong>หมวดที่ 3:</strong> Non-Coffee & Artisanal Tea (ชาเขียว, โกโก้, ชาผลไม้)</li>
+          <li><strong>หมวดที่ 4:</strong> Artisanal Bakery & Pastry (ขนมอบและเค้ก)</li>
+          <li><strong>หมวดที่ 5:</strong> Coffee Beans & Drip Bags (เมล็ดกาแฟสำหรับชงที่บ้าน)</li>
+          <li><strong>หมวดที่ 6:</strong> Monthly Pass (แพ็กเกจกาแฟสมาชิกรายเดือน)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 6px;">
+      <h4 style="color: #4a2810; margin-bottom: 4px;">🤖 ประโยชน์ในการประมวลผลของ Chatbot:</h4>
+      <p style="margin: 0; font-size: 12.5px; line-height: 1.6;">
+        เมื่อผู้ใช้งานพิมพ์ว่า <em>"มีเมนูอะไรแนะนำบ้าง"</em> หรือ <em>"ขอดูเมนูขายดีหน่อย"</em> AI จะทำการ Match คำค้นหาเข้ากับกลุ่ม <strong>Best Sellers</strong> หรือ <strong>Barista Picks</strong> ทันที ทำให้คำตอบกระชับ รวดเร็ว และนำเสนอสินค้าตัวท็อปได้ตรงจุด
+      </p>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 6 จาก 14</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 7: TOPIC 4 ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>หัวข้อที่ 4: การเลือกสินค้าให้เหมาะกับลูกค้า</span>
+    </div>
+
+    <span class="topic-badge">หัวข้อที่ 4</span>
+    <h2 class="topic-title">การเลือกสินค้าให้เหมาะกับลูกค้า (Personalization & Customer Matching)</h2>
+
+    <p style="margin-top: 0; color: #555;">
+      กรอบแนวทางการจับคู่สินค้ากับพฤติกรรมและความต้องการของลูกค้า (Customer Persona Mapping) เพื่อให้ Chatbot แนะนำเมนูได้อย่างตรงใจที่สุด:
+    </p>
+
+    <div class="card">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 8px;">🎯 1. การเลือกตามเป้าหมายและความต้องการ (By Need & Goal)</h3>
+      <div class="grid-2">
+        <div>
+          <strong>• ต้องการตื่นตัว โฟกัสงานด่วน:</strong><br>
+          <span style="font-size: 12.5px; color: #555;">แนะนำ: <em>Signature Dirty Coffee</em> หรือ <em>Double Ristretto Flat White</em> ให้กาเฟอีนเข้มข้น รสชาติติดทนนาน</span>
+        </div>
+        <div>
+          <strong>• ต้องการความสดชื่น ผ่อนคลายยามบ่าย:</strong><br>
+          <span style="font-size: 12.5px; color: #555;">แนะนำ: <em>Sparkling Yuzu Tonic</em> หรือ <em>Artisan Orange Cold Brew</em> ดับกระหาย รีเฟรชสมอง</span>
+        </div>
+        <div>
+          <strong>• สายรักสุขภาพ / แพ้นมวัว / วีแกน:</strong><br>
+          <span style="font-size: 12.5px; color: #555;">แนะนำ: <em>Vanilla Bean Oat Latte</em> (นมโอ๊ต 100%) หรือ <em>Coconut Cloud Espresso</em> (น้ำมะพร้าวแท้)</span>
+        </div>
+        <div>
+          <strong>• ผู้ที่ไม่บริโภคกาเฟอีน (Non-Caffeine):</strong><br>
+          <span style="font-size: 12.5px; color: #555;">แนะนำ: <em>Valrhona Dark Chocolate Float</em> หรือ <em>Strawberry Peach Sparkling Tea</em></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 8px;">💰 2. การเลือกตามกรอบงบประมาณ (By Budget)</h3>
+      <table style="margin: 4px 0;">
+        <thead>
+          <tr>
+            <th style="width: 25%;">ระดับงบประมาณ</th>
+            <th style="width: 35%;">เมนูและบริการที่แนะนำ</th>
+            <th style="width: 40%;">ความคุ้มค่าและจุดเด่น</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ประหยัด (ต่ำกว่า 100฿)</strong></td>
+            <td>ครัวซองต์อัลมอนด์ (85฿), แปงโอช็อกโกลา (90฿), ซินนามอนโรล (95฿)</td>
+            <td>ขนมอบสดเนยฝรั่งเศสแท้ ทานรองท้องช่วงเช้าในราคาสบายกระเป๋า</td>
+          </tr>
+          <tr>
+            <td><strong>มาตรฐาน (105฿ – 140฿)</strong></td>
+            <td>เครื่องดื่ม Signature ทุกเมนู (Dirty, Yuzu, Cold Brew, Matcha)</td>
+            <td>วัตถุดิบ Specialty พรีเมียม คุ้มค่าที่สุดสำหรับมื้อกาแฟประจำวัน</td>
+          </tr>
+          <tr>
+            <td><strong>สุดคุ้มระยะยาว (Daily Pass)</strong></td>
+            <td>แพ็กเกจ Starter Pass (499฿) หรือ Daily Brew Pass (990฿)</td>
+            <td>ซื้อครั้งเดียว ดื่มได้ 12 แก้ว เฉลี่ยเพียง 82.5฿/แก้ว (ประหยัดสูงสุด 40%)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 8px;">☕ 3. การเลือกตามลักษณะการใช้งานและโอกาส (By Occasion)</h3>
+      <ul style="margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.7;">
+        <li><strong>นั่งทำงานแบบ Work From Home:</strong> แนะนำเซ็ตคู่ <em>Work & Chill Combo (179฿)</em> สั่งกาแฟ Signature คู่เค้กบาสก์ชีสเค้ก อิ่มอร่อยพร้อมทำงานทั้งบ่าย</li>
+        <li><strong>สั่งจัดประชุมทีมในออฟฟิศ:</strong> แนะนำบริการ <em>Corporate Boxset</em> เครื่องดื่มและเบเกอรี่จัดเซ็ตพร้อมดื่ม สั่งล่วงหน้าลด 15%</li>
+        <li><strong>ซื้อเป็นของฝากญาติมิตร/เพื่อนร่วมงาน:</strong> แนะนำ <em>เมล็ดกาแฟดอยช้าง Peaberry (280฿)</em> หรือขวด <em>Cold Brew Glass Bottle</em> หรูหราและประทับใจ</li>
+      </ul>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 7 จาก 14</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 8: TOPIC 5 ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>หัวข้อที่ 5: ข้อมูลเปรียบเทียบสินค้าเชิงลึก</span>
+    </div>
+
+    <span class="topic-badge">หัวข้อที่ 5</span>
+    <h2 class="topic-title">ข้อมูลและตารางเปรียบเทียบสินค้า (Product Comparison Matrix)</h2>
+
+    <p style="margin-top: 0; color: #555;">
+      ตารางวิเคราะห์เปรียบเทียบความแตกต่างของสินค้าแต่ละรายการในมิติราคา ระดับความเข้มข้น ความหวาน ความมัน และกลุ่มลูกค้าเป้าหมาย เพื่อให้แชทบอทใช้เปรียบเทียบให้ลูกค้าเห็นภาพชัดเจน:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 18%;">รายการสินค้า</th>
+          <th style="width: 9%;">ราคา</th>
+          <th style="width: 14%;">ความเข้มกาแฟ</th>
+          <th style="width: 14%;">ความมันของนม</th>
+          <th style="width: 25%;">รสสัมผัสและจุดเด่นหลัก</th>
+          <th style="width: 20%;">เหมาะสำหรับใคร</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Signature Dirty Coffee</strong></td>
+          <td>120 ฿</td>
+          <td>●●●●○<br>(เข้มข้นมาก)</td>
+          <td>●●●●●<br>(ครีมมี่นัว)</td>
+          <td>นมเย็นจัดสูตรลับตัดกับช็อตเอสเปรสโซร้อน ไม่ใส่น้ำแข็ง เข้มมันละมุน</td>
+          <td>คอกาแฟที่ชอบความมันนัว ไม่ชอบกาแฟรสเปรี้ยว</td>
+        </tr>
+        <tr>
+          <td><strong>Coconut Cloud Espresso</strong></td>
+          <td>125 ฿</td>
+          <td>●●●○○<br>(ปานกลาง)</td>
+          <td>●●○○○<br>(เบาบาง)</td>
+          <td>น้ำมะพร้าวน้ำหอมแท้ตัดกับกาแฟดอยช้าง ท็อปโฟมมะพร้าวนุ่ม หวานธรรมชาติ</td>
+          <td>คนชอบกาแฟผลไม้ ดื่มง่าย สดชื่น ไม่เลี่ยน</td>
+        </tr>
+        <tr>
+          <td><strong>Vanilla Bean Oat Latte</strong></td>
+          <td>130 ฿</td>
+          <td>●●○○○<br>(นุ่มละมุน)</td>
+          <td>●●●●○<br>(นมโอ๊ตเนียน)</td>
+          <td>นมโอ๊ตนุ่มผสานกลิ่นฝักวานิลลาแท้ หวานน้อย ดื่มสบายท้อง</td>
+          <td>สายรักสุขภาพ, คนแพ้นมวัว, สาย Vegan</td>
+        </tr>
+        <tr>
+          <td><strong>Artisan Orange Cold Brew</strong></td>
+          <td>135 ฿</td>
+          <td>●●●○○<br>(สกัดเข้ม)</td>
+          <td>○○○○○<br>(ไม่มีนม)</td>
+          <td>กาแฟสกัดเย็น 18 ชม. กลิ่นส้มวาเลนเซียและโทนิค มีความฟรุตตี้บางๆ</td>
+          <td>คนชอบกาแฟดำแนวสดชื่น แก้ง่วงตอนบ่าย</td>
+        </tr>
+        <tr>
+          <td><strong>Sparkling Yuzu Tonic</strong></td>
+          <td>130 ฿</td>
+          <td>●●●○○<br>(กลางซ่า)</td>
+          <td>○○○○○<br>(ไม่มีนม)</td>
+          <td>ส้มยูซุแท้ญี่ปุ่นผสมโซดา ท็อปเอสเปรสโซ เปรี้ยวอมหวานซ่า</td>
+          <td>ชอบรสชาติจี๊ดจ๊าด ดับร้อน ตื่นเต็มตา</td>
+        </tr>
+        <tr>
+          <td><strong>Kyoto Uji Matcha Cloud</strong></td>
+          <td>125 ฿</td>
+          <td>○○○○○<br>(ไม่กาแฟ)</td>
+          <td>●●●●○<br>(ฟองมะพร้าว)</td>
+          <td>ชามัทฉะอุจิแท้ ตีสดชามต่อชาม ท็อปครีมมะพร้าว หอมอูมามิ</td>
+          <td>คนชอบชาเขียวแท้ ไม่ดื่มกาแฟ</td>
+        </tr>
+        <tr>
+          <td><strong>Starter Pass vs Daily Pass</strong></td>
+          <td>499฿ /<br>990฿</td>
+          <td colspan="2" style="text-align: center;">Starter (5 แก้ว) = 99.8฿/แก้ว<br>Daily Pass (12 แก้ว) = 82.5฿/แก้ว</td>
+          <td>Daily Pass ฟรีสิทธิ์อัปเกรดนมโอ๊ตทุกแก้ว + ส่วนลดเบเกอรี่ 20%</td>
+          <td>Starter เหมาะทดลอง | Daily Pass สำหรับคนดื่มประจำ</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card" style="margin-top: 10px;">
+      <h4 style="color: #4a2810; margin-bottom: 4px;">💡 ประโยชน์ของตารางเปรียบเทียบในระบบ AI Chatbot:</h4>
+      <p style="margin: 0; font-size: 12.5px; line-height: 1.6;">
+        เมื่อลูกค้าลังเล เช่น <em>"Dirty กับ Oat Latte ต่างกันยังไง?"</em> แชทบอทสามารถหยิบยกข้อเปรียบเทียบด้านระดับความเข้มข้นและชนิดของนมไปตอบได้อย่างฉับไว ช่วยปิดการขายได้ภายในบทสนทนาเดียว
+      </p>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 8 จาก 14</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 9: TOPIC 6 ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>หัวข้อที่ 6: โปรโมชั่นและสิทธิพิเศษ</span>
+    </div>
+
+    <span class="topic-badge">หัวข้อที่ 6</span>
+    <h2 class="topic-title">โปรโมชั่นและสิทธิพิเศษ (Promotions & VIP Loyalty Program)</h2>
+
+    <p style="margin-top: 0; color: #555;">
+      โครงสร้างแคมเปญส่งเสริมการขาย โค้ดส่วนลด และสิทธิประโยชน์ของระบบสมาชิกลอยัลตี้ เพื่อใช้ในการกระตุ้นยอดขายและดึงดูดลูกค้าซ้ำ:
+    </p>
+
+    <div class="card highlight">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 8px;">🏷️ 1. รายการโค้ดส่วนลดที่ใช้งานได้จริง (Active Promotion Codes)</h3>
+      <table style="margin: 4px 0;">
+        <thead>
+          <tr>
+            <th style="width: 20%;">รหัสโค้ด</th>
+            <th style="width: 20%;">ส่วนลดที่ได้รับ</th>
+            <th style="width: 35%;">เงื่อนไขการใช้งาน</th>
+            <th style="width: 25%;">กลุ่มเป้าหมาย</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color: #8c531b;">WELCOME10</strong></td>
+            <td>ลดทันที <strong>10%</strong></td>
+            <td>กรอกอีเมลรับข่าวสารที่หน้าเว็บ สั่งซื้อขั้นต่ำ 100 บาท</td>
+            <td>ลูกค้าใหม่สั่งซื้อครั้งแรก</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #8c531b;">DAILYVIP20</strong></td>
+            <td>ลดทันที <strong>20%</strong></td>
+            <td>สำหรับสมาชิก Daily Brew VIP Club ไม่จำกัดยอดขั้นต่ำ</td>
+            <td>สมาชิก VIP Club ทุกคน</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #8c531b;">MORNING20</strong></td>
+            <td>ลดทันที <strong>20%</strong></td>
+            <td>ใช้ได้เฉพาะช่วงเวลา 07:00 – 10:00 น. หมวด Espresso & Cold Brew</td>
+            <td>ลูกค้าสั่งกาแฟยามเช้าก่อนทำงาน</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #8c531b;">COMBO179</strong></td>
+            <td>เซ็ตละ <strong>179 บาท</strong><br>(ปกติ 240฿)</td>
+            <td>จับคู่เครื่องดื่ม Signature 1 แก้ว + เค้กหรือครัวซองต์ 1 ชิ้น</td>
+            <td>ลูกค้าสั่งขนมคู่กาแฟช่วงบ่าย</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 8px;">💳 2. ระบบบัตรสะสมแต้ม LINE Reward Card & VIP Club</h3>
+      <div class="grid-2">
+        <div>
+          <strong>• อัตราการสะสมแต้ม:</strong><br>
+          <span style="font-size: 12.5px; color: #555;">ทุกยอดสั่งซื้อ <strong>10 บาท = 1 แต้ม</strong> สะสมผ่านบัญชี LINE OA อัตโนมัติ (ลิงก์ดูบัตร: <code>https://u.lin.ee/um3QCOs</code>)</span>
+        </div>
+        <div>
+          <strong>• สิทธิ์การแลกของรางวัล:</strong><br>
+          <span style="font-size: 12.5px; color: #555;">สะสมครบ <strong>100 แต้ม</strong> แลกรับเครื่องดื่มฟรีทันที 1 แก้ว (มูลค่าสูงสุด 140 บาท) แต้มมีอายุ 1 ปีเต็ม</span>
+        </div>
+        <div>
+          <strong>• สิทธิพิเศษสมาชิก Daily Brew VIP Club:</strong><br>
+          <span style="font-size: 12.5px; color: #555;">รับส่วนลด 20% ทุกคำสั่งซื้อตลอดทั้งปี + ฟรีเครื่องดื่มและเค้กวันเกิดในเดือนเกิด 1 เซ็ตเต็ม</span>
+        </div>
+        <div>
+          <strong>• แพ็กเกจรายเดือน Daily Pass:</strong><br>
+          <span style="font-size: 12.5px; color: #555;">Daily Brew Pass 990 บาท ได้ดื่ม 12 แก้ว + ฟรีอัปเกรดนมโอ๊ตทุกแก้ว (เฉลี่ยแก้วละ 82.5฿)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 6px;">⚠️ 3. เงื่อนไขและข้อกำหนดโปรโมชั่น (Terms & Conditions)</h3>
+      <ul style="margin: 0; padding-left: 20px; font-size: 12.5px; line-height: 1.6;">
+        <li>คูปองส่วนลด 1 โค้ด สามารถใช้ได้ต่อ 1 คำสั่งซื้อ ไม่สามารถใช้โค้ดซ้อนกันในบิลเดียวกันได้</li>
+        <li>ส่วนลดไม่สามารถแลกเปลี่ยน ทอนเป็นเงินสด หรือโอนสิทธิ์ให้บุคคลอื่นได้</li>
+        <li>โค้ด MORNING20 จะเปิดให้ใช้งานตามเวลาของระบบเซิร์ฟเวอร์ (07:00 - 10:00 น.) เท่านั้น</li>
+      </ul>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 9 จาก 14</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 10: TOPIC 7, 8, 9 ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>หัวข้อที่ 7, 8, 9: ขั้นตอนสั่งซื้อ, ชำระเงิน และจัดส่ง</span>
+    </div>
+
+    <span class="topic-badge">หัวข้อที่ 7, 8 & 9</span>
+    <h2 class="topic-title">กระบวนการสั่งซื้อ, การชำระเงิน และการจัดส่งเดลิเวอรี</h2>
+
+    <!-- Topic 7 -->
+    <div class="card">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 8px;">🛒 หัวข้อที่ 7: ขั้นตอนการสั่งซื้อเดลิเวอรี (5-Step Ordering Flow)</h3>
+      <div style="display: flex; gap: 8px; font-size: 11.5px; text-align: center;">
+        <div style="flex:1; background:#faf6f1; border:1px solid #ebd9c8; border-radius:6px; padding:8px 4px;">
+          <strong style="color:#8c531b; display:block; font-size:12.5px;">ขั้นที่ 1</strong>
+          เลือกเมนู & ปรับแต่งหวาน/นม
+        </div>
+        <div style="flex:1; background:#faf6f1; border:1px solid #ebd9c8; border-radius:6px; padding:8px 4px;">
+          <strong style="color:#8c531b; display:block; font-size:12.5px;">ขั้นที่ 2</strong>
+          กดใส่ตะกร้า (Add to Cart)
+        </div>
+        <div style="flex:1; background:#faf6f1; border:1px solid #ebd9c8; border-radius:6px; padding:8px 4px;">
+          <strong style="color:#8c531b; display:block; font-size:12.5px;">ขั้นที่ 3</strong>
+          ใส่โค้ดส่วนลด & ที่อยู่จัดส่ง
+        </div>
+        <div style="flex:1; background:#faf6f1; border:1px solid #ebd9c8; border-radius:6px; padding:8px 4px;">
+          <strong style="color:#8c531b; display:block; font-size:12.5px;">ขั้นที่ 4</strong>
+          ชำระเงิน (QR/โอน/บัตร/COD)
+        </div>
+        <div style="flex:1; background:#faf6f1; border:1px solid #ebd9c8; border-radius:6px; padding:8px 4px;">
+          <strong style="color:#8c531b; display:block; font-size:12.5px;">ขั้นที่ 5</strong>
+          ไรเดอร์จัดส่งถึงที่ 30-45 นาที
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 8 -->
+    <div class="card">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 8px;">💳 หัวข้อที่ 8: ช่องทางการชำระเงิน (Payment Methods)</h3>
+      <div class="grid-2">
+        <div class="info-item">
+          <span class="info-label">1. QR PromptPay (แนะนำ):</span>
+          <span class="info-val">สแกนจ่ายผ่าน Mobile Banking ได้ทุกธนาคาร ไม่มีค่าธรรมเนียม ตรวจสอบสลิปอัตโนมัติ</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">2. โอนผ่านบัญชีธนาคาร:</span>
+          <span class="info-val">ธ.กสิกรไทย (KBank) เลขบัญชี: <code>123-4-56789-0</code> ชื่อบัญชี: บจก. เดลี่ บริว คอฟฟี่</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">3. บัตรเครดิต / เดบิต:</span>
+          <span class="info-val">รองรับ Visa, Mastercard, JCB ระบบความปลอดภัยมาตรฐาน 3D Secure</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">4. เก็บเงินปลายทาง (COD):</span>
+          <span class="info-val">ชำระเงินสดกับไรเดอร์เมื่อรับสินค้า (ยอดสั่งซื้อไม่เกิน 1,500 บาท มีค่าบริการ 20 บาท)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 9 -->
+    <div class="card highlight">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 8px;">🛵 หัวข้อที่ 9: นโยบายและระยะเวลาการจัดส่ง (Delivery & Shipping SLA)</h3>
+      <ul style="margin: 0; padding-left: 20px; font-size: 12.5px; line-height: 1.7;">
+        <li><strong>เครื่องดื่มชงสดและเบเกอรี่:</strong> จัดส่งด่วนผ่านไรเดอร์ GrabExpress / LINE MAN ภายใน <strong>30–45 นาที</strong> ครอบคลุมพื้นที่กรุงเทพฯ และปริมณฑล ซีลฝาสุญญากาศและแยกน้ำแข็งใส่ถุงเก็บความเย็นพิเศษ</li>
+        <li><strong>เมล็ดกาแฟและสินค้าของที่ระลึก:</strong> จัดส่งพัสดุด่วน Kerry Express / Flash Express ทั่วประเทศ ภายใน 1–2 วันทำการ</li>
+        <li><strong>อัตราค่าจัดส่ง:</strong> ใน กทม. เริ่มต้น 35 บาทตามระยะทางจริง | พัสดุต่างจังหวัดเหมาจ่าย 50 บาท</li>
+        <li>🔥 <strong>โปรโมชั่นส่งฟรี:</strong> <u>เมื่อมียอดสั่งซื้อสุทธิครบ 500 บาทขึ้นไป ระบบจะจัดส่งฟรีทันที!</u></li>
+      </ul>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 10 จาก 14</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 11: TOPIC 10 ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>หัวข้อที่ 10: นโยบายการคืนและเคลมสินค้า</span>
+    </div>
+
+    <span class="topic-badge">หัวข้อที่ 10</span>
+    <h2 class="topic-title">การคืน / เปลี่ยน / เคลมสินค้า (Return, Refund & Claim Policy)</h2>
+
+    <div class="card highlight">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 6px;">🛡️ นโยบายรับประกันความพึงพอใจ 100% (Satisfaction Guarantee)</h3>
+      <p style="margin: 0; font-size: 13px; line-height: 1.7;">
+        Daily Brew มุ่งมั่นให้บริการด้วยมาตรฐานสูงสุด ในกรณีที่ลูกค้าได้รับเครื่องดื่มหรือผลิตภัณฑ์ที่ไม่เป็นไปตามมาตรฐาน ทางร้านมีนโยบายรับประกันความพึงพอใจและยินดีเปลี่ยนสินค้าใหม่ให้ทันที หรือคืนเงินเต็มจำนวนโดยไม่มีเงื่อนไขยุ่งยาก
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="color: #c0392b; font-size: 14px; margin-bottom: 8px;">🍵 1. กรณีเครื่องดื่มและเบเกอรี่ชงสด</h3>
+        <ul style="margin: 0; padding-left: 18px; font-size: 12.5px; line-height: 1.7;">
+          <li><strong>กรณีที่รับเคลม:</strong> เครื่องดื่มหกเสียหายจากการขนส่ง, ได้รับสินค้าไม่ตรงตามออเดอร์, ทำระดับความหวาน/ชนิดนมผิดสเปก, หรือเบเกอรี่เสียหาย</li>
+          <li><strong>ระยะเวลาที่ต้องแจ้ง:</strong> แจ้งเจ้าหน้าที่ภายใน <strong>2 ชั่วโมง</strong> นับจากเวลาที่ได้รับสินค้าตามระบบไรเดอร์</li>
+          <li><strong>สิ่งที่ต้องเตรียม:</strong> ถ่ายรูปภาพหรือคลิปวิดีโอแก้วที่เสียหาย พร้อมระบุหมายเลขคำสั่งซื้อ (Order ID)</li>
+          <li><strong>แนวทางชดเชย:</strong> ร้านจัดส่งแก้วใหม่ให้ทันทีแบบ Express หรือโอนเงินคืน 100% เต็มจำนวน</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 style="color: #2980b9; font-size: 14px; margin-bottom: 8px;">📦 2. กรณีเมล็ดกาแฟและอุปกรณ์</h3>
+        <ul style="margin: 0; padding-left: 18px; font-size: 12.5px; line-height: 1.7;">
+          <li><strong>กรณีที่รับเคลม:</strong> บรรจุภัณฑ์ฉีกขาด, วาล์วคายก๊าซเสียหาย, บดเมล็ดกาแฟผิดระดับการชง, หรือจัดส่งเมล็ดกาแฟผิดรุ่น</li>
+          <li><strong>ระยะเวลาที่ต้องแจ้ง:</strong> แจ้งเจ้าหน้าที่ได้ภายใน <strong>7 วัน</strong> นับจากวันที่พัสดุถูกเซ็นรับตามระบบขนส่ง</li>
+          <li><strong>แนวทางการชดเชย:</strong> ทางร้านจะจัดส่งถุงใหม่ให้ทันที โดยร้านรับผิดชอบค่าขนส่งขากลับทั้งหมด</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #8c531b; font-size: 14px; margin-bottom: 8px;">📲 3. ขั้นตอนการประสานงานแจ้งเคลมสินค้าสำหรับลูกค้า</h3>
+      <div style="font-size: 12.5px; line-height: 1.7;">
+        1. ทักแชท LINE Official Account: <strong>@285arhlw</strong> หรือโทร <strong>02-999-8888</strong><br>
+        2. พิมพ์คำว่า <em>"แจ้งเคลมสินค้า"</em> หรือส่งรูปภาพสินค้าที่พบปัญหาลงในแชท<br>
+        3. ระบุเลขคำสั่งซื้อและเบอร์โทรศัพท์ที่ใช้สั่งซื้อสินค้า<br>
+        4. แอดมินจะตรวจสอบและอนุมัติการเคลมภายใน <strong>5–10 นาที</strong> พร้อมส่งไรเดอร์นำแก้วใหม่ไปส่งให้ทันที
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 11 จาก 14</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 12: TOPIC 11 ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>หัวข้อที่ 11: คลังคำถาม-คำตอบที่พบบ่อย (FAQ Database)</span>
+    </div>
+
+    <span class="topic-badge">หัวข้อที่ 11</span>
+    <h2 class="topic-title">FAQ คลังคำถามที่พบบ่อยสำหรับ AI Chatbot (20 Questions & Answers)</h2>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <div class="faq-block">
+        <div class="faq-q">Q1: ร้านเปิด–ปิดกี่โมง มีวันหยุดไหม?</div>
+        <div class="faq-a">A: เปิดทุกวัน ไม่มีวันหยุดค่ะ จ.-ศ. 07:00–18:00 น. | ส.-อา. และวันหยุด 08:00–19:00 น. ค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q2: มีหน้าร้านไหม ตั้งอยู่ที่ไหน?</div>
+        <div class="faq-a">A: ขณะนี้ยังไม่มีหน้าร้านสำหรับนั่งทานค่ะ ให้บริการ Online & Delivery ชงสดส่งด่วนถึงบ้านและออฟฟิศค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q3: เมนูซิกเนเจอร์อันดับ 1 คืออะไร?</div>
+        <div class="faq-a">A: Signature Dirty Coffee (120฿) นมเย็นจัดกับเอสเปรสโซสกัดร้อน และ Sparkling Yuzu Tonic (130฿) ค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q4: ถ้าแพ้นมวัว มีตัวเลือกอะไรบ้าง?</div>
+        <div class="faq-a">A: มีนมโอ๊ตพรีเมียมและนมอัลมอนด์ (+15฿) และมี Coconut Cloud Espresso ใช้น้ำมะพร้าวแท้ 100% ค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q5: คนไม่ดื่มกาแฟ สั่งอะไรได้บ้าง?</div>
+        <div class="faq-a">A: แนะนำ Kyoto Uji Matcha Cloud (125฿), Valrhona Chocolate Float (135฿) หรือชาพีชโซดา (115฿) ค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q6: สั่งออนไลน์ใช้เวลากี่นาทีถึง?</div>
+        <div class="faq-a">A: เครื่องดื่มชงสดจัดส่งด่วน 30-45 นาที แยกน้ำแข็งซีลฝาอย่างดี เมล็ดกาแฟส่งพัสดุ 1-2 วันทำการค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q7: มีโปรโมชั่นส่งฟรีหรือไม่?</div>
+        <div class="faq-a">A: มีค่ะ เมื่อมียอดสั่งซื้อครบ 500 บาทขึ้นไป ระบบจะจัดส่งฟรีให้ทันทีทุกออเดอร์ค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q8: มีโค้ดส่วนลดลูกค้าใหม่ไหม?</div>
+        <div class="faq-a">A: กรอกอีเมลรับโค้ด WELCOME10 ลด 10% หรือสมัครสมาชิก VIP รับโค้ด DAILYVIP20 ลด 20% ทันทีค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q9: บัตรสะสมแต้มใช้งานอย่างไร?</div>
+        <div class="faq-a">A: ซื้อครบทุก 10 บาท = 1 แต้มใน LINE OA สะสมครบ 100 แต้มแลกรับเครื่องดื่มฟรี 1 แก้ว แต้มมีอายุ 1 ปีค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q10: ปรับความหวานได้กี่ระดับ?</div>
+        <div class="faq-a">A: 4 ระดับค่ะ: ไม่หวาน (0%), หวานน้อย (25%), หวานกำลังดี (50% แนะนำ), และหวานปกติ (100%) ค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q11: เมล็ดกาแฟใช้ของที่ไหน คั่วสดไหม?</div>
+        <div class="faq-a">A: เมล็ดหลักคือ Thai Single Origin ดอยช้าง เกรด Peaberry คั่วสดใหม่สัปดาห์ต่อสัปดาห์ โทนช็อกโกแลตคาราเมลค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q12: สั่งเมล็ดกาแฟให้บดให้ได้ไหม?</div>
+        <div class="faq-a">A: บดฟรีไม่มีค่าใช้จ่ายค่ะ ระบุวิธีชงได้เลย เช่น Espresso, Moka Pot, Drip Filter หรือ Cold Brew ค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q13: แพ็กเกจรายเดือน Daily Pass คุ้มยังไง?</div>
+        <div class="faq-a">A: Daily Pass 990฿ ได้ 12 แก้ว (เฉลี่ย 82.5฿/แก้ว) ฟรีอัปเกรดนมพืช ประหยัดสูงสุดถึง 40% ค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q14: ชำระเงินช่องทางใดได้บ้าง?</div>
+        <div class="faq-a">A: QR PromptPay, โอนผ่าน ธ.กสิกรไทย, บัตรเครดิต/เดบิต และบริการเก็บเงินปลายทาง (COD) ค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q15: ส่งเดลิเวอรี กาแฟจะละลายไหม?</div>
+        <div class="faq-a">A: ไม่ละลายแน่นอนค่ะ ทางร้านซีลฝาสุญญากาศและแยกน้ำแข็งใส่ถุงเก็บความเย็นพิเศษส่งถึงมือสดชื่นค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q16: จัดส่งพื้นที่ไหนบ้าง ค่าส่งเท่าไร?</div>
+        <div class="faq-a">A: จัดส่งทั่วกรุงเทพฯ และปริมณฑลผ่านไรเดอร์ ค่าส่งคิดตามระยะทางจริงเริ่มต้น 35 บาท สั่งครบ 500฿ ส่งฟรีค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q17: เครื่องดื่มหกเสียหาย ทำอย่างไร?</div>
+        <div class="faq-a">A: ถ่ายรูปส่งให้แอดมินทาง LINE OA: @285arhlw ภายใน 2 ชม. ทางร้านส่งแก้วใหม่ให้ทันที หรือคืนเงิน 100% ค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q18: เค้กและเบเกอรี่อบสดทุกวันไหม?</div>
+        <div class="faq-a">A: ครัวซองต์และบาสก์ชีสเค้กอบสดใหม่ทุกเช้า ใช้วัตถุดิบนำเข้าพรีเมียม ไม่ใส่วัตถุกันเสียค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q19: มีเซ็ต Coffee Break ประชุมไหม?</div>
+        <div class="faq-a">A: มีบริการ Catering & Boxset ส่งออฟฟิศ สั่งล่วงหน้า 1 วัน ได้รับส่วนลดพิเศษ 15% ติดต่อทาง LINE ได้เลยค่ะ</div>
+      </div>
+      <div class="faq-block">
+        <div class="faq-q">Q20: สมาชิก VIP มีสิทธิประโยชน์อะไรบ้าง?</div>
+        <div class="faq-a">A: ส่วนลด 20% ทุกบิล, ฟรีเครื่องดื่ม+เค้กวันเกิด, และสิทธิ์ชิมเมล็ดกาแฟ Specialty ล็อตพิเศษก่อนใครค่ะ</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 12 จาก 14</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 13: TOPIC 12 & 13 ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>หัวข้อที่ 12 & 13: คำถามวินิจฉัยและกฎการแนะนำ</span>
+    </div>
+
+    <span class="topic-badge">หัวข้อที่ 12 & 13</span>
+    <h2 class="topic-title">คำถามวินิจฉัยและกฎตรรกะในการแนะนำสินค้า (Recommendation Engine)</h2>
+
+    <!-- Topic 12 -->
+    <div class="card">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 8px;">❓ หัวข้อที่ 12: ชุดคำถามวินิจฉัยความต้องการลูกค้า (Diagnostic Questions)</h3>
+      <p style="margin: 0 0 8px 0; font-size: 12.5px; color: #555;">กำหนดให้ AI Chatbot ถามลูกค้ารวม 4 คำถามเพื่อคัดกรองความชอบและบริบท:</p>
+      
+      <div class="grid-2">
+        <div class="rule-card">
+          <strong>คำถามที่ 1: ความชอบด้านรสชาติกาแฟ</strong><br>
+          <em>"วันนี้อยากดื่มกาแฟเข้มข้นตื่นเต็มตา, กาแฟผลไม้สดชื่น, หรือเป็นเครื่องดื่มไม่ผสมกาแฟดีคะ?"</em><br>
+          <span style="font-size: 11.5px; color: #666;">(ตัวเลือก: เข้มมันครีมมี่ / สดชื่นเปรี้ยวหวาน / Non-Coffee ชา-โกโก้)</span>
+        </div>
+        <div class="rule-card">
+          <strong>คำถามที่ 2: เนื้อสัมผัสและประเภทนม</strong><br>
+          <em>"ชอบดื่มแบบผสมนมสดหอมมัน, นมโอ๊ตสุขภาพ หรือชอบแบบกาแฟดำสกัดเย็นคะ?"</em><br>
+          <span style="font-size: 11.5px; color: #666;">(ตัวเลือก: นมสดแท้ / นมโอ๊ต Plant-Based / กาแฟดำ)</span>
+        </div>
+        <div class="rule-card">
+          <strong>คำถามที่ 3: ระดับความหวาน</strong><br>
+          <em>"ชอบความหวานระดับไหนดีคะ ร้านปรับได้ตั้งแต่ 0% ถึงหวานปกติ 100% เลยค่ะ"</em><br>
+          <span style="font-size: 11.5px; color: #666;">(ตัวเลือก: ไม่หวาน 0% / หวานน้อย 25-50% / หวานปกติ 100%)</span>
+        </div>
+        <div class="rule-card">
+          <strong>คำถามที่ 4: ความถี่ในการดื่ม & งบประมาณ</strong><br>
+          <em>"สั่งดื่มแก้วเดี่ยว หรือดื่มเป็นประจำ สนใจดูแพ็กเกจรายเดือนประหยัด 40% ด้วยไหมคะ?"</em><br>
+          <span style="font-size: 11.5px; color: #666;">(ตัวเลือก: สั่งแก้วเดี่ยว 100-140฿ / สนใจแพ็กเกจประหยัด 40%)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 13 -->
+    <div class="card highlight">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 8px;">⚙️ หัวข้อที่ 13: กฎในการแนะนำสินค้า (Rule-Based Recommendation Logic)</h3>
+      
+      <div class="rule-card">
+        <span class="rule-if">RULE 1: IF</span> ลูกค้าชอบ <u>กาแฟเข้มข้น + หอมมันนม + ไม่เปรี้ยว</u> <span class="rule-then">→ THEN:</span> แนะนำ <strong>Signature Dirty Coffee (120฿)</strong> ชูจุดเด่นนมสูตรลับเย็นจัดกับเอสเปรสโซสกัดร้อน แยกส่งอย่างดี
+      </div>
+      <div class="rule-card">
+        <span class="rule-if">RULE 2: IF</span> ลูกค้าชอบ <u>สดชื่น + ตื่นตัว + ผลไม้เปรี้ยวซ่า</u> <span class="rule-then">→ THEN:</span> แนะนำ <strong>Sparkling Yuzu Tonic (130฿)</strong> หรือ <strong>Artisan Orange Cold Brew (135฿)</strong>
+      </div>
+      <div class="rule-card">
+        <span class="rule-if">RULE 3: IF</span> ลูกค้า <u>แพ้นมวัว / ทานเจ / สายสุขภาพคลีน</u> <span class="rule-then">→ THEN:</span> แนะนำ <strong>Vanilla Bean Oat Latte (130฿)</strong> หรือ <strong>Coconut Cloud Espresso (125฿)</strong>
+      </div>
+      <div class="rule-card">
+        <span class="rule-if">RULE 4: IF</span> ลูกค้า <u>ไม่ดื่มกาแฟ + ชอบรสเข้มข้น</u> <span class="rule-then">→ THEN:</span> แนะนำ <strong>Valrhona Dark Chocolate Float (135฿)</strong> ช็อกโกแลตฝรั่งเศส 70%
+      </div>
+      <div class="rule-card">
+        <span class="rule-if">RULE 5: IF</span> ลูกค้า <u>สั่งเครื่องดื่มแล้ว และถามหาของหวานคู่กัน</u> <span class="rule-then">→ THEN:</span> แนะนำเซ็ตโปรโมชั่น <strong>Work & Chill Combo (179฿)</strong> คู่กับ <strong>Basque Cheesecake</strong> หรือ <strong>Almond Croissant</strong>
+      </div>
+      <div class="rule-card">
+        <span class="rule-if">RULE 6: IF</span> ลูกค้า <u>ดื่มประจำเกือบทุกวัน / ถามหาโปรโมชั่น</u> <span class="rule-then">→ THEN:</span> แนะนำ <strong>Daily Brew Pass (10+2 แก้ว เพียง 990฿)</strong> ประหยัด 40% และฟรีอัปเกรดนมพืช
+      </div>
+      <div class="rule-card">
+        <span class="rule-if">RULE 7: IF</span> ลูกค้า <u>ต้องการเมล็ดกาแฟไปชงเองที่บ้าน</u> <span class="rule-then">→ THEN:</span> แนะนำ <strong>เมล็ดกาแฟดอยช้าง Peaberry 250g (280฿)</strong> คั่วสดใหม่พร้อมบริการบดฟรี
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 13 จาก 14</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 14: TOPIC 14 & SUMMARY ================= -->
+  <div class="page">
+    <div class="page-header">
+      <span class="doc-title">DAILY BREW — AI CHATBOT KNOWLEDGE BASE</span>
+      <span>หัวข้อที่ 14 & บทสรุปโครงการ</span>
+    </div>
+
+    <span class="topic-badge">หัวข้อที่ 14 & สรุปโครงการ</span>
+    <h2 class="topic-title">ข้อมูลติดต่อ, บริการหลังการขาย และบทสรุปโครงงาน</h2>
+
+    <!-- Topic 14 -->
+    <div class="card">
+      <h3 style="color: #8c531b; font-size: 15px; margin-bottom: 10px;">📞 ข้อมูลติดต่อและบริการหลังการขาย (Contact & Customer Service SLA)</h3>
+      <div class="grid-2">
+        <div class="info-item">
+          <span class="info-label">LINE Official Account:</span>
+          <span class="info-val"><strong>@285arhlw</strong> (แอดมินตอบข้อความ & ระบบสะสมแต้มอัตโนมัติ)</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">หมายเลขโทรศัพท์ติดต่อร้าน:</span>
+          <span class="info-val"><strong>02-999-8888, 081-234-5678</strong></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">เว็บไซต์หลักทางการ:</span>
+          <span class="info-val"><code>https://beemcraf.github.io/daily-brew/</code></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Facebook Fanpage:</span>
+          <span class="info-val">Daily Brew Specialty Coffee</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">เวลาปฏิบัติงานเจ้าหน้าที่คนจริง:</span>
+          <span class="info-val">ทุกวัน เวลา 07:00 – 19:00 น. (นอกเวลาทำการ AI Chatbot จะตอบคำถามตลอด 24 ชั่วโมง)</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">มาตรฐานระยะเวลาตอบกลับ (SLA):</span>
+          <span class="info-val">ตอบกลับข้อความภายใน <strong>5–10 นาที</strong> ในเวลาทำการ | กรณีแจ้งเคลมสินค้าดำเนินการทันที</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary Box -->
+    <div class="card highlight">
+      <h3 style="color: #4a2810; font-size: 15px; margin-bottom: 8px;">🎓 บทสรุปการประยุกต์ใช้งานในโครงงานนักศึกษา (Project Summary)</h3>
+      <p style="margin: 0 0 8px 0; font-size: 13px; line-height: 1.7;">
+        เอกสารชุดข้อมูลทั้ง 14 หัวข้อนี้ ได้รับการออกแบบให้สอดคล้องกับพฤติกรรมผู้บริโภคยุคใหม่บนช่องทางออนไลน์และเดลิเวอรี โดยสามารถนำข้อมูลนี้ไปติดตั้งใช้งานจริงร่วมกับเทคโนโลยี Chatbot ได้ 2 แนวทาง:
+      </p>
+      <ol style="margin: 0; padding-left: 20px; font-size: 12.5px; line-height: 1.7;">
+        <li><strong>LINE Official Account AI Chatbot (Beta):</strong> นำชุดคำถาม-คำตอบในหัวข้อ 11 และ 13 ไปกำหนดเป็นชุดคำตอบอัตโนมัติ ช่วยลดภาระงานของแอดมินได้กว่า 80%</li>
+        <li><strong>Generative AI & RAG Engine (Dify / ChatGPT / Botnoi):</strong> ป้อนเอกสารฉบับนี้เป็น System Knowledge Base เพื่อให้โมเดลภาษาขนาดใหญ่ (LLM) สามารถสืบค้นและตอบคำถามเชิงลึกได้อย่างเป็นธรรมชาติและแม่นยำ</li>
+      </ol>
+    </div>
+
+    <div class="card" style="text-align: center; background: #faf5ef; border: 1px dashed #d4a373;">
+      <p style="margin: 0; font-size: 12.5px; color: #6d4c41;">
+        ☕ <strong>Daily Brew Specialty Coffee & Roastery</strong> — <em>"Coffee First, Everything Later."</em><br>
+        เอกสารฉบับสมบูรณ์สำหรับนำส่งรายงานโครงงานนักศึกษา | จำนวนทั้งสิ้น 14 หน้า
+      </p>
+    </div>
+
+    <div class="page-footer">
+      <span>Daily Brew Specialty Coffee & Roastery</span>
+      <span>หน้า 14 จาก 14 (จบเอกสาร)</span>
+    </div>
+  </div>
+
+</body>
+</html>
