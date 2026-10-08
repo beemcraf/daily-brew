@@ -973,6 +973,8 @@ async function confirmOrderAndSendEmail() {
     points_earned: pendingCheckoutData.pointsEarned
   };
 
+  let phpMailSuccess = false;
+
   // 1. Dual Dispatch: Call order_checkout.php (MySQL + PHPMailer Gmail SMTP)
   try {
     const phpRes = await fetch('order_checkout.php', {
@@ -982,12 +984,16 @@ async function confirmOrderAndSendEmail() {
     });
     const phpData = await phpRes.json();
     console.log('🐘 PHP order_checkout.php response:', phpData);
+    if (phpData && phpData.mail_sent) {
+      phpMailSuccess = true;
+      console.log('✅ Email sent successfully via PHP (Gmail SMTP). Skipping EmailJS.');
+    }
   } catch (err) {
-    console.warn('PHP order_checkout.php call note:', err);
+    console.warn('PHP order_checkout.php call note (Server may be static):', err);
   }
 
-  // 2. Dual Dispatch: EmailJS fallback (for static hosting like GitHub Pages)
-  if (typeof emailjs !== 'undefined') {
+  // 2. Dual Dispatch: EmailJS fallback (only if PHP mail was NOT sent, e.g. on GitHub Pages)
+  if (!phpMailSuccess && typeof emailjs !== 'undefined') {
     try {
       const itemsText = orderPayload.items.map(it => `${it.name} x${it.qty} (${it.price * it.qty}฿)`).join(', ');
       await emailjs.send(
@@ -1008,6 +1014,7 @@ async function confirmOrderAndSendEmail() {
         },
         EMAILJS_CONFIG.publicKey
       );
+      console.log('✅ Email sent via EmailJS fallback.');
     } catch (e) {
       console.warn('EmailJS fallback note:', e);
     }
@@ -1441,27 +1448,35 @@ async function sendVipWelcomeEmail(memberData) {
   };
 
   // Dual Dispatch: Call register_vip.php if hosted on PHP server (Graceful Fallback)
+  let phpVipSent = false;
   try {
-    fetch('register_vip.php', {
+    const phpRes = await fetch('register_vip.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(memberData)
-    }).then(res => res.json())
-      .then(data => console.log('🐘 PHP register_vip.php response:', data))
-      .catch(() => {});
+    });
+    const data = await phpRes.json();
+    console.log('🐘 PHP register_vip.php response:', data);
+    if (data && data.mail_sent) {
+      phpVipSent = true;
+      showToast(`✉️ ส่งอีเมลต้อนรับ VIP (ผ่าน PHP Server) ไปที่ ${memberData.email} เรียบร้อยแล้วค่ะ!`);
+    }
   } catch (e) {}
 
-  try {
-    const res = await emailjs.send(
-      EMAILJS_CONFIG.serviceId,
-      EMAILJS_CONFIG.templateId,
-      templateParams,
-      EMAILJS_CONFIG.publicKey
-    );
-    console.log('✅ VIP welcome email sent via EmailJS:', res.status, res.text);
-    showToast(`✉️ ส่งอีเมลต้อนรับ VIP ไปที่ ${memberData.email} เรียบร้อยแล้วค่ะ!`);
-  } catch (error) {
-    console.error('❌ Failed to send welcome email via EmailJS:', error);
+  // Only fallback to EmailJS if PHP server was not available (e.g. GitHub Pages)
+  if (!phpVipSent) {
+    try {
+      const res = await emailjs.send(
+        EMAILJS_CONFIG.serviceId,
+        EMAILJS_CONFIG.templateId,
+        templateParams,
+        EMAILJS_CONFIG.publicKey
+      );
+      console.log('✅ VIP welcome email sent via EmailJS fallback:', res.status, res.text);
+      showToast(`✉️ ส่งอีเมลต้อนรับ VIP ไปที่ ${memberData.email} เรียบร้อยแล้วค่ะ!`);
+    } catch (error) {
+      console.error('❌ Failed to send welcome email via EmailJS:', error);
+    }
   }
 }
 
