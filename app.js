@@ -992,8 +992,8 @@ async function confirmOrderAndSendEmail() {
     console.warn('PHP order_checkout.php call note (Server may be static):', err);
   }
 
-  // 2. Dual Dispatch: EmailJS fallback (only if PHP mail was NOT sent, e.g. on GitHub Pages)
-  if (!phpMailSuccess && typeof emailjs !== 'undefined') {
+  // 2. Dual Dispatch: EmailJS fallback (only if enabled AND PHP mail was NOT sent, e.g. on GitHub Pages)
+  if (typeof ENABLE_EMAILJS !== 'undefined' && ENABLE_EMAILJS && !phpMailSuccess && typeof emailjs !== 'undefined') {
     try {
       const itemsText = orderPayload.items.map(it => `${it.name} x${it.qty} (${it.price * it.qty}฿)`).join(', ');
       await emailjs.send(
@@ -1387,6 +1387,9 @@ function showToast(message) {
 // ==========================================
 // 11. VIP MEMBERSHIP REGISTRATION (CRM & LOYALTY)
 // ==========================================
+// สวิตช์ปิด/เปิด EmailJS (ตั้งเป็น false เพื่อใช้ระบบ Pure PHP Gmail SMTP 100% ป้องกันอีเมลซ้ำซ้อน)
+const ENABLE_EMAILJS = false;
+
 const EMAILJS_CONFIG = {
   serviceId: 'service_qhds3fs',
   templateId: 'template_chdjvqq',
@@ -1395,6 +1398,10 @@ const EMAILJS_CONFIG = {
 };
 
 function initEmailJS() {
+  if (!ENABLE_EMAILJS) {
+    console.log('🔇 EmailJS is turned OFF (Pure PHP Gmail SMTP active).');
+    return;
+  }
   if (typeof emailjs !== 'undefined' && EMAILJS_CONFIG.publicKey) {
     try {
       emailjs.init({
@@ -1408,11 +1415,6 @@ function initEmailJS() {
 }
 
 async function sendVipWelcomeEmail(memberData) {
-  if (typeof emailjs === 'undefined') {
-    console.warn('EmailJS SDK not loaded');
-    return;
-  }
-
   // Requirement 3: Personalized Marketing Recommendation based on favorite coffee
   let recTitle = 'Signature Dirty Coffee & Basque Burnt Cheesecake';
   let recDesc = 'เมนูขายดีอันดับ 1 รสชาติหวานมันเข้มข้น ทานคู่กับชีสเค้กหน้าไหม้สไตล์บาสก์ ละมุนลงตัวที่สุดค่ะ';
@@ -1428,26 +1430,7 @@ async function sendVipWelcomeEmail(memberData) {
     recDesc = 'ละมุนกับฟองนมนุ่มและกลิ่นวานิลลาคาราเมล ทานคู่กับครัวซองต์อัลมอนด์หอมเนยสดกรอบนอกนุ่มในค่ะ';
   }
 
-  const templateParams = {
-    to_email: memberData.email,
-    email: memberData.email,
-    to_name: memberData.fullname,
-    name: memberData.fullname,
-    customer_name: memberData.fullname,
-    title: 'ต้อนรับสมาชิก VIP คนพิเศษ 👑☕',
-    member_id: memberData.memberId,
-    favorite_coffee: memberData.favoriteCoffee || '-',
-    milk_type: memberData.milk || '-',
-    birthday: memberData.birthday || 'ไม่ได้ระบุ',
-    address: memberData.address || '-',
-    points: '100 PTS',
-    promo_code: 'DAILYVIP20',
-    recommended_product_title: recTitle,
-    recommended_product_desc: recDesc,
-    message: `ขอต้อนรับคุณ ${memberData.fullname} เข้าสู่ครอบครัว Daily Brew VIP Club ค่ะ!\n\n💳 รหัสสมาชิกของคุณ: ${memberData.memberId}\n🎁 โค้ดส่วนลด 20%: DAILYVIP20\n⭐ แต้มสะสมต้อนรับ: 100 Points\n🎂 สิทธิพิเศษวันเกิด: รับเครื่องดื่มและเบเกอรีฟรีในเดือนเกิด\n\n🎯 เมนูแนะนำพิเศษสำหรับคุณ: ${recTitle}\n${recDesc}\n\nสามารถใช้โค้ด DAILYVIP20 สั่งซื้อบนเว็บไซต์ Daily Brew หรือเดลิเวอรีเพื่อรับส่วนลด 20% ได้ทันทีนะคะ ❤️`
-  };
-
-  // Dual Dispatch: Call register_vip.php if hosted on PHP server (Graceful Fallback)
+  // 1. Primary Dispatch: Call register_vip.php on PHP server (Gmail SMTP)
   let phpVipSent = false;
   try {
     const phpRes = await fetch('register_vip.php', {
@@ -1457,14 +1440,35 @@ async function sendVipWelcomeEmail(memberData) {
     });
     const data = await phpRes.json();
     console.log('🐘 PHP register_vip.php response:', data);
-    if (data && data.mail_sent) {
+    if (data && (data.mail_sent || data.php_mail_dispatched)) {
       phpVipSent = true;
       showToast(`✉️ ส่งอีเมลต้อนรับ VIP (ผ่าน PHP Server) ไปที่ ${memberData.email} เรียบร้อยแล้วค่ะ!`);
     }
-  } catch (e) {}
+  } catch (e) {
+    console.warn('PHP register_vip.php call note:', e);
+  }
 
-  // Only fallback to EmailJS if PHP server was not available (e.g. GitHub Pages)
-  if (!phpVipSent) {
+  // 2. Fallback: Only use EmailJS if ENABLE_EMAILJS is true AND PHP failed (e.g. GitHub Pages)
+  if (ENABLE_EMAILJS && !phpVipSent && typeof emailjs !== 'undefined') {
+    const templateParams = {
+      to_email: memberData.email,
+      email: memberData.email,
+      to_name: memberData.fullname,
+      name: memberData.fullname,
+      customer_name: memberData.fullname,
+      title: 'ต้อนรับสมาชิก VIP คนพิเศษ 👑☕',
+      member_id: memberData.memberId,
+      favorite_coffee: memberData.favoriteCoffee || '-',
+      milk_type: memberData.milk || '-',
+      birthday: memberData.birthday || 'ไม่ได้ระบุ',
+      address: memberData.address || '-',
+      points: '100 PTS',
+      promo_code: 'DAILYVIP20',
+      recommended_product_title: recTitle,
+      recommended_product_desc: recDesc,
+      message: `ขอต้อนรับคุณ ${memberData.fullname} เข้าสู่ครอบครัว Daily Brew VIP Club ค่ะ!\n\n💳 รหัสสมาชิกของคุณ: ${memberData.memberId}\n🎁 โค้ดส่วนลด 20%: DAILYVIP20\n⭐ แต้มสะสมต้อนรับ: 100 Points\n🎂 สิทธิพิเศษวันเกิด: รับเครื่องดื่มและเบเกอรีฟรีในเดือนเกิด\n\n🎯 เมนูแนะนำพิเศษสำหรับคุณ: ${recTitle}\n${recDesc}\n\nสามารถใช้โค้ด DAILYVIP20 สั่งซื้อบนเว็บไซต์ Daily Brew หรือเดลิเวอรีเพื่อรับส่วนลด 20% ได้ทันทีนะคะ ❤️`
+    };
+
     try {
       const res = await emailjs.send(
         EMAILJS_CONFIG.serviceId,
@@ -1520,52 +1524,54 @@ async function handleNewsletterSubscription(event) {
 }
 
 async function sendNewsletterWelcomeEmail(subscriberEmail) {
-  if (typeof emailjs === 'undefined') {
-    console.warn('EmailJS SDK not loaded');
-    return;
-  }
-
-  // If newsletterTemplateId is not configured, do not fall back to VIP template (to prevent sending VIP card & 20% discount to newsletter subscribers)
-  if (!EMAILJS_CONFIG.newsletterTemplateId) {
-    console.info('ℹ️ Note: EMAILJS_CONFIG.newsletterTemplateId is not set yet. Please create a 2nd template in EmailJS using email-template-newsletter.html to send 10% welcome emails.');
-    return;
-  }
-
-  const targetTemplateId = EMAILJS_CONFIG.newsletterTemplateId;
-
-  const templateParams = {
-    to_email: subscriberEmail,
-    email: subscriberEmail,
-    customer_name: 'เพื่อนคอกาแฟ',
-    name: 'เพื่อนคอกาแฟ',
-    to_name: 'เพื่อนคอกาแฟ',
-    title: '🎉 ขอบคุณที่ติดตาม Daily Brew Journal ☕ (รับส่วนลด 10%)',
-    promo_code: 'WELCOME10',
-    message: `ขอบคุณที่กดติดตามข่าวสาร Daily Brew ค่ะ!\n\nเราขอมอบของขวัญต้อนรับส่วนลด 10% ให้คุณ:\n🎁 โค้ดส่วนลด 10%: WELCOME10\n\nสามารถใช้โค้ด WELCOME10 สั่งซื้อเครื่องดื่มหรือเบเกอรีบนเว็บไซต์ Daily Brew เพื่อรับส่วนลด 10% ได้ทันทีนะคะ ❤️`
-  };
-
-  // Dual Dispatch: Call subscribe.php if hosted on PHP server (Graceful Fallback)
+  // 1. Primary Dispatch: Call subscribe.php on PHP server (Gmail SMTP)
+  let phpNewsletterSent = false;
   try {
-    fetch('subscribe.php', {
+    const res = await fetch('subscribe.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: subscriberEmail })
-    }).then(res => res.json())
-      .then(data => console.log('🐘 PHP subscribe.php response:', data))
-      .catch(() => {});
-  } catch (e) {}
+    });
+    const data = await res.json();
+    console.log('🐘 PHP subscribe.php response:', data);
+    if (data && (data.mail_sent || data.php_mail_dispatched)) {
+      phpNewsletterSent = true;
+      showToast(`✉️ ส่งอีเมลต้อนรับและโค้ดส่วนลด 10% ไปที่ ${subscriberEmail} แล้วค่ะ!`);
+    }
+  } catch (e) {
+    console.warn('PHP subscribe.php call note:', e);
+  }
 
-  try {
-    const res = await emailjs.send(
-      EMAILJS_CONFIG.serviceId,
-      targetTemplateId,
-      templateParams,
-      EMAILJS_CONFIG.publicKey
-    );
-    console.log('✅ Newsletter welcome email sent via EmailJS:', res.status, res.text);
-    showToast(`✉️ ส่งอีเมลต้อนรับและโค้ดส่วนลดไปที่ ${subscriberEmail} แล้วค่ะ!`);
-  } catch (error) {
-    console.error('❌ Failed to send newsletter welcome email via EmailJS:', error);
+  // 2. Fallback: Only use EmailJS if ENABLE_EMAILJS is true AND PHP failed (e.g. GitHub Pages)
+  if (ENABLE_EMAILJS && !phpNewsletterSent && typeof emailjs !== 'undefined') {
+    if (!EMAILJS_CONFIG.newsletterTemplateId) {
+      console.info('ℹ️ Note: EMAILJS_CONFIG.newsletterTemplateId is not set.');
+      return;
+    }
+
+    const templateParams = {
+      to_email: subscriberEmail,
+      email: subscriberEmail,
+      customer_name: 'เพื่อนคอกาแฟ',
+      name: 'เพื่อนคอกาแฟ',
+      to_name: 'เพื่อนคอกาแฟ',
+      title: '🎉 ขอบคุณที่ติดตาม Daily Brew Journal ☕ (รับส่วนลด 10%)',
+      promo_code: 'WELCOME10',
+      message: `ขอบคุณที่กดติดตามข่าวสาร Daily Brew ค่ะ!\n\nเราขอมอบของขวัญต้อนรับส่วนลด 10% ให้คุณ:\n🎁 โค้ดส่วนลด 10%: WELCOME10\n\nสามารถใช้โค้ด WELCOME10 สั่งซื้อเครื่องดื่มหรือเบเกอรีบนเว็บไซต์ Daily Brew เพื่อรับส่วนลด 10% ได้ทันทีนะคะ ❤️`
+    };
+
+    try {
+      const res = await emailjs.send(
+        EMAILJS_CONFIG.serviceId,
+        EMAILJS_CONFIG.newsletterTemplateId,
+        templateParams,
+        EMAILJS_CONFIG.publicKey
+      );
+      console.log('✅ Newsletter welcome email sent via EmailJS:', res.status, res.text);
+      showToast(`✉️ ส่งอีเมลต้อนรับและโค้ดส่วนลดไปที่ ${subscriberEmail} แล้วค่ะ!`);
+    } catch (error) {
+      console.error('❌ Failed to send newsletter welcome email via EmailJS:', error);
+    }
   }
 }
 

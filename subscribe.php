@@ -128,7 +128,8 @@ if ($isJsonRequest) {
         'message' => 'ส่งอีเมลต้อนรับและคูปองส่วนลด 10% สำเร็จแล้วค่ะ!',
         'email' => $email,
         'promo_code' => 'WELCOME10',
-        'php_mail_dispatched' => $mailSent
+        'php_mail_dispatched' => $mailSent,
+        'mail_sent' => $mailSent
     ], JSON_UNESCAPED_UNICODE);
     exit;
 } else {

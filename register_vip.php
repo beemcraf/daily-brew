@@ -212,7 +212,8 @@ if ($isJsonRequest) {
             'title' => $recProductTitle,
             'description' => $recProductDesc
         ],
-        'php_mail_dispatched'          => $mailSent
+        'php_mail_dispatched'          => $mailSent,
+        'mail_sent'                    => $mailSent
     ], JSON_UNESCAPED_UNICODE);
     exit;
 } else {
