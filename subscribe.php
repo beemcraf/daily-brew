@@ -88,7 +88,9 @@ try {
 // --------------------------------------------------------------------------
 // 4. เตรียมเนื้อหาอีเมลจากแม่แบบ HTML (email-template-newsletter.html)
 // --------------------------------------------------------------------------
-$templatePath = __DIR__ . '/email-template-newsletter.html';
+$templatePath = file_exists(__DIR__ . '/templates/email-template-newsletter.html') 
+    ? __DIR__ . '/templates/email-template-newsletter.html' 
+    : __DIR__ . '/email-template-newsletter.html';
 $htmlBody = '';
 
 if (file_exists($templatePath)) {

@@ -33,7 +33,7 @@
 
 ## 🛠️ เทคโนโลยีที่ใช้ (Tech Stack)
 
-รายละเอียดฉบับเต็มสามารถอ่านได้ที่ไฟล์ 📄 **[TECH_STACK.md](TECH_STACK.md)**
+รายละเอียดฉบับเต็มสามารถอ่านได้ที่ไฟล์ 📄 **[TECH_STACK.md](docs/TECH_STACK.md)**
 
 - **Frontend Core:** HTML5 (Semantic & SEO Friendly), Vanilla CSS3 (Custom Design System, Flexbox, CSS Grid, Glassmorphism, Micro-Animations), Vanilla JavaScript (ES6+)
 - **Typography & Icons:** Google Fonts (`Playfair Display`, `Outfit`, `Prompt`), Font Awesome 6.5.1
@@ -47,10 +47,19 @@
 ```
 ร้านขายกาแฟ(Daily Brew)/
 ├── index.html          # โครงสร้างหน้าเว็บหลัก, Sections, Modals
+├── vip.html            # หน้าลงทะเบียนสมาชิกระดับ VIP
 ├── style.css           # ดีไซน์ระบบ Design Tokens, Glassmorphism, Responsive
 ├── app.js              # ลอจิกการทำงาน (CDP, Order History, Packages, Smart Rec, Cart)
-├── TECH_STACK.md       # เอกสารสรุปเทคโนโลยีและระบบ CDP อย่างละเอียด
-├── README.md           # เอกสารแนะนำโปรเจกต์สำหรับ GitHub
+├── order_checkout.php  # สคริปต์บันทึกออเดอร์และส่งใบเสร็จทางอีเมล
+├── register_vip.php    # สคริปต์ลงทะเบียน VIP และส่งอีเมลแนะนำเมนูเฉพาะบุคคล
+├── subscribe.php       # สคริปต์รับข่าวสารและส่งคูปองต้อนรับ
+├── admin.php           # หน้า Admin Hub จัดการสต็อกและดูข้อมูลลูกค้า
+├── admin_login.php     # หน้าล็อกอินเข้าสู่ระบบ Admin Hub
+├── mailer.php          # โมดูลส่งอีเมล PHPMailer (Gmail SMTP)
+├── test_mail.php       # หน้าเครื่องมือทดสอบการส่งอีเมล 3 รูปแบบ
+├── database/           # ฐานข้อมูล MySQL (database.sql)
+├── templates/          # แม่แบบอีเมล HTML (newsletter, VIP, order)
+├── docs/               # คู่มือการติดตั้ง, แผนกลยุทธ์การตลาด, LINE OA, PDF scripts
 └── assets/             # รูปภาพเมนู แบนเนอร์ และโลโก้ร้านกาแฟ
 ```
 

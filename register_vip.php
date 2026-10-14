@@ -147,7 +147,9 @@ try {
 // --------------------------------------------------------------------------
 // 5. ดึงและแทนที่ข้อมูลในแม่แบบ HTML (email-template-vip.html)
 // --------------------------------------------------------------------------
-$templatePath = __DIR__ . '/email-template-vip.html';
+$templatePath = file_exists(__DIR__ . '/templates/email-template-vip.html') 
+    ? __DIR__ . '/templates/email-template-vip.html' 
+    : __DIR__ . '/email-template-vip.html';
 $htmlBody = '';
 
 if (file_exists($templatePath)) {

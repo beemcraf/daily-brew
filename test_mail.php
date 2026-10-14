@@ -28,7 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if ($emailType === 'order') {
             // 1. ใบเสร็จคำสั่งซื้อ
-            $templatePath = __DIR__ . '/email-template-order.html';
+            $templatePath = file_exists(__DIR__ . '/templates/email-template-order.html')
+                ? __DIR__ . '/templates/email-template-order.html'
+                : __DIR__ . '/email-template-order.html';
             $html = file_exists($templatePath) ? file_get_contents($templatePath) : '<h2>ใบเสร็จ Daily Brew</h2>';
             
             $itemsHtml = '
@@ -72,7 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
         } elseif ($emailType === 'vip') {
             // 2. ต้อนรับสมาชิก VIP
-            $templatePath = __DIR__ . '/email-template-vip.html';
+            $templatePath = file_exists(__DIR__ . '/templates/email-template-vip.html')
+                ? __DIR__ . '/templates/email-template-vip.html'
+                : __DIR__ . '/email-template-vip.html';
             $html = file_exists($templatePath) ? file_get_contents($templatePath) : '<h2>ยินดีต้อนรับสมาชิก VIP Daily Brew</h2>';
             
             $memberId = 'VIP-GOLD-' . rand(1000, 9999);
@@ -90,7 +94,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
         } else {
             // 3. Newsletter Welcome
-            $templatePath = __DIR__ . '/email-template-newsletter.html';
+            $templatePath = file_exists(__DIR__ . '/templates/email-template-newsletter.html')
+                ? __DIR__ . '/templates/email-template-newsletter.html'
+                : __DIR__ . '/email-template-newsletter.html';
             $html = file_exists($templatePath) ? file_get_contents($templatePath) : '<h2>ขอบคุณที่ติดตาม Daily Brew</h2>';
             
             $replacements = [

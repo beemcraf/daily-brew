@@ -86,7 +86,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $dbConnected) {
                 $stmt->close();
 
                 if ($orderData && !empty($orderData['customer_email'])) {
-                    $templatePath = __DIR__ . '/email-template-order.html';
+                    $templatePath = file_exists(__DIR__ . '/templates/email-template-order.html')
+                        ? __DIR__ . '/templates/email-template-order.html'
+                        : __DIR__ . '/email-template-order.html';
                     $html = file_exists($templatePath) ? file_get_contents($templatePath) : '<h2>ใบเสร็จคำสั่งซื้อ</h2>';
                     
                     $itemsArr = json_decode($orderData['items_json'] ?? '[]', true) ?: [];

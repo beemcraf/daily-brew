@@ -222,7 +222,9 @@ try {
 // 5. โหลดแม่แบบ HTML และส่งอีเมลใบเสร็จรับเงิน
 // --------------------------------------------------------------------------
 $orderDate = date('d/m/Y, H:i น.');
-$templatePath = __DIR__ . '/email-template-order.html';
+$templatePath = file_exists(__DIR__ . '/templates/email-template-order.html') 
+    ? __DIR__ . '/templates/email-template-order.html' 
+    : __DIR__ . '/email-template-order.html';
 
 if (file_exists($templatePath)) {
     $htmlContent = file_get_contents($templatePath);

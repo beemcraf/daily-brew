@@ -6,11 +6,12 @@ A Thai-language specialty coffee shop showcase with CDP features, VIP membership
 
 ## Architecture
 - **Frontend**: `index.html` + `style.css` + `app.js` (vanilla, no framework, no build step)
-- **PHP backend**: `subscribe.php`, `register_vip.php`, `order_checkout.php`
+- **PHP backend**: `subscribe.php`, `register_vip.php`, `order_checkout.php`, `admin_login.php`, `admin.php`, `test_mail.php`
 - **Email module**: `mailer.php` (PHPMailer via Gmail SMTP, fallback to `mail()`)
-- **Database**: `database.sql` (MySQL schema: `subscribers`, `vip_members`, `orders`)
+- **Database**: `database/database.sql` (MySQL schema: `subscribers`, `vip_members`, `orders`)
 - **Config**: `config.local.php` (contains Gmail app password — DO NOT COMMIT)
-- **Templates**: `email-template-*.html` (HTML email templates for newsletter, VIP, order)
+- **Templates**: `templates/email-template-*.html` (HTML email templates for newsletter, VIP, order)
+- **Docs**: `docs/` (Marketing guides, setup docs, LINE OA knowledge base, PDF generator scripts)
 - **Assets**: `assets/` (images only, no build pipeline)
 - **Deployment**: GitHub Pages for frontend; PHP backend needs separate server (not deployed)
 
@@ -24,7 +25,7 @@ A Thai-language specialty coffee shop showcase with CDP features, VIP membership
 ## Commands
 - **Serve locally**: Use VS Code Live Server or `php -S localhost:8000` from project root
 - **Run PHP**: Requires PHP 7.4+ with `mysqli` and `openssl` extensions
-- **Database setup**: Import `database.sql` in MySQL Workbench (File → Open SQL Script → Execute)
+- **Database setup**: Import `database/database.sql` in MySQL Workbench (File → Open SQL Script → Execute)
 - **No lint/test/format commands** — this project has none configured
 
 ## File Responsibilities
