@@ -52,6 +52,7 @@ if (!$mysqli->connect_errno) {
 
 $noticeMessage = '';
 $noticeType = 'success';
+$activeTab = htmlspecialchars($_POST['active_tab'] ?? $_GET['tab'] ?? 'orders');
 
 // --------------------------------------------------------------------------
 // 2. จัดการ Action ต่างๆ ที่แอดมินสั่งงาน
@@ -197,6 +198,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $dbConnected) {
                 }
             }
             $noticeMessage = "ส่งอีเมล Broadcast ไปยังผู้ติดตามจำนวน {$sentCount} ท่านเรียบร้อยแล้วค่ะ! 📣";
+        }
+    }
+
+    // Action F: ลบรายการคำสั่งซื้อ (Delete Order)
+    elseif ($action === 'delete_order') {
+        $orderId = trim($_POST['order_id'] ?? '');
+        if ($orderId) {
+            $stmt = $mysqli->prepare("DELETE FROM `orders` WHERE `order_id` = ? LIMIT 1");
+            if ($stmt) {
+                $stmt->bind_param('s', $orderId);
+                $stmt->execute();
+                $stmt->close();
+                $noticeMessage = "ลบรายการคำสั่งซื้อ #{$orderId} เรียบร้อยแล้วค่ะ 🗑️";
+            }
+        }
+    }
+
+    // Action G: ลบข้อมูลสมาชิก VIP (Delete VIP Member)
+    elseif ($action === 'delete_vip') {
+        $memberId = trim($_POST['member_id'] ?? '');
+        if ($memberId) {
+            $stmt = $mysqli->prepare("DELETE FROM `vip_members` WHERE `member_id` = ? LIMIT 1");
+            if ($stmt) {
+                $stmt->bind_param('s', $memberId);
+                $stmt->execute();
+                $stmt->close();
+                $noticeMessage = "ลบข้อมูลสมาชิก VIP รหัส {$memberId} เรียบร้อยแล้วค่ะ 🗑️";
+            }
+        }
+    }
+
+    // Action H: ลบผู้ติดตามข่าวสาร (Delete Subscriber)
+    elseif ($action === 'delete_subscriber') {
+        $subId = intval($_POST['subscriber_id'] ?? 0);
+        $subEmail = trim($_POST['subscriber_email'] ?? '');
+        if ($subId > 0) {
+            $stmt = $mysqli->prepare("DELETE FROM `subscribers` WHERE `id` = ? LIMIT 1");
+            if ($stmt) {
+                $stmt->bind_param('i', $subId);
+                $stmt->execute();
+                $stmt->close();
+                $noticeMessage = "ลบรายชื่อผู้ติดตาม " . ($subEmail ? "({$subEmail})" : "") . " เรียบร้อยแล้วค่ะ 🗑️";
+            }
         }
     }
 }
@@ -615,6 +659,17 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
       background: #2980b9;
       color: white;
     }
+    .btn-delete {
+      background: #fdf2f2;
+      border-color: #f5b7b1;
+      color: #c0392b;
+    }
+    .btn-delete:hover {
+      background: #c0392b;
+      color: white;
+      border-color: #c0392b;
+      box-shadow: 0 2px 6px rgba(192, 57, 43, 0.25);
+    }
 
     /* Forms & Inputs */
     select.status-select {
@@ -746,7 +801,7 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
         <span>Gmail SMTP: Active</span>
       </div>
       <div style="color:#d4a373; font-weight:600;">
-        <i class="fa-solid fa-user-circle"></i> <?= htmlspecialchars($_SESSION['admin_user']) ?>
+        <i class="fa-solid fa-user-circle"></i> <?= htmlspecialchars($_SESSION['admin_user'] ?? 'admin') ?>
       </div>
       <a href="?action=logout" class="btn-logout">
         <i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ
@@ -814,33 +869,33 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
 
     <!-- Navigation Tabs -->
     <div class="tabs-header">
-      <button class="tab-btn active" onclick="switchTab('orders', this)">
+      <button class="tab-btn <?= $activeTab === 'orders' ? 'active' : '' ?>" onclick="switchTab('orders', this)">
         <i class="fa-solid fa-receipt"></i> จัดการคำสั่งซื้อ
         <span class="badge-count"><?= count($ordersList) ?></span>
       </button>
 
-      <button class="tab-btn" onclick="switchTab('vip', this)">
+      <button class="tab-btn <?= $activeTab === 'vip' ? 'active' : '' ?>" onclick="switchTab('vip', this)">
         <i class="fa-solid fa-crown"></i> สมาชิก VIP Club
         <span class="badge-count"><?= count($vipsList) ?></span>
       </button>
 
-      <button class="tab-btn" onclick="switchTab('stock', this)">
+      <button class="tab-btn <?= $activeTab === 'stock' ? 'active' : '' ?>" onclick="switchTab('stock', this)">
         <i class="fa-solid fa-mug-saucer"></i> สต็อกเมนูเครื่องดื่ม
         <span class="badge-count"><?= count($menuStock) ?></span>
       </button>
 
-      <button class="tab-btn" onclick="switchTab('subscribers', this)">
+      <button class="tab-btn <?= $activeTab === 'subscribers' ? 'active' : '' ?>" onclick="switchTab('subscribers', this)">
         <i class="fa-solid fa-paper-plane"></i> ข่าวสาร & ผู้ติดตาม
         <span class="badge-count"><?= count($subscribersList) ?></span>
       </button>
 
-      <button class="tab-btn" onclick="switchTab('system', this)">
+      <button class="tab-btn <?= $activeTab === 'system' ? 'active' : '' ?>" onclick="switchTab('system', this)">
         <i class="fa-solid fa-server"></i> สุขภาพระบบ & เครื่องมือ
       </button>
     </div>
 
     <!-- ================= TAB 1: ORDERS ================= -->
-    <div id="tab-orders" class="tab-pane active">
+    <div id="tab-orders" class="tab-pane <?= $activeTab === 'orders' ? 'active' : '' ?>">
       <div class="table-card">
         <div class="table-header-row">
           <div class="table-title">
@@ -920,6 +975,7 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
                       <form method="POST" action="admin.php" style="display:inline-block;" onsubmit="return confirm('ยืนยันส่งใบเสร็จซ้ำเข้าอีเมลลูกค้านะคะ?');">
                         <input type="hidden" name="action" value="resend_receipt">
                         <input type="hidden" name="order_id" value="<?= htmlspecialchars($ord['order_id']) ?>">
+                        <input type="hidden" name="active_tab" value="orders">
                         <button type="submit" class="btn-action btn-resend" title="ส่งใบเสร็จซ้ำผ่าน PHP">
                           <i class="fa-solid fa-envelope"></i> ส่งใบเสร็จซ้ำ
                         </button>
@@ -928,6 +984,15 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
                       <button type="button" class="btn-action" onclick='viewOrderModal(<?= json_encode($ord, JSON_HEX_APOS | JSON_HEX_QUOT) ?>)'>
                         <i class="fa-solid fa-eye"></i> ดู
                       </button>
+
+                      <form method="POST" action="admin.php" style="display:inline-block;" onsubmit="return confirm('คุณต้องการลบคำสั่งซื้อ #<?= htmlspecialchars($ord['order_id']) ?> ใช่หรือไม่? (ลบแล้วกู้คืนไม่ได้นะคะ)');">
+                        <input type="hidden" name="action" value="delete_order">
+                        <input type="hidden" name="order_id" value="<?= htmlspecialchars($ord['order_id']) ?>">
+                        <input type="hidden" name="active_tab" value="orders">
+                        <button type="submit" class="btn-action btn-delete" title="ลบออเดอร์นี้">
+                          <i class="fa-solid fa-trash-can"></i> ลบ
+                        </button>
+                      </form>
                     </td>
                   </tr>
                 <?php endforeach; ?>
@@ -939,7 +1004,7 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
     </div>
 
     <!-- ================= TAB 2: VIP CRM ================= -->
-    <div id="tab-vip" class="tab-pane">
+    <div id="tab-vip" class="tab-pane <?= $activeTab === 'vip' ? 'active' : '' ?>">
       <div class="table-card">
         <div class="table-header-row">
           <div class="table-title">
@@ -967,6 +1032,7 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
                   <th>โค้ดประจำตัว</th>
                   <th>วันที่สมัคร</th>
                   <th style="text-align:center;">ปรับแต้ม</th>
+                  <th style="text-align:center;">จัดการ</th>
                 </tr>
               </thead>
               <tbody>
@@ -999,6 +1065,7 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
                         <input type="hidden" name="action" value="update_vip_points">
                         <input type="hidden" name="member_id" value="<?= htmlspecialchars($vip['member_id']) ?>">
                         <input type="hidden" name="points_delta" value="50">
+                        <input type="hidden" name="active_tab" value="vip">
                         <button type="submit" class="btn-action" title="เพิ่ม 50 แต้ม">
                           <i class="fa-solid fa-plus"></i> 50 แต้ม
                         </button>
@@ -1007,8 +1074,19 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
                         <input type="hidden" name="action" value="update_vip_points">
                         <input type="hidden" name="member_id" value="<?= htmlspecialchars($vip['member_id']) ?>">
                         <input type="hidden" name="points_delta" value="-50">
+                        <input type="hidden" name="active_tab" value="vip">
                         <button type="submit" class="btn-action" style="color:#c0392b;" title="ลด 50 แต้ม">
                           <i class="fa-solid fa-minus"></i> 50
+                        </button>
+                      </form>
+                    </td>
+                    <td style="text-align:center; white-space:nowrap;">
+                      <form method="POST" action="admin.php" style="display:inline-block;" onsubmit="return confirm('คุณต้องการลบสมาชิก VIP คุณ <?= htmlspecialchars($vip['fullname']) ?> (<?= htmlspecialchars($vip['member_id']) ?>) ใช่หรือไม่? (ลบแล้วกู้คืนไม่ได้นะคะ)');">
+                        <input type="hidden" name="action" value="delete_vip">
+                        <input type="hidden" name="member_id" value="<?= htmlspecialchars($vip['member_id']) ?>">
+                        <input type="hidden" name="active_tab" value="vip">
+                        <button type="submit" class="btn-action btn-delete" title="ลบสมาชิกท่านนี้">
+                          <i class="fa-solid fa-trash-can"></i> ลบ
                         </button>
                       </form>
                     </td>
@@ -1022,7 +1100,7 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
     </div>
 
     <!-- ================= TAB 3: STOCK & MENU ================= -->
-    <div id="tab-stock" class="tab-pane">
+    <div id="tab-stock" class="tab-pane <?= $activeTab === 'stock' ? 'active' : '' ?>">
       <div class="table-card">
         <div class="table-header-row">
           <div class="table-title">
@@ -1069,6 +1147,7 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
                     <form method="POST" action="admin.php" style="display:inline-block;">
                       <input type="hidden" name="action" value="toggle_stock">
                       <input type="hidden" name="item_key" value="<?= htmlspecialchars($key) ?>">
+                      <input type="hidden" name="active_tab" value="stock">
                       <button type="submit" class="btn-action" style="font-size:12px;">
                         <i class="fa-solid fa-repeat"></i> เปลี่ยนเป็น <?= $item['in_stock'] ? 'ของหมด' : 'พร้อมเสิร์ฟ' ?>
                       </button>
@@ -1083,7 +1162,7 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
     </div>
 
     <!-- ================= TAB 4: SUBSCRIBERS & BROADCAST ================= -->
-    <div id="tab-subscribers" class="tab-pane">
+    <div id="tab-subscribers" class="tab-pane <?= $activeTab === 'subscribers' ? 'active' : '' ?>">
       <div class="table-card">
         <div class="table-header-row">
           <div class="table-title">
@@ -1096,6 +1175,7 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
         <div class="broadcast-box">
           <form method="POST" action="admin.php" onsubmit="return confirm('ยืนยันส่งอีเมล Broadcast ไปยังผู้ติดตามทุกคนนะคะ?');">
             <input type="hidden" name="action" value="broadcast_newsletter">
+            <input type="hidden" name="active_tab" value="subscribers">
             <label style="font-size:13px; font-weight:600; color:var(--espresso); display:block; margin-bottom:6px;">
               หัวข้ออีเมลแคมเปญ (Email Subject):
             </label>
@@ -1126,11 +1206,12 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
                 <th>อีเมลผู้ติดตาม</th>
                 <th>โค้ดต้อนรับ</th>
                 <th>วันที่ลงทะเบียน</th>
+                <th style="text-align:center;">จัดการ</th>
               </tr>
             </thead>
             <tbody>
               <?php if (empty($subscribersList)): ?>
-                <tr><td colspan="4" style="text-align:center; color:#888;">ยังไม่มีผู้ติดตามในระบบ</td></tr>
+                <tr><td colspan="5" style="text-align:center; color:#888;">ยังไม่มีผู้ติดตามในระบบ</td></tr>
               <?php else: ?>
                 <?php foreach ($subscribersList as $idx => $sub): ?>
                   <tr>
@@ -1138,6 +1219,17 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
                     <td><strong><?= htmlspecialchars($sub['email']) ?></strong></td>
                     <td><code><?= htmlspecialchars($sub['promo_code'] ?? 'WELCOME10') ?></code></td>
                     <td style="color:#777; font-size:12px;"><?= date('d/m/y H:i', strtotime($sub['subscribed_at'] ?? 'now')) ?></td>
+                    <td style="text-align:center; white-space:nowrap;">
+                      <form method="POST" action="admin.php" style="display:inline-block;" onsubmit="return confirm('คุณต้องการลบอีเมล <?= htmlspecialchars($sub['email']) ?> ออกจากรายชื่อผู้ติดตามใช่หรือไม่? (ลบแล้วกู้คืนไม่ได้นะคะ)');">
+                        <input type="hidden" name="action" value="delete_subscriber">
+                        <input type="hidden" name="subscriber_id" value="<?= intval($sub['id']) ?>">
+                        <input type="hidden" name="subscriber_email" value="<?= htmlspecialchars($sub['email']) ?>">
+                        <input type="hidden" name="active_tab" value="subscribers">
+                        <button type="submit" class="btn-action btn-delete" title="ลบอีเมลนี้">
+                          <i class="fa-solid fa-trash-can"></i> ลบ
+                        </button>
+                      </form>
+                    </td>
                   </tr>
                 <?php endforeach; ?>
               <?php endif; ?>
@@ -1148,7 +1240,7 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
     </div>
 
     <!-- ================= TAB 5: SYSTEM HEALTH ================= -->
-    <div id="tab-system" class="tab-pane">
+    <div id="tab-system" class="tab-pane <?= $activeTab === 'system' ? 'active' : '' ?>">
       <div class="table-card">
         <div class="table-header-row">
           <div class="table-title">
@@ -1210,10 +1302,30 @@ $menuStock = file_exists($stockFile) ? json_decode(file_get_contents($stockFile)
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
 
-      btn.classList.add('active');
+      if (btn) {
+        btn.classList.add('active');
+      } else {
+        const targetBtn = document.querySelector(`.tab-btn[onclick*="'${tabId}'"]`);
+        if (targetBtn) targetBtn.classList.add('active');
+      }
       const targetPane = document.getElementById('tab-' + tabId);
       if (targetPane) targetPane.classList.add('active');
+      try {
+        localStorage.setItem('adminActiveTab', tabId);
+      } catch(e) {}
     }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const phpTab = '<?= $activeTab ?>';
+      if (phpTab && document.getElementById('tab-' + phpTab)) {
+        switchTab(phpTab);
+      } else {
+        const savedTab = localStorage.getItem('adminActiveTab');
+        if (savedTab && document.getElementById('tab-' + savedTab)) {
+          switchTab(savedTab);
+        }
+      }
+    });
 
     function viewOrderModal(ord) {
       document.getElementById('mOrderId').innerText = ord.order_id;
