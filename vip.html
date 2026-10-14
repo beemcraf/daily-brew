@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20261014-mobile">
   <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
 </head>
 <body>
@@ -50,6 +50,11 @@
           <li><a href="index.html#story">เรื่องราว</a></li>
           <li><a href="index.html#reviews">รีวิว</a></li>
           <li><a href="index.html#contact">ติดต่อเรา</a></li>
+          <li class="mobile-nav-divider"></li>
+          <li class="mobile-nav-action"><a href="vip.html" class="mobile-vip-link"><i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> สมัครสมาชิก VIP Club (ลด 20%)</a></li>
+          <li class="mobile-nav-action"><a href="javascript:void(0)" onclick="openMemberPortalModal()"><i class="fa-solid fa-clock-rotate-left"></i> ประวัติสั่งซื้อ & ข้อมูล CDP</a></li>
+          <li class="mobile-nav-action"><a href="javascript:void(0)" onclick="openMktgModal()"><i class="fa-solid fa-chart-pie"></i> แผนการตลาด (ส่งอาจารย์)</a></li>
+          <li class="mobile-nav-action"><a href="admin_login.php"><i class="fa-solid fa-lock"></i> เข้าสู่ระบบ Admin Hub</a></li>
         </ul>
       </nav>
 
@@ -58,7 +63,8 @@
         <!-- VIP Club Member Button (Active on this page) -->
         <a href="vip.html" class="btn-nav-vip active" id="btn-nav-vip" title="ระบบสมาชิก Daily Brew Club">
           <i class="fa-solid fa-crown" style="color: var(--accent-gold);"></i>
-          <span>สมัครสมาชิก VIP</span>
+          <span class="vip-text-desktop">สมัครสมาชิก VIP</span>
+          <span class="vip-text-mobile">VIP</span>
         </a>
 
         <!-- Member Portal & Order History Button -->

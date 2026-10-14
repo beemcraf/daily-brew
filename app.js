@@ -287,20 +287,19 @@ function setupEventListeners() {
   // Mobile Menu Toggle
   const btnMobile = document.getElementById('btn-mobile-menu');
   const navLinks = document.getElementById('nav-links');
-  if (btnMobile) {
-    btnMobile.addEventListener('click', () => {
-      if (navLinks.style.display === 'flex') {
-        navLinks.style.display = 'none';
-      } else {
-        navLinks.style.display = 'flex';
-        navLinks.style.flexDirection = 'column';
-        navLinks.style.position = 'absolute';
-        navLinks.style.top = '80px';
-        navLinks.style.left = '0';
-        navLinks.style.right = '0';
-        navLinks.style.background = '#fdfaf6';
-        navLinks.style.padding = '20px';
-        navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+  if (btnMobile && navLinks) {
+    btnMobile.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navLinks.classList.toggle('mobile-open');
+      const isOpen = navLinks.classList.contains('mobile-open');
+      btnMobile.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('mobile-open') && !navLinks.contains(e.target) && !btnMobile.contains(e.target)) {
+        navLinks.classList.remove('mobile-open');
+        btnMobile.innerHTML = '<i class="fa-solid fa-bars"></i>';
       }
     });
   }
@@ -322,7 +321,8 @@ function setupEventListeners() {
       }, 900);
 
       if (window.innerWidth <= 920 && navLinks) {
-        navLinks.style.display = 'none';
+        navLinks.classList.remove('mobile-open');
+        if (btnMobile) btnMobile.innerHTML = '<i class="fa-solid fa-bars"></i>';
       }
     });
   });
@@ -1677,9 +1677,9 @@ function initVipPage() {
   if (navVipBtn) {
     if (member && member.fullname) {
       const firstName = member.fullname.split(' ')[0];
-      navVipBtn.innerHTML = `<i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> <span>บัตร VIP (${firstName})</span>`;
+      navVipBtn.innerHTML = `<i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> <span class="vip-text-desktop">บัตร VIP (${firstName})</span><span class="vip-text-mobile">VIP</span>`;
     } else {
-      navVipBtn.innerHTML = `<i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> <span>สมัครสมาชิก VIP</span>`;
+      navVipBtn.innerHTML = `<i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> <span class="vip-text-desktop">สมัครสมาชิก VIP</span><span class="vip-text-mobile">VIP</span>`;
     }
   }
 

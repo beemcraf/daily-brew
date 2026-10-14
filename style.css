@@ -3408,41 +3408,330 @@ html, body {
   }
 }
 
-/* 2. TABLET & COMPACT SCREENS (max-width: 900px) */
-@media (max-width: 900px) {
+/* Mobile Utility Tokens */
+.vip-text-desktop {
+  display: inline;
+}
+.vip-text-mobile {
+  display: none;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.mobile-nav-divider,
+.mobile-nav-action {
+  display: none;
+}
+
+/* 2. TABLET & COMPACT SCREENS (max-width: 920px) */
+@media (max-width: 920px) {
+  nav {
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    overflow: visible !important;
+  }
+  .nav-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 8px !important;
+    gap: 4px !important;
+  }
   .nav-actions {
-    gap: 6px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
   }
-  .btn-mktg-deck span,
-  .btn-cdp-portal span {
+
+  .nav-links {
     display: none;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: rgba(253, 250, 246, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 16px 18px 30px;
+    border-radius: 0 0 24px 24px;
+    border-bottom: 2px solid rgba(194, 139, 81, 0.25);
+    box-shadow: 0 16px 40px rgba(36, 20, 14, 0.16);
+    gap: 4px;
+    z-index: 1001;
   }
-  .btn-mktg-deck,
-  .btn-cdp-portal {
-    padding: 8px 11px;
+
+  .nav-links.mobile-open {
+    display: flex !important;
+    animation: mobileSlideDown 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
-  .navbar-container {
-    padding: 0 16px;
+
+  .nav-links li {
+    width: 100%;
+    list-style: none;
+  }
+
+  .nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 12px;
+    width: 100%;
+    color: var(--primary-espresso);
+    transition: all 0.2s ease;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    background: rgba(194, 139, 81, 0.12);
+    color: var(--accent-caramel) !important;
+  }
+
+  .mobile-nav-divider {
+    display: block;
+    height: 1px;
+    background: rgba(80, 49, 35, 0.1);
+    margin: 10px 0 8px;
+    width: 100%;
+  }
+
+  .mobile-nav-action {
+    display: block;
+    width: 100%;
+  }
+
+  .mobile-nav-action a {
+    background: rgba(200, 137, 55, 0.08);
+    border: 1px solid rgba(200, 137, 55, 0.22);
+    border-radius: 12px;
+    color: var(--primary-espresso) !important;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  .mobile-nav-action a.mobile-vip-link {
+    background: linear-gradient(135deg, #24140e 0%, #3a2216 100%);
+    color: #f5d77f !important;
+    border: 1px solid rgba(223, 177, 91, 0.5);
+    box-shadow: 0 3px 10px rgba(36, 20, 14, 0.2);
+  }
+
+  .menu-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-mktg-deck {
+    display: none !important;
+  }
+
+  .vip-text-desktop {
+    display: none !important;
+  }
+  .vip-text-mobile {
+    display: inline !important;
+  }
+  .btn-member-portal span {
+    display: none !important;
+  }
+  .btn-member-portal {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.92rem;
+  }
+  .btn-nav-vip {
+    padding: 5px 10px;
+    font-size: 0.74rem;
+    gap: 4px;
+    border-radius: 9999px;
+  }
+  .brand-text span {
+    display: none !important;
   }
 }
 
 /* 3. MOBILE MASTER (max-width: 768px) */
 @media (max-width: 768px) {
-  /* Dynamic Fluid Typography */
+  /* Navbar & Brand Header Fix (Prevents Any Logo & Button Overlap) */
+  .navbar {
+    height: 64px;
+    background: rgba(250, 246, 240, 0.98);
+  }
+  .nav-container {
+    height: 64px;
+    padding: 0 12px;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  main {
+    padding-top: 64px;
+  }
+
+  .brand-logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: auto !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    text-decoration: none;
+  }
+  .brand-logo img {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .brand-text h1 {
+    font-size: 1.1rem !important;
+    white-space: nowrap !important;
+    line-height: 1.1;
+    margin: 0;
+    color: var(--primary-espresso);
+    font-weight: 700;
+  }
+  .brand-text span {
+    display: none !important;
+  }
+
+  /* Nav Actions Responsive Compact Badges */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .btn-nav-vip {
+    padding: 5px 10px;
+    font-size: 0.74rem;
+    gap: 4px;
+    border-radius: 9999px;
+  }
+  .vip-text-desktop {
+    display: none !important;
+  }
+  .vip-text-mobile {
+    display: inline !important;
+  }
+
+  .btn-member-portal {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.92rem;
+  }
+  .btn-member-portal span {
+    display: none !important;
+  }
+
+  .cart-toggle-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+  .cart-count-badge {
+    top: -4px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+    font-size: 0.68rem;
+  }
+
+  .menu-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 1.15rem;
+    border-radius: 50%;
+  }
+
+  /* Dynamic Fluid Typography & Section Headers */
+  .section-header {
+    margin-bottom: 24px;
+    padding: 0 10px;
+  }
+  .section-header h2 {
+    font-size: clamp(1.4rem, 5.2vw, 1.85rem) !important;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .section-header p {
+    font-size: 0.86rem;
+    line-height: 1.55;
+    padding: 0 4px;
+  }
+  .badge-tag {
+    font-size: 0.76rem;
+    padding: 5px 12px;
+    margin-bottom: 10px;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 24px 0 44px;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
+  .hero-badge {
+    margin: 0 auto 12px;
+    font-size: 0.76rem;
+  }
   .hero-content h1 {
-    font-size: clamp(1.85rem, 6.5vw, 2.4rem);
+    font-size: clamp(1.75rem, 6.2vw, 2.25rem);
     line-height: 1.25;
   }
   .hero-content h1 .hero-slogan-highlight {
-    font-size: clamp(1.35rem, 5vw, 1.8rem);
+    font-size: clamp(1.2rem, 4.8vw, 1.55rem);
+  }
+  .hero-description {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin: 14px auto 22px;
+    padding: 0 4px;
   }
   .hero-cta-group {
     flex-direction: column;
     width: 100%;
-    gap: 12px;
+    gap: 10px;
   }
   .hero-cta-group .btn {
     width: 100%;
+    padding: 12px 20px;
+    font-size: 0.95rem;
   }
 
   /* Horizontal Smooth Swipeable Filter Pills */
@@ -3451,10 +3740,10 @@ html, body {
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 4px 16px 14px 16px;
-    margin-left: -16px;
-    margin-right: -16px;
+    padding: 4px 12px 14px 12px;
+    margin: 0 -12px 18px -12px;
     scrollbar-width: none;
+    gap: 8px;
   }
   .menu-filter-bar::-webkit-scrollbar {
     display: none;
@@ -3462,55 +3751,122 @@ html, body {
   .menu-tab-btn {
     flex-shrink: 0;
     white-space: nowrap;
-    padding: 8px 18px;
-    font-size: 0.88rem;
+    padding: 8px 16px;
+    font-size: 0.84rem;
+    border-radius: 9999px;
   }
 
   /* Menu Cards */
   .menu-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 18px;
+    padding: 0 4px;
   }
   .menu-card {
     max-width: 440px;
     margin: 0 auto;
     width: 100%;
+    border-radius: 18px;
+  }
+  .menu-card-img-wrapper {
+    height: 195px;
+  }
+  .menu-card-body {
+    padding: 16px;
+  }
+  .menu-card-actions {
+    gap: 8px;
+  }
+  .menu-card-actions .btn {
+    padding: 10px 14px;
+    font-size: 0.84rem;
   }
 
-  /* Smart AI Recommendation Banner */
+  /* Smart AI Recommendation Banner (Optimized Card) */
   .smart-rec-banner {
     flex-direction: column;
     text-align: center;
     padding: 20px 16px;
-    border-radius: 16px;
+    border-radius: 20px;
+    margin: 15px auto 26px;
+    gap: 14px;
   }
   .smart-rec-visuals {
+    display: flex;
+    align-items: center;
     justify-content: center;
+    gap: 12px;
   }
   .smart-rec-img {
-    width: 80px;
-    height: 80px;
+    width: 66px;
+    height: 66px;
+    border-radius: 14px;
+  }
+  .smart-rec-plus-icon {
+    font-size: 1.2rem;
+    color: var(--accent-gold);
+  }
+  .smart-rec-tag {
+    font-size: 0.74rem;
+    padding: 4px 11px;
+    border-radius: 9999px;
+    display: inline-block;
+  }
+  .smart-rec-content h4 {
+    font-size: 1.08rem;
+    line-height: 1.35;
+    margin: 8px 0 6px;
+  }
+  .smart-rec-content p {
+    font-size: 0.83rem;
+    line-height: 1.5;
+    color: #e5d7ca;
+    margin: 0;
   }
   #btn-smart-rec-order {
     width: 100%;
+    padding: 12px 18px;
+    font-size: 0.92rem;
   }
 
-  /* Modals: Cart, Checkout & CDP */
+  /* Quiz Section Responsive */
+  .quiz-container {
+    padding: 24px 16px;
+    border-radius: 20px;
+  }
+  .quiz-options-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .quiz-option-card {
+    padding: 14px 16px;
+    border-radius: 14px;
+  }
+
+  /* Modals: Cart, Checkout, Customizer & CDP (Mobile Bottom Sheet) */
   .modal-overlay {
-    padding: 12px;
+    padding: 0;
+    align-items: flex-end;
   }
   .modal-content {
-    width: 95%;
-    max-width: 95%;
-    margin: auto;
-    border-radius: 18px;
-    max-height: 90vh;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 24px 24px 0 0 !important;
+    max-height: 90vh !important;
+    margin: 0 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
   }
   .modal-header {
     padding: 16px 18px;
+    border-bottom: 1px solid var(--border-light);
   }
   .modal-body {
-    padding: 16px 18px 20px 18px;
+    padding: 16px 18px 24px;
+  }
+  .modal-footer {
+    padding: 12px 18px;
   }
 
   /* Form Inputs: Prevent iOS Safari auto-zoom with 16px base font size */
@@ -3518,15 +3874,17 @@ html, body {
   input[type="email"],
   input[type="tel"],
   input[type="date"],
+  input[type="number"],
   select,
   textarea {
     font-size: 16px !important;
+    min-height: 44px;
   }
 
   /* Newsletter Box */
   .lead-capture-box {
-    padding: 28px 20px;
-    border-radius: 20px;
+    padding: 24px 16px;
+    border-radius: 18px;
   }
   .newsletter-form-inline {
     flex-direction: column;
@@ -3536,38 +3894,36 @@ html, body {
   .newsletter-form-inline input,
   .newsletter-form-inline button {
     width: 100%;
+    min-height: 44px;
   }
 }
 
 /* 4. ULTRA-COMPACT MOBILE PHONES (max-width: 480px) */
 @media (max-width: 480px) {
-  .nav-container,
-  .navbar-container {
-    height: 70px;
-  }
-  main {
-    padding-top: 70px;
+  .nav-container {
+    padding: 0 10px;
+    gap: 5px;
   }
   .brand-logo {
-    width: 38px;
-    height: 38px;
+    gap: 6px !important;
   }
-  .brand-name {
-    font-size: 1.15rem;
+  .brand-logo img {
+    width: 34px !important;
+    height: 34px !important;
+  }
+  .brand-text h1 {
+    font-size: 1.0rem !important;
   }
   .btn-nav-vip {
-    padding: 6px 10px;
-    font-size: 0.76rem;
+    padding: 4px 8px;
+    font-size: 0.70rem;
+    gap: 3px;
   }
-  .cart-toggle-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 0.95rem;
-  }
+  .btn-member-portal,
+  .cart-toggle-btn,
   .menu-toggle {
-    width: 36px;
-    height: 36px;
-    font-size: 1.2rem;
+    width: 34px;
+    height: 34px;
   }
 
   /* Digital VIP Member Card */
@@ -3575,15 +3931,15 @@ html, body {
     padding: 0;
   }
   .vip-digital-card {
-    padding: 18px 16px;
-    border-radius: 18px;
+    padding: 18px 14px;
+    border-radius: 16px;
   }
   .vip-card-id {
-    font-size: 1.05rem !important;
-    letter-spacing: 2px;
+    font-size: 1.0rem !important;
+    letter-spacing: 1.5px;
   }
   .vip-card-name {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
 
   /* CDP History & Tables */
@@ -3595,8 +3951,20 @@ html, body {
   .cdp-orders-table th,
   .cdp-orders-table td {
     padding: 8px 10px;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     white-space: nowrap;
+  }
+}
+
+/* Mobile Menu Animation */
+@keyframes mobileSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
