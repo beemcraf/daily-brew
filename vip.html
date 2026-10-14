@@ -52,8 +52,8 @@
           <li><a href="index.html#contact">ติดต่อเรา</a></li>
           <li class="mobile-nav-divider"></li>
           <li class="mobile-nav-action"><a href="vip.html" class="mobile-vip-link"><i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> สมัครสมาชิก VIP Club (ลด 20%)</a></li>
-          <li class="mobile-nav-action"><a href="javascript:void(0)" onclick="openMemberPortalModal()"><i class="fa-solid fa-clock-rotate-left"></i> ประวัติสั่งซื้อ & ข้อมูล CDP</a></li>
-          <li class="mobile-nav-action"><a href="javascript:void(0)" onclick="openMktgModal()"><i class="fa-solid fa-chart-pie"></i> แผนการตลาด (ส่งอาจารย์)</a></li>
+          <li class="mobile-nav-action"><a href="javascript:void(0)" onclick="openMemberPortalModal()"><i class="fa-solid fa-clock-rotate-left"></i> ประวัติการสั่งซื้อ & แต้มสะสม</a></li>
+          <li class="mobile-nav-action"><a href="javascript:void(0)" onclick="openMktgModal()"><i class="fa-solid fa-lightbulb"></i> กลยุทธ์แบรนด์ (Brand Strategy)</a></li>
           <li class="mobile-nav-action"><a href="admin_login.php"><i class="fa-solid fa-lock"></i> เข้าสู่ระบบ Admin Hub</a></li>
         </ul>
       </nav>
@@ -68,15 +68,15 @@
         </a>
 
         <!-- Member Portal & Order History Button -->
-        <button class="btn-member-portal" id="btn-open-member-portal" onclick="openMemberPortalModal()" title="ดูข้อมูลลูกค้า CDP และประวัติการสั่งซื้อ">
+        <button class="btn-member-portal" id="btn-open-member-portal" onclick="openMemberPortalModal()" title="ดูประวัติการสั่งซื้อและแต้มสะสม">
           <i class="fa-solid fa-clock-rotate-left"></i>
-          <span>ประวัติสั่งซื้อ & CDP</span>
+          <span>ประวัติสั่งซื้อ & แต้ม</span>
         </button>
 
         <!-- Digital Marketing Deck Button -->
-        <button class="btn-mktg-deck" id="btn-open-mktg" title="คลิกเพื่อดูแผนการตลาด Digital Marketing">
-          <i class="fa-solid fa-chart-pie"></i>
-          <span>Marketing Deck</span>
+        <button class="btn-mktg-deck" id="btn-open-mktg" title="คลิกเพื่อดูแผนกลยุทธ์แบรนด์และการตลาด">
+          <i class="fa-solid fa-lightbulb"></i>
+          <span>Brand Strategy</span>
         </button>
 
         <!-- Cart Button -->
@@ -669,8 +669,8 @@
     <div class="modal-content member-portal-content">
       <div class="modal-header">
         <div>
-          <h3><i class="fa-solid fa-id-card-clip" style="color: var(--accent-caramel);"></i> ประวัติสั่งซื้อ & ข้อมูลลูกค้า (CDP)</h3>
-          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 2px 0 0 0;">Customer Data Platform & Omnichannel Order Tracking</p>
+          <h3><i class="fa-solid fa-id-card-clip" style="color: var(--accent-caramel);"></i> ประวัติการสั่งซื้อ & บัตรสมาชิก VIP</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 2px 0 0 0;">ศูนย์รวมข้อมูลสมาชิก, แต้มสะสม และประวัติการสั่งซื้อ</p>
         </div>
         <button class="btn-close-modal" onclick="closeMemberPortalModal()">&times;</button>
       </div>
@@ -701,7 +701,7 @@
             <i class="fa-solid fa-receipt"></i> ประวัติการสั่งซื้อย้อนหลัง
           </button>
           <button class="portal-tab-btn" id="tab-btn-profile" onclick="switchPortalTab('profile')">
-            <i class="fa-solid fa-user-gear"></i> ข้อมูลลูกค้า & พฤติกรรม (CDP)
+            <i class="fa-solid fa-user-gear"></i> ข้อมูลสมาชิก & สิทธิประโยชน์
           </button>
           <button class="portal-tab-btn" id="tab-btn-coupons" onclick="switchPortalTab('coupons')">
             <i class="fa-solid fa-ticket"></i> คูปองส่วนลดของฉัน

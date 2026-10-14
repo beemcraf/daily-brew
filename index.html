@@ -50,15 +50,15 @@
           <li><a href="#contact">ติดต่อเรา</a></li>
           <li class="mobile-nav-divider"></li>
           <li class="mobile-nav-action"><a href="vip.html" class="mobile-vip-link"><i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> สมัครสมาชิก VIP Club (ลด 20%)</a></li>
-          <li class="mobile-nav-action"><a href="javascript:void(0)" onclick="openMemberPortalModal()"><i class="fa-solid fa-clock-rotate-left"></i> ประวัติสั่งซื้อ & ข้อมูล CDP</a></li>
-          <li class="mobile-nav-action"><a href="javascript:void(0)" onclick="openMktgModal()"><i class="fa-solid fa-chart-pie"></i> แผนการตลาด (ส่งอาจารย์)</a></li>
+          <li class="mobile-nav-action"><a href="javascript:void(0)" onclick="openMemberPortalModal()"><i class="fa-solid fa-clock-rotate-left"></i> ประวัติการสั่งซื้อ & แต้มสะสม</a></li>
+          <li class="mobile-nav-action"><a href="javascript:void(0)" onclick="openMktgModal()"><i class="fa-solid fa-lightbulb"></i> กลยุทธ์แบรนด์ (Brand Strategy)</a></li>
           <li class="mobile-nav-action"><a href="admin_login.php"><i class="fa-solid fa-lock"></i> เข้าสู่ระบบ Admin Hub</a></li>
         </ul>
       </nav>
 
       <!-- Nav Actions & Special Marketing Presentation Button -->
       <div class="nav-actions">
-        <!-- VIP Club Member Button (Next to Order History & CDP) -->
+        <!-- VIP Club Member Button (Next to Order History & Points) -->
         <a href="vip.html" class="btn-nav-vip" id="btn-nav-vip" title="ระบบสมาชิก Daily Brew Club">
           <i class="fa-solid fa-crown" style="color: var(--accent-gold);"></i>
           <span class="vip-text-desktop">สมัครสมาชิก VIP</span>
@@ -66,15 +66,15 @@
         </a>
 
         <!-- Member Portal & Order History Button -->
-        <button class="btn-member-portal" id="btn-open-member-portal" onclick="openMemberPortalModal()" title="ดูข้อมูลลูกค้า CDP และประวัติการสั่งซื้อ">
+        <button class="btn-member-portal" id="btn-open-member-portal" onclick="openMemberPortalModal()" title="ดูประวัติการสั่งซื้อและแต้มสะสม">
           <i class="fa-solid fa-clock-rotate-left"></i>
-          <span>ประวัติสั่งซื้อ & CDP</span>
+          <span>ประวัติสั่งซื้อ & แต้ม</span>
         </button>
 
         <!-- Digital Marketing Deck Button for Professor Presentation -->
-        <button class="btn-mktg-deck" id="btn-open-mktg" title="คลิกเพื่อดูแผนการตลาด Digital Marketing สำหรับนำเสนออาจารย์">
-          <i class="fa-solid fa-chart-pie"></i>
-          <span>Marketing Deck</span>
+        <button class="btn-mktg-deck" id="btn-open-mktg" title="คลิกเพื่อดูแผนกลยุทธ์แบรนด์และการตลาด สำหรับนำเสนอ">
+          <i class="fa-solid fa-lightbulb"></i>
+          <span>Brand Strategy</span>
         </button>
 
         <!-- Cart Button -->
@@ -311,7 +311,7 @@
     <section class="quiz-section" id="quiz">
       <div class="container">
         <div class="section-header">
-          <span class="badge-tag"><i class="fa-solid fa-sparkles"></i> AI Flavor Matcher</span>
+          <span class="badge-tag"><i class="fa-solid fa-sparkles"></i> Barista Flavor Matcher</span>
           <h2>ค้นหากาแฟที่เข้ากับอารมณ์คุณวันนี้</h2>
           <p>ตอบคำถามง่ายๆ 3 ข้อ ให้บาริสต้า Daily Brew แนะนำแก้วที่ใช่ที่สุดสำหรับคุณในตอนนี้!</p>
         </div>
@@ -613,7 +613,7 @@
 
           <div class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-quote">"ชอบฟีเจอร์ AI Quiz แนะนำเครื่องดื่มมาก แนะนำ Dirty Coffee ตรงใจสุดๆ เมล็ดกาแฟมีความฟรุตตี้ปลายๆ ถูกใจสาย Specialty"</p>
+            <p class="review-quote">"ชอบฟีเจอร์ควิซค้นหารสชาติกาแฟมาก แนะนำ Dirty Coffee ตรงใจสุดๆ เมล็ดกาแฟมีความฟรุตตี้ปลายๆ ถูกใจสาย Specialty"</p>
             <div class="review-author">
               <div class="author-avatar">N</div>
               <div class="author-info">
@@ -884,8 +884,8 @@
     <div class="modal-content modal-member-portal">
       <div class="modal-header">
         <div>
-          <h3 style="font-size: 1.3rem;"><i class="fa-solid fa-address-card" style="color: var(--accent-caramel);"></i> Member Portal & CDP Dashboard</h3>
-          <span style="font-size: 0.8rem; color: var(--text-muted);">ระบบจัดการข้อมูลลูกค้า 360 องศา & ประวัติการสั่งซื้อ</span>
+          <h3 style="font-size: 1.3rem;"><i class="fa-solid fa-address-card" style="color: var(--accent-caramel);"></i> Member Portal & ประวัติการสั่งซื้อ</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">ข้อมูลสมาชิก VIP, แต้มสะสม และประวัติการสั่งซื้อย้อนหลัง</span>
         </div>
         <button class="btn-close-modal" onclick="closeMemberPortalModal()">&times;</button>
       </div>
@@ -893,7 +893,7 @@
         
         <!-- Portal Navigation Tabs -->
         <div class="mktg-tabs">
-          <button class="mktg-tab-btn active" onclick="switchPortalTab(event, 'portal-profile')">👤 ข้อมูลลูกค้า (CDP Profile)</button>
+          <button class="mktg-tab-btn active" onclick="switchPortalTab(event, 'portal-profile')">👤 ข้อมูลสมาชิก & แต้มสะสม</button>
           <button class="mktg-tab-btn" onclick="switchPortalTab(event, 'portal-orders')">📜 ประวัติการสั่งซื้อ (Order History)</button>
           <button class="mktg-tab-btn" onclick="switchPortalTab(event, 'portal-perks')">🎁 คูปอง & สิทธิประโยชน์</button>
         </div>
