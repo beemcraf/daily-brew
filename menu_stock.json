@@ -1,86 +1,86 @@
 {
-  "dirty-coffee": {
-    "name": "Signature Dirty Coffee",
-    "nameTh": "เดอร์ตี้ คอฟฟี่ ซิกเนเจอร์",
-    "category": "Espresso Bar",
-    "price": 120,
-    "in_stock": true
-  },
-  "coconut-espresso": {
-    "name": "Coconut Cloud Espresso",
-    "nameTh": "เอสเปรสโซมะพร้าวน้ำหอมคลาวด์",
-    "category": "Espresso Bar",
-    "price": 125,
-    "in_stock": true
-  },
-  "vanilla-oat-latte": {
-    "name": "Vanilla Bean Oat Latte",
-    "nameTh": "วานิลลาบีน โอ๊ต ลาเต้",
-    "category": "Espresso Bar",
-    "price": 130,
-    "in_stock": true
-  },
-  "flat-white": {
-    "name": "Velvet Flat White",
-    "nameTh": "แฟลต ไวท์ ลาเต้อาร์ต",
-    "category": "Espresso Bar",
-    "price": 105,
-    "in_stock": true
-  },
-  "orange-coldbrew": {
-    "name": "Artisan Orange Cold Brew",
-    "nameTh": "โคลด์บรูว์ ส้มวาเลนเซีย",
-    "category": "Cold Brew",
-    "price": 135,
-    "in_stock": true
-  },
-  "yuzu-sparkling": {
-    "name": "Sparkling Yuzu Espresso Tonic",
-    "nameTh": "สปาร์กลิง ยูซุ เอสเปรสโซ",
-    "category": "Cold Brew",
-    "price": 130,
-    "in_stock": true
-  },
-  "uji-matcha-cloud": {
-    "name": "Kyoto Uji Matcha Cloud",
-    "nameTh": "อุจิมัทฉะ คลาวด์",
-    "category": "Non-Coffee",
-    "price": 125,
-    "in_stock": true
-  },
-  "valrhona-chocolate": {
-    "name": "Valrhona Dark Chocolate Float",
-    "nameTh": "ดาร์กช็อกโกแลต วาลโรห์นา 70%",
-    "category": "Non-Coffee",
-    "price": 135,
-    "in_stock": true
-  },
-  "almond-croissant": {
-    "name": "French Almond Croissant",
-    "nameTh": "ครัวซองต์อัลมอนด์ฝรั่งเศส",
-    "category": "Bakery",
-    "price": 85,
-    "in_stock": true
-  },
-  "basque-cheesecake": {
-    "name": "San Sebastian Basque Cheesecake",
-    "nameTh": "บาสก์ชีสเค้กหน้าไหม้",
-    "category": "Bakery",
-    "price": 145,
-    "in_stock": true
-  },
-  "truffle-brioche": {
-    "name": "Truffle Cheese Brioche Toast",
-    "nameTh": "บริออชโทสต์ ทรัฟเฟิลชีสเยิ้ม",
-    "category": "Bakery",
-    "price": 120,
-    "in_stock": true
-  },
-  "coffee-beans-doichang": {
-    "name": "Doi Chang Peaberry Beans (250g)",
-    "nameTh": "เมล็ดกาแฟดอยช้าง พีเบอร์รี่ (250 กรัม)",
-    "category": "Retail Beans",
-    "price": 280,
-    "in_stock": true
-  }
+    "dirty-coffee": {
+        "name": "Signature Dirty Coffee",
+        "nameTh": "เดอร์ตี้ คอฟฟี่ ซิกเนเจอร์",
+        "category": "Espresso Bar",
+        "price": 120,
+        "in_stock": false
+    },
+    "coconut-espresso": {
+        "name": "Coconut Cloud Espresso",
+        "nameTh": "เอสเปรสโซมะพร้าวน้ำหอมคลาวด์",
+        "category": "Espresso Bar",
+        "price": 125,
+        "in_stock": true
+    },
+    "vanilla-oat-latte": {
+        "name": "Vanilla Bean Oat Latte",
+        "nameTh": "วานิลลาบีน โอ๊ต ลาเต้",
+        "category": "Espresso Bar",
+        "price": 130,
+        "in_stock": true
+    },
+    "flat-white": {
+        "name": "Velvet Flat White",
+        "nameTh": "แฟลต ไวท์ ลาเต้อาร์ต",
+        "category": "Espresso Bar",
+        "price": 105,
+        "in_stock": true
+    },
+    "orange-coldbrew": {
+        "name": "Artisan Orange Cold Brew",
+        "nameTh": "โคลด์บรูว์ ส้มวาเลนเซีย",
+        "category": "Cold Brew",
+        "price": 135,
+        "in_stock": true
+    },
+    "yuzu-sparkling": {
+        "name": "Sparkling Yuzu Espresso Tonic",
+        "nameTh": "สปาร์กลิง ยูซุ เอสเปรสโซ",
+        "category": "Cold Brew",
+        "price": 130,
+        "in_stock": true
+    },
+    "uji-matcha-cloud": {
+        "name": "Kyoto Uji Matcha Cloud",
+        "nameTh": "อุจิมัทฉะ คลาวด์",
+        "category": "Non-Coffee",
+        "price": 125,
+        "in_stock": true
+    },
+    "valrhona-chocolate": {
+        "name": "Valrhona Dark Chocolate Float",
+        "nameTh": "ดาร์กช็อกโกแลต วาลโรห์นา 70%",
+        "category": "Non-Coffee",
+        "price": 135,
+        "in_stock": true
+    },
+    "almond-croissant": {
+        "name": "French Almond Croissant",
+        "nameTh": "ครัวซองต์อัลมอนด์ฝรั่งเศส",
+        "category": "Bakery",
+        "price": 85,
+        "in_stock": true
+    },
+    "basque-cheesecake": {
+        "name": "San Sebastian Basque Cheesecake",
+        "nameTh": "บาสก์ชีสเค้กหน้าไหม้",
+        "category": "Bakery",
+        "price": 145,
+        "in_stock": true
+    },
+    "truffle-brioche": {
+        "name": "Truffle Cheese Brioche Toast",
+        "nameTh": "บริออชโทสต์ ทรัฟเฟิลชีสเยิ้ม",
+        "category": "Bakery",
+        "price": 120,
+        "in_stock": true
+    },
+    "coffee-beans-doichang": {
+        "name": "Doi Chang Peaberry Beans (250g)",
+        "nameTh": "เมล็ดกาแฟดอยช้าง พีเบอร์รี่ (250 กรัม)",
+        "category": "Retail Beans",
+        "price": 280,
+        "in_stock": true
+    }
 }
